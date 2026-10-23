@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第9章 建设工程劳动保障法律制度 · 考点卡</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --line:#e2e0d8; --line2:#cfccc2;
+  --tx:#2c2c2a; --tx2:#5f5e5a; --tx3:#8c8a82;
+  --blue:#185fa5; --blue-bg:#e6f1fb;
+  --teal:#0f6e56; --teal-bg:#e1f5ee;
+  --amber:#854f0b; --amber-bg:#faeeda;
+  --red:#a32d2d; --red-bg:#fcebeb;
+  --purple:#534ab7; --purple-bg:#eeedfe;
+  --gray:#6b6b66; --gray-bg:#efeee9;
+  --top:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:15px; line-height:1.7;
+  padding:0 20px 80px; padding-top:calc(var(--top) + 26px);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--top);z-index:60;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:rgba(246,245,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.back{
+  font-size:13px;color:var(--tx2);text-decoration:none;white-space:nowrap;
+  padding:5px 10px;border-radius:7px;transition:background .15s;
+}
+.back:hover{background:#eceae4;color:var(--tx)}
+.ch-title{font-size:13.5px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modes{margin-left:auto;display:flex;background:#eceae4;border-radius:9px;padding:3px;gap:2px;flex-shrink:0}
+.mtab{
+  border:0;background:transparent;font-family:inherit;font-size:13px;color:var(--tx2);
+  padding:5px 14px;border-radius:6px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.mtab:hover{color:var(--tx)}
+.mtab.on{background:var(--card);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.wrap{max-width:1120px;margin:0 auto}
+header.pg{margin-bottom:22px}
+.kicker{font-size:12px;letter-spacing:.12em;color:var(--tx3);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:25px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--tx2);font-size:14px}
+.sub b{color:var(--blue);font-weight:600}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:20px 0 16px;position:sticky;top:calc(var(--top) + 8px);z-index:20;
+}
+#q{
+  flex:1;min-width:180px;border:1px solid var(--line2);border-radius:8px;
+  padding:8px 12px;font-size:14px;font-family:inherit;color:var(--tx);
+  outline:none;background:#fbfaf7;transition:border-color .15s;
+}
+#q:focus{border-color:var(--blue);background:#fff}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line2);background:#fff;border-radius:99px;
+  padding:5px 13px;font-size:13px;color:var(--tx2);cursor:pointer;
+  font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--tx3)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip .n{opacity:.55;font-size:11px;margin-left:4px}
+
+.stats{font-size:13px;color:var(--tx3);margin-bottom:14px}
+.stats b{color:var(--tx);font-weight:600}
+
+/* ---------- 索引模式 ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;border-left:3px solid var(--line2);
+  cursor:pointer;transition:border-color .15s,box-shadow .15s;
+}
+.card:hover{border-color:var(--line2);box-shadow:0 1px 6px rgba(0,0,0,.045)}
+.card.t-时间{border-left-color:var(--blue)}
+.card.t-数字{border-left-color:var(--purple)}
+.card.t-计算{border-left-color:var(--teal)}
+.card.t-程序{border-left-color:var(--amber)}
+.card.t-主体{border-left-color:var(--red)}
+.card.t-概念{border-left-color:var(--gray)}
+
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.tag{font-size:11px;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.t-时间 .tag{background:var(--blue-bg);color:var(--blue)}
+.t-数字 .tag{background:var(--purple-bg);color:var(--purple)}
+.t-计算 .tag{background:var(--teal-bg);color:var(--teal)}
+.t-程序 .tag{background:var(--amber-bg);color:var(--amber)}
+.t-主体 .tag{background:var(--red-bg);color:var(--red)}
+.t-概念 .tag{background:var(--gray-bg);color:var(--gray)}
+.sec{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.pg{margin-left:auto;font-size:11px;color:var(--tx3);background:#f2f0eb;padding:2px 7px;border-radius:4px}
+.fmark{font-size:11px;color:var(--teal);background:var(--teal-bg);padding:2px 6px;border-radius:4px}
+
+.card h3{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px}
+ul{list-style:none}
+li{position:relative;padding-left:15px;margin-bottom:6px;font-size:14px;color:var(--tx2)}
+li::before{content:"";position:absolute;left:2px;top:.65em;width:4px;height:4px;border-radius:50%;background:var(--tx3)}
+li b{color:var(--tx);font-weight:600}
+li .hi{background:#fff3cd;color:#633806;font-weight:600;padding:0 3px;border-radius:3px}
+
+.trap{
+  margin-top:11px;padding:9px 12px;border-radius:7px;
+  background:var(--red-bg);border-left:2px solid var(--red);
+  font-size:13px;color:#791f1f;
+}
+.trap::before{content:"易错 ";font-weight:700;font-size:11px;letter-spacing:.05em}
+
+.card .body{display:none}
+.card.open .body{display:block}
+.more{font-size:12px;color:var(--tx3);margin-top:8px}
+.card.open .more{display:none}
+.card.open{border-color:var(--line2)}
+.empty{text-align:center;color:var(--tx3);padding:60px 0;font-size:14px}
+
+/* ---------- 配图 ---------- */
+.figbox{margin:14px 0 4px}
+.figbox img{
+  display:block;width:100%;height:auto;border:1px solid var(--line);
+  border-radius:8px;background:#fff;cursor:zoom-in;transition:border-color .15s;
+}
+.figbox img:hover{border-color:var(--teal)}
+.figcap{
+  display:flex;gap:8px;align-items:baseline;margin-top:6px;
+  font-size:11.5px;color:var(--tx3);line-height:1.55;
+}
+.figcap .fl{color:var(--teal);font-weight:600;flex-shrink:0}
+.figcap .zoom{margin-left:auto;flex-shrink:0;color:var(--tx3)}
+
+/* 灯箱 */
+.lb{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(28,27,25,.9);padding:28px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+.lb.on{display:flex}
+.lb img{
+  max-width:100%;max-height:calc(100vh - 110px);object-fit:contain;
+  background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.lb .lbtx{color:#ddd;font-size:13px;text-align:center;max-width:760px;line-height:1.6}
+.lb .lbclose{
+  position:absolute;top:14px;right:20px;color:#fff;font-size:28px;line-height:1;
+  background:none;border:0;cursor:pointer;opacity:.7;
+}
+.lb .lbclose:hover{opacity:1}
+
+/* ---------- 知识卡片模式 ---------- */
+#cardView{display:none}
+.stage{
+  min-height:calc(100vh - var(--top) - 70px);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:6px;padding-bottom:8px;
+}
+.stage-filter{
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:14px;flex-shrink:0;
+}
+.stage-filter .chip{padding:4px 12px;font-size:12.5px}
+
+.stage-body{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;padding:4px 0;
+}
+.kcard{
+  width:100%;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;
+  border-top:4px solid var(--line2);
+  padding:32px 38px 28px;
+  box-shadow:0 4px 24px rgba(60,55,45,.06);
+  max-height:calc(100vh - 210px);overflow-y:auto;
+}
+.kcard.t-时间{border-top-color:var(--blue)}
+.kcard.t-数字{border-top-color:var(--purple)}
+.kcard.t-计算{border-top-color:var(--teal)}
+.kcard.t-程序{border-top-color:var(--amber)}
+.kcard.t-主体{border-top-color:var(--red)}
+.kcard.t-概念{border-top-color:var(--gray)}
+.kcard.anim{animation:pop .28s cubic-bezier(.2,.7,.3,1)}
+@keyframes pop{
+  from{opacity:0;transform:translateY(10px) scale(.99)}
+  to{opacity:1;transform:none}
+}
+.kc-top{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.kc-top .tag{font-size:12px;padding:3px 10px;border-radius:6px}
+.kc-top .sec{font-size:12px}
+.kc-top .pg{margin-left:auto;font-size:12px;padding:3px 9px}
+.kc-title{font-size:21px;font-weight:600;line-height:1.45;letter-spacing:-.01em;margin-bottom:18px}
+.kc-list li{font-size:15.5px;line-height:1.85;margin-bottom:10px;padding-left:18px;color:var(--tx2)}
+.kc-list li::before{top:.85em;width:5px;height:5px;left:3px}
+.kc-list li b{color:var(--tx)}
+.kc-list li .hi{font-size:16px;padding:1px 5px}
+.kc-trap{
+  margin-top:18px;padding:13px 15px;border-radius:9px;
+  background:var(--red-bg);border-left:3px solid var(--red);
+  font-size:14px;line-height:1.75;color:#791f1f;
+}
+.kc-trap::before{
+  content:"易错";display:inline-block;font-weight:700;font-size:11px;
+  letter-spacing:.06em;background:var(--red);color:#fff;
+  padding:1px 7px;border-radius:4px;margin-right:8px;vertical-align:1px;
+}
+.kc-empty{text-align:center;color:var(--tx3);padding:70px 0}
+.kcard .figbox img{max-height:40vh;width:auto;max-width:100%;margin:0 auto}
+
+/* 翻页导航 */
+.stage-nav{
+  display:flex;align-items:center;gap:16px;justify-content:center;
+  margin-top:18px;width:100%;max-width:680px;flex-shrink:0;
+}
+.navbtn{
+  flex:0 0 auto;border:1px solid var(--line2);background:var(--card);
+  border-radius:10px;padding:11px 22px;font-size:14px;font-family:inherit;
+  color:var(--tx2);cursor:pointer;transition:all .15s;
+}
+.navbtn:hover:not(:disabled){border-color:var(--tx3);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.navbtn:active:not(:disabled){transform:translateY(1px)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.posbox{flex:1;min-width:0;text-align:center}
+.posnum{font-size:13px;color:var(--tx2);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.posnum b{color:var(--tx);font-weight:600;font-size:15px}
+.posbar{height:3px;background:#e6e3db;border-radius:2px;margin-top:7px;overflow:hidden}
+.posbar i{display:block;height:100%;background:var(--tx2);border-radius:2px;transition:width .25s ease}
+.kc-hint{text-align:center;font-size:12px;color:var(--tx3);margin-top:12px}
+.kc-hint kbd{
+  font-family:inherit;font-size:11px;background:#eceae4;border:1px solid var(--line2);
+  border-radius:4px;padding:1px 5px;margin:0 2px;color:var(--tx2);
+}
+
+/* 打印 */
+@media print{
+  body{background:#fff;padding:0;font-size:12px}
+  .topbar,.toolbar,.stats,.more,.stage-filter,.stage-nav,.kc-hint,.lb{display:none!important}
+  .card .body{display:block!important}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .card{break-inside:avoid;box-shadow:none;padding:10px 12px}
+  h1{font-size:18px}
+  #cardView{display:none!important}
+  #gridView{display:block!important}
+  .figbox img{max-height:6.5cm;width:auto;max-width:100%}
+}
+@media(max-width:640px){
+  body{padding:0 12px 60px;padding-top:calc(var(--top) + 18px)}
+  h1{font-size:20px}
+  .ch-title{font-size:12px;max-width:110px}
+  .mtab{padding:5px 10px;font-size:12.5px}
+  .grid{grid-template-columns:1fr}
+  .kcard{padding:22px 18px 20px;border-radius:14px;max-height:calc(100vh - 195px)}
+  .kc-title{font-size:18px;margin-bottom:14px}
+  .kc-list li{font-size:14.5px;margin-bottom:8px}
+  .kc-list li .hi{font-size:15px}
+  .kc-trap{font-size:13.5px;padding:11px 12px}
+  .stage-nav{gap:8px}
+  .navbtn{padding:11px 14px;font-size:13px}
+  .posnum{font-size:12px}
+  .kcard .figbox img{max-height:32vh}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="back" href="../index.html#fg">← 全部章节</a>
+  <div class="ch-title">第 9 章　建设工程劳动保障法律制度</div>
+  <div class="modes">
+    <button class="mtab on" data-mode="grid">索引</button>
+    <button class="mtab" data-mode="card">知识卡片</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 索引模式 ============ -->
+  <div id="gridView">
+    <header class="pg">
+      <div class="kicker">2027 二建 · 建设工程法规及相关知识</div>
+      <h1>第 9 章　建设工程劳动保障法律制度</h1>
+      <div class="sub">教材 P271–P301　·　<b id="total">0</b> 张考点卡　·　覆盖 9.1 劳动合同制度 至 9.5 劳动争议的解决</div>
+      <div class="sub" style="margin-top:4px;font-size:13px;color:var(--tx3)">点击卡片展开细节；带 <span class="fmark">配图</span> 的卡片可直接看图，点图放大</div>
+    </header>
+
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索考点关键词，如：时限、比例、网络计划……">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="list"></div>
+    <div class="empty" id="empty" style="display:none">没有匹配的考点，换个关键词试试</div>
+  </div>
+
+  <!-- ============ 知识卡片模式 ============ -->
+  <div id="cardView">
+    <div class="stage">
+      <div class="stage-filter" id="chips2"></div>
+      <div class="stage-body">
+        <div class="kcard" id="kcard"></div>
+      </div>
+      <div class="stage-nav">
+        <button class="navbtn" id="prev">← 上一张</button>
+        <div class="posbox">
+          <div class="posnum"><b id="pos">1</b> / <span id="posAll">1</span></div>
+          <div class="posbar"><i id="posfill" style="width:0%"></i></div>
+        </div>
+        <button class="navbtn" id="next">下一张 →</button>
+      </div>
+      <div class="kc-hint">键盘 <kbd>←</kbd> <kbd>→</kbd> 翻页　·　<kbd>空格</kbd> 切回索引　·　点图放大</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="lb" id="lb">
+  <button class="lbclose" id="lbclose">×</button>
+  <img id="lbimg" alt="">
+  <div class="lbtx" id="lbtx"></div>
+</div>
+
+<script>
+const BANK = {"chapter": 9, "name": "建设工程劳动保障法律制度", "pages": "P271–P301", "summary": "覆盖 9.1 劳动合同制度 至 9.5 劳动争议的解决", "cards": [{"t": "时间", "s": "9.1.1", "p": "P273", "n": "订立书面劳动合同的期限", "k": ["用人单位<b>自用工之日起即与劳动者建立劳动关系<\/b>", "已建立劳动关系、未同时订立书面合同的，应自用工之日起<span class='hi'>1 个月内<\/span>订立", "用工前订立劳动合同的，劳动关系仍自<b>用工之日<\/b>起建立", "只签订书面合同而无用工事实的，劳动关系并未建立"], "x": "1 个月是「补签书面合同」的期限，不是建立劳动关系的时间；劳动关系自用工之日起算。"}, {"t": "数字", "s": "9.1.1", "p": "P273", "n": "未订书面合同的二倍工资", "k": ["用人单位未依法与劳动者订立书面劳动合同，应当支付劳动者的<b>二倍工资<\/b>", "二倍工资<b>按月计算<\/b>", "不满一个月的，按该月<b>实际工作日<\/b>计算"], "x": "是「二倍工资」而非「双倍赔偿」；不满一个月的按实际工作日折算，不是按整月计。"}, {"t": "数字", "s": "9.1.1", "p": "P274", "n": "试用期期限的三档规定", "k": ["合同期限 <b>3 个月以上不满 1 年<\/b>的，试用期不得超过 <b>1 个月<\/b>", "合同期限 <b>1 年以上不满 3 年<\/b>的，试用期不得超过 <b>2 个月<\/b>", "<b>3 年以上固定期限和无固定期限<\/b>的，试用期不得超过 <b>6 个月<\/b>"], "x": "「3 年以上」含 3 年本身，此时可约定到 6 个月；「1 年以上不满 3 年」才是 2 个月。"}, {"t": "数字", "s": "9.1.1", "p": "P274", "n": "试用期的约定次数与禁止情形", "k": ["同一用人单位与同一劳动者<b>只能约定一次试用期<\/b>", "以完成一定工作任务为期限，或合同期限<b>不满 3 个月<\/b>的，<b>不得约定试用期<\/b>", "试用期<b>包含在劳动合同期限内<\/b>；劳动合同仅约定试用期的，试用期不成立", "非全日制用工双方当事人<b>不得约定试用期<\/b>"], "x": "「仅约定试用期」的后果是该期限直接视为劳动合同期限，并非试用期无效后另行重约。"}, {"t": "主体", "s": "9.1.1", "p": "P274–P275", "n": "应当订立无固定期限合同的情形", "k": ["劳动者在该用人单位<b>连续工作满 10 年<\/b>的", "初次实行劳动合同制度或国企改制重新订约时，连续满 10 年<b>且距法定退休年龄不足 10 年<\/b>", "<b>连续订立二次<\/b>固定期限劳动合同后再次续订的", "自用工之日起<b>满 1 年不与劳动者订立书面合同<\/b>的，视为已订立无固定期限合同"], "x": "前三种须劳动者提出或同意续订才强制订立；第四种是法律「视为」，无须劳动者提出。"}, {"t": "时间", "s": "9.1.2", "p": "P278", "n": "劳动者单方解除的预告期", "k": ["劳动者<b>提前 30 日以书面形式<\/b>通知用人单位，可以解除劳动合同", "劳动者在<b>试用期内提前 3 日<\/b>通知用人单位，可以解除劳动合同"], "x": "30 日、3 日均须书面通知；只有强迫劳动、违章指挥危及人身安全时才可立即解除且无须告知。"}, {"t": "时间", "s": "9.1.2", "p": "P278", "n": "用人单位预告解除的两种方式", "k": ["用人单位应<b>提前 30 日以书面形式<\/b>通知劳动者本人", "或者<b>额外支付劳动者 1 个月工资<\/b>后解除", "适用情形限于医疗期满不能工作、不能胜任工作、客观情况发生重大变化"], "x": "「提前 30 日书面通知」与「额外支付 1 个月工资」是择一关系，不要求同时履行。"}, {"t": "数字", "s": "9.1.2", "p": "P278", "n": "经济性裁员的人数与比例条件", "k": ["需要裁减人员<b> 20 人以上<\/b>的", "裁减不足 20 人但占企业职工总数<b> 10% 以上<\/b>的", "须提前 <span class='hi'>30 日<\/span>向工会或者全体职工说明情况，听取意见", "裁减人员方案须<b>向劳动行政部门报告<\/b>后方可裁减"], "x": "「20 人」与「10%」是选择关系，满足其一即触发程序；向劳动行政部门报告不是审批。"}, {"t": "主体", "s": "9.1.2", "p": "P279", "n": "用人单位不得解除的六种情形", "k": ["接触职业病危害作业者<b>未进行离岗前职业健康检查<\/b>，或疑似职业病人在诊断、医学观察期间", "在本单位患职业病或因工负伤并被确认<b>丧失或者部分丧失劳动能力<\/b>", "患病或非因工负伤在<b>规定医疗期内<\/b>；女职工在<b>孕期、产期、哺乳期<\/b>", "在本单位<b>连续工作满 15 年，且距法定退休年龄不足 5 年<\/b>"], "x": "限制的只是依第 40 条、第 41 条解除；劳动者有第 39 条过错时仍可即时解除。"}, {"t": "主体", "s": "9.1.2", "p": "P277–P278", "n": "过错性解除无须支付经济补偿", "k": ["即时解除又称<b>过错性解除<\/b>，用人单位<b>不必提前预告<\/b>即可解除", "因劳动者过错解除合同的，用人单位<b>不需要支付经济补偿金<\/b>", "被依法追究刑事责任<b>仅限法院生效判决刑罚（含缓刑）<\/b>", "<b>刑事拘留不属于<\/b>被追究刑事责任，不能据此解除劳动合同"], "x": "试用期内被证明不符合录用条件也属过错性解除，但须有证据，并非可随意辞退。"}, {"t": "主体", "s": "9.1.2", "p": "P279", "n": "终止劳动合同应付经济补偿的情形", "k": ["用人单位被<b>依法宣告破产<\/b>的", "用人单位被<b>吊销营业执照、责令关闭、撤销<\/b>或决定<b>提前解散<\/b>的", "法定终止情形共 6 种，仅上述两种须支付经济补偿金"], "x": "合同期满时若同时出现不得解除的情形，合同应延续至该情形消失时才终止。"}, {"t": "数字", "s": "9.2.1", "p": "P280", "n": "劳务派遣劳动合同的期限", "k": ["劳务派遣单位应与被派遣劳动者订立<b> 2 年以上的固定期限劳动合同<\/b>", "劳务派遣单位应<b>按月支付<\/b>劳动报酬", "被派遣劳动者<b>无工作期间<\/b>，按当地<b>最低工资标准按月支付报酬<\/b>", "派遣单位与同一被派遣劳动者<b>只能约定一次试用期<\/b>"], "x": "2 年是期限下限且必须是固定期限；无工作期间不发工资是错的，仍须按最低工资标准支付。"}, {"t": "数字", "s": "9.2.2", "p": "P284", "n": "延长工作时间的加班工资标准", "k": ["日法定标准工作时间以外延长工作时间的，按不低于本人小时工资标准的 <b>150%<\/b> 支付", "休息日工作而又<b>不能安排补休<\/b>的，按不低于 <b>200%<\/b> 支付", "法定休假节日工作的，按不低于 <b>300%<\/b> 支付", "计件工资者完成定额后被安排延长工时的，分别按计件单价的 150%、200%、300% 支付"], "x": "只有 200% 一档附有「不能安排补休」的前提条件，150% 与 300% 两档无此前提。"}, {"t": "数字", "s": "9.2.2", "p": "P285", "n": "农民工工资保证金的存储比例", "k": ["由<b>施工总承包单位<\/b>在银行设立账户，按工程施工合同额的一定比例存储", "原则上<b>不低于 1%，不超过 3%<\/b>", "同一管理地区有多个在建工程的，比例可下浮但<b>不得低于 0.5%<\/b>", "施工合同额<b>低于 300 万元<\/b>且前一年内未发生工资拖欠的，可免存储"], "x": "0.5% 是多工程下浮后的绝对下限；免存储须同时满足「低于 300 万元」和「前一年无拖欠」。"}, {"t": "时间", "s": "9.2.2", "p": "P285", "n": "工资保证金支付与补足的时限", "k": ["经办银行收到《支付通知书》后<b> 5 个工作日内<\/b>，从保证金账户划付款项", "以银行保函替代的，经办银行同样在<b> 5 个工作日内<\/b>依保函约定支付", "保证金使用后，施工总承包单位应<b>自使用之日起 10 个工作日内补足<\/b>"], "x": "两个期限均指「工作日」；起算点分别是收到《支付通知书》之日和保证金使用之日。"}, {"t": "主体", "s": "9.2.2", "p": "P285", "n": "农民工工资专用账户的开立主体", "k": ["专用账户由<b>施工总承包单位<\/b>在工程建设项目所在地银行业金融机构开立", "账户性质是<b>专项用于支付农民工工资的专用存款账户<\/b>", "人工费用指建设单位向总包单位专用账户拨付的、专项用于支付工资的工程款", "农民工工资卡实行<b>一人一卡、本人持卡<\/b>，不得扣押或者变相扣押"], "x": "开立主体是施工总承包单位，不是建设单位；建设单位只是向该账户拨付人工费用。"}, {"t": "数字", "s": "9.3.2", "p": "P290", "n": "女职工产假天数及增加规则", "k": ["女职工生育享受 <b>98 天产假<\/b>，其中<b>产前可以休假 15 天<\/b>", "<b>难产<\/b>的，增加产假 <b>15 天<\/b>", "生育多胞胎的，<b>每多生育 1 个婴儿增加产假 15 天<\/b>", "怀孕未满 4 个月流产的享受 <b>15 天<\/b>，满 4 个月流产的享受 <b>42 天<\/b>"], "x": "98 天已包含产前 15 天，不是「98+15」；难产与多胞胎的增加天数可以叠加。"}, {"t": "数字", "s": "9.3.2", "p": "P290–P291", "n": "孕期与哺乳期的工时保护", "k": ["对怀孕 <b>7 个月以上<\/b>的女职工，不得延长劳动时间或者安排夜班劳动", "应在劳动时间内安排一定休息时间；<b>产前检查时间计入劳动时间<\/b>", "对哺乳<b>未满 1 周岁<\/b>婴儿的女职工，不得延长劳动时间或者安排夜班劳动", "每天劳动时间内安排 <b>1 小时哺乳时间<\/b>，多胞胎每多哺乳 1 个婴儿每天增加 1 小时"], "x": "产前检查时间算「劳动时间」而非请假；哺乳时间按天计，多胞胎按婴儿数递增。"}, {"t": "数字", "s": "9.3.2", "p": "P291", "n": "童工与未成年工的年龄界线", "k": ["招用<b>不满 16 周岁<\/b>的未成年人，统称使用童工，一律不得录用", "招用人员时<b>必须核查身份证<\/b>，录用登记、核查材料应妥善保管", "未成年工是指<b>年满 16 周岁未满 18 周岁<\/b>的劳动者", "不得安排未成年工从事矿山井下、有毒有害、第四级体力劳动强度的劳动"], "x": "16 周岁是「童工」与「未成年工」的分界；未成年工可以招用，但须登记、限制工种。"}, {"t": "时间", "s": "9.4.1", "p": "P292–P293", "n": "工伤认定申请的 30 日与 1 年", "k": ["所在单位应自事故伤害发生之日或被诊断、鉴定为职业病之日起<span class='hi'>30 日内<\/span>提出工伤认定申请", "遇特殊情况，经报社会保险行政部门同意，申请时限可以适当延长", "单位未申请的，受伤害职工或其近亲属、<b>工会组织<\/b>可在<span class='hi'>1 年内<\/span>提出申请", "申请向<b>用人单位所在地统筹地区<\/b>社会保险行政部门提出"], "x": "30 日是单位的义务期限、1 年是职工一方的权利期限，起算点相同但法律后果不同。"}, {"t": "主体", "s": "9.4.1", "p": "P292", "n": "单位逾期申请期间的工伤费用负担", "k": ["单位没有在 30 日内提交工伤认定申请的", "在此期间发生的<b>符合条例规定的工伤待遇等有关费用由该用人单位负担<\/b>"], "x": "超过 30 日并不导致不能认定，而是这段「空档期」的待遇由单位自付，基金不予支付。"}, {"t": "数字", "s": "9.4.1", "p": "P292", "n": "视同工伤的 48 小时情形", "k": ["在工作时间和工作岗位，<b>突发疾病死亡<\/b>或在<span class='hi'>48 小时之内<\/span>经抢救无效死亡的", "在<b>抢险救灾<\/b>等维护国家利益、公共利益活动中受到伤害的", "原在军队服役因战、因公负伤致残并取得革命伤残军人证，到用人单位后<b>旧伤复发<\/b>的"], "x": "前两种按条例享受全部待遇；第三种旧伤复发只享受除<b>一次性伤残补助金以外<\/b>的待遇。"}, {"t": "数字", "s": "9.4.2", "p": "P295", "n": "停工留薪期的期限与待遇", "k": ["停工留薪期内<b>原工资福利待遇不变<\/b>，由所在单位<b>按月支付<\/b>", "停工留薪期一般<b>不超过 12 个月<\/b>", "伤情严重或情况特殊，经<b>设区的市级劳动能力鉴定委员会<\/b>确认可延长，但延长不得超过 12 个月", "评定伤残等级后停发原待遇，改按有关规定享受伤残待遇"], "x": "延长须经设区的市级劳动能力鉴定委员会确认；12 个月是「延长」的上限而非总计上限。"}, {"t": "数字", "s": "9.4.2", "p": "P295", "n": "一至四级伤残的补助金与津贴", "k": ["一至四级伤残<b>保留劳动关系、退出工作岗位<\/b>", "一次性伤残补助金：一级 27 个月、二级 25 个月、三级 23 个月、四级 21 个月本人工资", "伤残津贴按月支付：一级 90%、二级 85%、三级 80%、四级 75% 本人工资", "津贴实际金额低于当地最低工资标准的，由<b>工伤保险基金<\/b>补足差额"], "x": "一至四级的伤残津贴由工伤保险基金支付，五、六级的津贴由用人单位支付，主体不同。"}, {"t": "数字", "s": "9.4.2", "p": "P296", "n": "五至十级伤残的补助金与津贴", "k": ["一次性伤残补助金：五级 18 个月、六级 16 个月本人工资", "七级 13 个月、八级 11 个月、九级 9 个月、十级 7 个月本人工资", "五级、六级难以安排工作的，由<b>用人单位按月<\/b>发伤残津贴，标准为本人工资的 70%、60%", "七至十级合同期满终止或本人提出解除的，<b>基金付一次性工伤医疗补助金、单位付一次性伤残就业补助金<\/b>"], "x": "「医疗补助金」由基金出、「就业补助金」由单位出，二者具体标准均由省级政府规定。"}, {"t": "数字", "s": "9.4.2", "p": "P296", "n": "因工死亡的三项待遇标准", "k": ["丧葬补助金为 <b>6 个月<\/b>的统筹地区上年度职工月平均工资", "供养亲属抚恤金：配偶每月 <b>40%<\/b>，其他亲属每人每月 <b>30%<\/b>", "孤寡老人或孤儿每人每月在上述标准基础上<b>增加 10%<\/b>", "一次性工亡补助金为上一年度全国城镇居民人均可支配收入的 <b>20 倍<\/b>"], "x": "工亡补助金的基数是「全国城镇居民人均可支配收入」，不是本地区职工平均工资。"}, {"t": "时间", "s": "9.5.2", "p": "P301", "n": "劳动争议仲裁时效 1 年", "k": ["申请仲裁的时效期间为<span class='hi'>1 年<\/span>，自当事人知道或应当知道权利被侵害之日起计算", "因主张权利、请求救济或对方同意履行而<b>中断<\/b>的，从中断时起重新计算", "因不可抗力等正当理由<b>中止<\/b>的，从中止原因消除之日起继续计算", "劳动关系存续期间因<b>拖欠劳动报酬<\/b>发生争议的，不受 1 年时效限制", "劳动关系终止的，应<b>自劳动关系终止之日起 1 年内<\/b>提出"], "x": "拖欠劳动报酬「不受时效限制」只适用于劳动关系存续期间；一旦终止即回归终止之日起 1 年。"}, {"t": "时间", "s": "9.5.2", "p": "P300", "n": "仲裁受理与审理的期限", "k": ["仲裁委员会收到仲裁申请之日起 <b>5 日内<\/b>决定是否受理", "仲裁庭应自<b>受理仲裁申请之日起<\/b><span class='hi'>45 日内<\/span>结束裁决", "案情复杂需延期的，经<b>仲裁委员会主任批准<\/b>可延期，但延长期限不得超过 <b>15 日<\/b>", "逾期未作出裁决的，当事人可就该争议事项<b>向人民法院提起诉讼<\/b>"], "x": "45 日加 15 日最长 60 日；起算点是「受理之日」，不是当事人「申请之日」。"}, {"t": "程序", "s": "9.5.2", "p": "P300", "n": "一裁终局的两类争议", "k": ["追索劳动报酬、工伤医疗费、经济补偿或赔偿金，<b>不超过当地月最低工资标准 12 个月金额<\/b>的争议", "因执行国家劳动标准在<b>工作时间、休息休假、社会保险<\/b>等方面发生的争议", "终局裁决的裁决书<b>自作出之日起<\/b>发生法律效力"], "x": "金额门槛是「当地月最低工资标准 × 12 个月」，不是劳动者本人工资的 12 倍。"}, {"t": "程序", "s": "9.5.1", "p": "P299", "n": "调解协议书的效力与救济", "k": ["调解协议生效后，对双方当事人具有约束力，当事人应当履行", "该约束力<b>不是强制执行的效果<\/b>，仅相当于劳动合同的约束力", "一方在协议约定期限内不履行的，另一方<b>只能依法申请仲裁<\/b>，不能请求法院强制执行"], "x": "调解是自愿程序，协议靠自觉履行；不履行时的救济途径是申请仲裁，而非直接起诉。"}]};
+const DATA = BANK.cards;
+const FIGS = BANK.figs || {};
+const CH = BANK.chapter;
+const TYPES = ["时间","数字","计算","程序","主体","概念"];
+
+let activeType = "全部", keyword = "";
+let cur = 0;
+let mode = "grid";
+
+const $ = id => document.getElementById(id);
+
+function figHTML(d, compact){
+  if(!d.fig || !FIGS[d.fig]) return "";
+  const F = FIGS[d.fig];
+  return `<figure class="figbox">
+    <img src="${F.src}" alt="${F.cap||''}" data-fig="${d.fig}" loading="lazy">
+    <figcaption class="figcap">
+      <span class="fl">配图</span>
+      <span>${F.cap||''}</span>
+      <span class="zoom">教材 ${F.p}　点击放大</span>
+    </figcaption>
+  </figure>`;
+}
+
+function filtered(){
+  const kw = keyword.trim().toLowerCase();
+  return DATA.filter(d=>{
+    if(activeType !== "全部" && d.t !== activeType) return false;
+    if(!kw) return true;
+    const hay = (d.n + " " + d.s + " " + d.p + " " + d.k.join(" ") + " " + (d.x||"")).replace(/<[^>]+>/g,"").toLowerCase();
+    return hay.includes(kw);
+  });
+}
+
+function chipHTML(){
+  const counts = {};
+  TYPES.forEach(t=>counts[t] = DATA.filter(d=>d.t===t).length);
+  const items = [["全部", DATA.length], ...TYPES.filter(t=>counts[t]).map(t=>[t,counts[t]])];
+  return items.map(([t,n])=>
+    `<button class="chip${t===activeType?" on":""}" data-t="${t}">${t}<span class="n">${n}</span></button>`
+  ).join("");
+}
+function bindChips(box){
+  box.querySelectorAll(".chip").forEach(b=>{
+    b.onclick = ()=>{ activeType = b.dataset.t; cur = 0; renderChips(); renderGrid(); renderCard(); };
+  });
+}
+function renderChips(){
+  const a = $("chips"), b = $("chips2");
+  if(a){ a.innerHTML = chipHTML(); bindChips(a); }
+  if(b){ b.innerHTML = chipHTML(); bindChips(b); }
+}
+
+/* ---------------- 索引模式 ---------------- */
+function renderGrid(){
+  const rows = filtered();
+  const kw = keyword.trim();
+  $("total").textContent = DATA.length;
+  $("stats").innerHTML = (kw || activeType!=="全部")
+    ? `筛选出 <b>${rows.length}</b> 张考点卡` + (kw?`，关键词「${kw.replace(/</g,"&lt;")}」`:"") + `　·　共 ${DATA.length} 张`
+    : `共 <b>${DATA.length}</b> 张考点卡　·　${BANK.summary}`;
+
+  $("empty").style.display = rows.length ? "none" : "block";
+  $("list").innerHTML = rows.map(d=>`
+    <div class="card t-${d.t}">
+      <div class="card-top">
+        <span class="tag">${d.t}</span>
+        <span class="sec">${d.s||""}</span>
+        ${d.fig && FIGS[d.fig] ? '<span class="fmark">配图</span>' : ''}
+        <span class="pg">${d.p||""}</span>
+      </div>
+      <h3>${d.n}</h3>
+      <div class="body">
+        <ul>${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+        ${figHTML(d)}
+        ${d.x?`<div class="trap">${d.x}</div>`:""}
+      </div>
+      <div class="more">点击展开 ▾</div>
+    </div>`).join("");
+
+  $("list").querySelectorAll(".card").forEach(c=>{
+    c.onclick = (e)=>{ if(e.target.closest(".figbox")) return; c.classList.toggle("open"); };
+  });
+  bindZoom($("list"));
+}
+
+/* ---------------- 知识卡片模式 ---------------- */
+function renderCard(){
+  const rows = filtered();
+  const box = $("kcard");
+  $("posAll").textContent = rows.length || 0;
+
+  if(!rows.length){
+    box.className = "kcard";
+    box.innerHTML = `<div class="kc-empty">当前筛选下没有卡片</div>`;
+    $("pos").textContent = "0";
+    $("posfill").style.width = "0%";
+    $("prev").disabled = $("next").disabled = true;
+    return;
+  }
+  if(cur >= rows.length) cur = rows.length - 1;
+  if(cur < 0) cur = 0;
+
+  const d = rows[cur];
+  box.className = "kcard t-" + d.t;
+  box.innerHTML = `
+    <div class="kc-top">
+      <span class="tag">${d.t}</span>
+      <span class="sec">${d.s||""}</span>
+      <span class="pg">${d.p||""}</span>
+    </div>
+    <h2 class="kc-title">${d.n}</h2>
+    <ul class="kc-list">${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+    ${figHTML(d, true)}
+    ${d.x?`<div class="kc-trap">${d.x}</div>`:""}
+  `;
+  box.scrollTop = 0;
+  box.classList.remove("anim"); void box.offsetWidth; box.classList.add("anim");
+
+  $("pos").textContent = cur + 1;
+  $("posfill").style.width = ((cur+1)/rows.length*100).toFixed(1) + "%";
+  $("prev").disabled = cur === 0;
+  $("next").disabled = cur === rows.length - 1;
+  bindZoom(box);
+  try{ localStorage.setItem("kb_pos_ch"+CH, cur); }catch(e){}
+}
+
+function go(n){
+  const rows = filtered();
+  if(!rows.length) return;
+  const t = cur + n;
+  if(t < 0 || t >= rows.length) return;
+  cur = t; renderCard();
+}
+
+/* ---------------- 灯箱 ---------------- */
+function bindZoom(scope){
+  scope.querySelectorAll(".figbox img").forEach(img=>{
+    img.onclick = (e)=>{
+      e.stopPropagation();
+      const F = FIGS[img.dataset.fig] || {};
+      $("lbimg").src = F.src || img.src;
+      $("lbtx").textContent = F.cap || "";
+      $("lb").classList.add("on");
+    };
+  });
+}
+function closeLB(){ $("lb").classList.remove("on"); }
+$("lb").onclick = closeLB;
+$("lbclose").onclick = (e)=>{ e.stopPropagation(); closeLB(); };
+
+/* ---------------- 模式切换 ---------------- */
+function setMode(m){
+  mode = m;
+  document.querySelectorAll(".mtab").forEach(b=>b.classList.toggle("on", b.dataset.mode===m));
+  $("gridView").style.display = m==="grid" ? "block" : "none";
+  $("cardView").style.display = m==="card" ? "block" : "none";
+  if(m==="card"){
+    if(!window.__restored){
+      const saved = (window.__posParam != null)
+        ? window.__posParam
+        : parseInt(localStorage.getItem("kb_pos_ch"+CH)||"0", 10);
+      const rows = filtered();
+      cur = Math.min(Math.max(saved||0,0), Math.max(rows.length-1,0));
+      window.__restored = true;
+    }
+    renderCard();
+    window.scrollTo({top:0, behavior:"auto"});
+  }else{
+    renderGrid();
+  }
+  try{ localStorage.setItem("kb_mode", m); }catch(e){}
+}
+document.querySelectorAll(".mtab").forEach(b=>{
+  b.onclick = ()=> setMode(b.dataset.mode);
+});
+
+/* ---------------- 事件 ---------------- */
+$("q").addEventListener("input", e=>{
+  keyword = e.target.value; cur = 0; renderGrid();
+  if(mode==="card") renderCard();
+});
+$("prev").onclick = ()=> go(-1);
+$("next").onclick = ()=> go(1);
+
+document.addEventListener("keydown", e=>{
+  if($("lb").classList.contains("on")){
+    if(e.key === "Escape") closeLB();
+    return;
+  }
+  const inInput = document.activeElement && document.activeElement.tagName === "INPUT";
+  if(e.key === "/" && !inInput && mode==="grid"){
+    e.preventDefault(); $("q").focus(); return;
+  }
+  if(mode === "card" && !inInput){
+    if(e.key === "ArrowLeft"){ e.preventDefault(); go(-1); }
+    else if(e.key === "ArrowRight"){ e.preventDefault(); go(1); }
+    else if(e.key === " "){ e.preventDefault(); setMode("grid"); }
+    else if(e.key === "Escape"){ setMode("grid"); }
+  }
+});
+
+/* 触摸滑动（图片上不触发，避免与放大冲突） */
+let tx = 0, ty = 0;
+const stage = document.querySelector(".stage-body");
+stage.addEventListener("touchstart", e=>{
+  if(e.target.closest(".figbox")) return;
+  tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+}, {passive:true});
+stage.addEventListener("touchend", e=>{
+  if(e.target.closest(".figbox")) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)*1.6) go(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* ---------------- 初始化 ---------------- */
+renderChips();
+renderGrid();
+let initMode = "grid";
+try{ initMode = localStorage.getItem("kb_mode") || "grid"; }catch(e){}
+const sp = new URLSearchParams(location.search);
+if(sp.get("mode")) initMode = sp.get("mode");
+if(sp.get("i") != null) window.__posParam = Math.max(parseInt(sp.get("i"), 10) || 0, 0);
+setMode(initMode);
+</script>
+</body>
+</html>

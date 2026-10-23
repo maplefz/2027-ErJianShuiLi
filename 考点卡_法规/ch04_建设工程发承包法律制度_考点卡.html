@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4章 建设工程发承包法律制度 · 考点卡</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --line:#e2e0d8; --line2:#cfccc2;
+  --tx:#2c2c2a; --tx2:#5f5e5a; --tx3:#8c8a82;
+  --blue:#185fa5; --blue-bg:#e6f1fb;
+  --teal:#0f6e56; --teal-bg:#e1f5ee;
+  --amber:#854f0b; --amber-bg:#faeeda;
+  --red:#a32d2d; --red-bg:#fcebeb;
+  --purple:#534ab7; --purple-bg:#eeedfe;
+  --gray:#6b6b66; --gray-bg:#efeee9;
+  --top:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:15px; line-height:1.7;
+  padding:0 20px 80px; padding-top:calc(var(--top) + 26px);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--top);z-index:60;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:rgba(246,245,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.back{
+  font-size:13px;color:var(--tx2);text-decoration:none;white-space:nowrap;
+  padding:5px 10px;border-radius:7px;transition:background .15s;
+}
+.back:hover{background:#eceae4;color:var(--tx)}
+.ch-title{font-size:13.5px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modes{margin-left:auto;display:flex;background:#eceae4;border-radius:9px;padding:3px;gap:2px;flex-shrink:0}
+.mtab{
+  border:0;background:transparent;font-family:inherit;font-size:13px;color:var(--tx2);
+  padding:5px 14px;border-radius:6px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.mtab:hover{color:var(--tx)}
+.mtab.on{background:var(--card);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.wrap{max-width:1120px;margin:0 auto}
+header.pg{margin-bottom:22px}
+.kicker{font-size:12px;letter-spacing:.12em;color:var(--tx3);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:25px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--tx2);font-size:14px}
+.sub b{color:var(--blue);font-weight:600}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:20px 0 16px;position:sticky;top:calc(var(--top) + 8px);z-index:20;
+}
+#q{
+  flex:1;min-width:180px;border:1px solid var(--line2);border-radius:8px;
+  padding:8px 12px;font-size:14px;font-family:inherit;color:var(--tx);
+  outline:none;background:#fbfaf7;transition:border-color .15s;
+}
+#q:focus{border-color:var(--blue);background:#fff}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line2);background:#fff;border-radius:99px;
+  padding:5px 13px;font-size:13px;color:var(--tx2);cursor:pointer;
+  font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--tx3)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip .n{opacity:.55;font-size:11px;margin-left:4px}
+
+.stats{font-size:13px;color:var(--tx3);margin-bottom:14px}
+.stats b{color:var(--tx);font-weight:600}
+
+/* ---------- 索引模式 ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;border-left:3px solid var(--line2);
+  cursor:pointer;transition:border-color .15s,box-shadow .15s;
+}
+.card:hover{border-color:var(--line2);box-shadow:0 1px 6px rgba(0,0,0,.045)}
+.card.t-时间{border-left-color:var(--blue)}
+.card.t-数字{border-left-color:var(--purple)}
+.card.t-计算{border-left-color:var(--teal)}
+.card.t-程序{border-left-color:var(--amber)}
+.card.t-主体{border-left-color:var(--red)}
+.card.t-概念{border-left-color:var(--gray)}
+
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.tag{font-size:11px;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.t-时间 .tag{background:var(--blue-bg);color:var(--blue)}
+.t-数字 .tag{background:var(--purple-bg);color:var(--purple)}
+.t-计算 .tag{background:var(--teal-bg);color:var(--teal)}
+.t-程序 .tag{background:var(--amber-bg);color:var(--amber)}
+.t-主体 .tag{background:var(--red-bg);color:var(--red)}
+.t-概念 .tag{background:var(--gray-bg);color:var(--gray)}
+.sec{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.pg{margin-left:auto;font-size:11px;color:var(--tx3);background:#f2f0eb;padding:2px 7px;border-radius:4px}
+.fmark{font-size:11px;color:var(--teal);background:var(--teal-bg);padding:2px 6px;border-radius:4px}
+
+.card h3{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px}
+ul{list-style:none}
+li{position:relative;padding-left:15px;margin-bottom:6px;font-size:14px;color:var(--tx2)}
+li::before{content:"";position:absolute;left:2px;top:.65em;width:4px;height:4px;border-radius:50%;background:var(--tx3)}
+li b{color:var(--tx);font-weight:600}
+li .hi{background:#fff3cd;color:#633806;font-weight:600;padding:0 3px;border-radius:3px}
+
+.trap{
+  margin-top:11px;padding:9px 12px;border-radius:7px;
+  background:var(--red-bg);border-left:2px solid var(--red);
+  font-size:13px;color:#791f1f;
+}
+.trap::before{content:"易错 ";font-weight:700;font-size:11px;letter-spacing:.05em}
+
+.card .body{display:none}
+.card.open .body{display:block}
+.more{font-size:12px;color:var(--tx3);margin-top:8px}
+.card.open .more{display:none}
+.card.open{border-color:var(--line2)}
+.empty{text-align:center;color:var(--tx3);padding:60px 0;font-size:14px}
+
+/* ---------- 配图 ---------- */
+.figbox{margin:14px 0 4px}
+.figbox img{
+  display:block;width:100%;height:auto;border:1px solid var(--line);
+  border-radius:8px;background:#fff;cursor:zoom-in;transition:border-color .15s;
+}
+.figbox img:hover{border-color:var(--teal)}
+.figcap{
+  display:flex;gap:8px;align-items:baseline;margin-top:6px;
+  font-size:11.5px;color:var(--tx3);line-height:1.55;
+}
+.figcap .fl{color:var(--teal);font-weight:600;flex-shrink:0}
+.figcap .zoom{margin-left:auto;flex-shrink:0;color:var(--tx3)}
+
+/* 灯箱 */
+.lb{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(28,27,25,.9);padding:28px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+.lb.on{display:flex}
+.lb img{
+  max-width:100%;max-height:calc(100vh - 110px);object-fit:contain;
+  background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.lb .lbtx{color:#ddd;font-size:13px;text-align:center;max-width:760px;line-height:1.6}
+.lb .lbclose{
+  position:absolute;top:14px;right:20px;color:#fff;font-size:28px;line-height:1;
+  background:none;border:0;cursor:pointer;opacity:.7;
+}
+.lb .lbclose:hover{opacity:1}
+
+/* ---------- 知识卡片模式 ---------- */
+#cardView{display:none}
+.stage{
+  min-height:calc(100vh - var(--top) - 70px);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:6px;padding-bottom:8px;
+}
+.stage-filter{
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:14px;flex-shrink:0;
+}
+.stage-filter .chip{padding:4px 12px;font-size:12.5px}
+
+.stage-body{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;padding:4px 0;
+}
+.kcard{
+  width:100%;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;
+  border-top:4px solid var(--line2);
+  padding:32px 38px 28px;
+  box-shadow:0 4px 24px rgba(60,55,45,.06);
+  max-height:calc(100vh - 210px);overflow-y:auto;
+}
+.kcard.t-时间{border-top-color:var(--blue)}
+.kcard.t-数字{border-top-color:var(--purple)}
+.kcard.t-计算{border-top-color:var(--teal)}
+.kcard.t-程序{border-top-color:var(--amber)}
+.kcard.t-主体{border-top-color:var(--red)}
+.kcard.t-概念{border-top-color:var(--gray)}
+.kcard.anim{animation:pop .28s cubic-bezier(.2,.7,.3,1)}
+@keyframes pop{
+  from{opacity:0;transform:translateY(10px) scale(.99)}
+  to{opacity:1;transform:none}
+}
+.kc-top{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.kc-top .tag{font-size:12px;padding:3px 10px;border-radius:6px}
+.kc-top .sec{font-size:12px}
+.kc-top .pg{margin-left:auto;font-size:12px;padding:3px 9px}
+.kc-title{font-size:21px;font-weight:600;line-height:1.45;letter-spacing:-.01em;margin-bottom:18px}
+.kc-list li{font-size:15.5px;line-height:1.85;margin-bottom:10px;padding-left:18px;color:var(--tx2)}
+.kc-list li::before{top:.85em;width:5px;height:5px;left:3px}
+.kc-list li b{color:var(--tx)}
+.kc-list li .hi{font-size:16px;padding:1px 5px}
+.kc-trap{
+  margin-top:18px;padding:13px 15px;border-radius:9px;
+  background:var(--red-bg);border-left:3px solid var(--red);
+  font-size:14px;line-height:1.75;color:#791f1f;
+}
+.kc-trap::before{
+  content:"易错";display:inline-block;font-weight:700;font-size:11px;
+  letter-spacing:.06em;background:var(--red);color:#fff;
+  padding:1px 7px;border-radius:4px;margin-right:8px;vertical-align:1px;
+}
+.kc-empty{text-align:center;color:var(--tx3);padding:70px 0}
+.kcard .figbox img{max-height:40vh;width:auto;max-width:100%;margin:0 auto}
+
+/* 翻页导航 */
+.stage-nav{
+  display:flex;align-items:center;gap:16px;justify-content:center;
+  margin-top:18px;width:100%;max-width:680px;flex-shrink:0;
+}
+.navbtn{
+  flex:0 0 auto;border:1px solid var(--line2);background:var(--card);
+  border-radius:10px;padding:11px 22px;font-size:14px;font-family:inherit;
+  color:var(--tx2);cursor:pointer;transition:all .15s;
+}
+.navbtn:hover:not(:disabled){border-color:var(--tx3);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.navbtn:active:not(:disabled){transform:translateY(1px)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.posbox{flex:1;min-width:0;text-align:center}
+.posnum{font-size:13px;color:var(--tx2);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.posnum b{color:var(--tx);font-weight:600;font-size:15px}
+.posbar{height:3px;background:#e6e3db;border-radius:2px;margin-top:7px;overflow:hidden}
+.posbar i{display:block;height:100%;background:var(--tx2);border-radius:2px;transition:width .25s ease}
+.kc-hint{text-align:center;font-size:12px;color:var(--tx3);margin-top:12px}
+.kc-hint kbd{
+  font-family:inherit;font-size:11px;background:#eceae4;border:1px solid var(--line2);
+  border-radius:4px;padding:1px 5px;margin:0 2px;color:var(--tx2);
+}
+
+/* 打印 */
+@media print{
+  body{background:#fff;padding:0;font-size:12px}
+  .topbar,.toolbar,.stats,.more,.stage-filter,.stage-nav,.kc-hint,.lb{display:none!important}
+  .card .body{display:block!important}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .card{break-inside:avoid;box-shadow:none;padding:10px 12px}
+  h1{font-size:18px}
+  #cardView{display:none!important}
+  #gridView{display:block!important}
+  .figbox img{max-height:6.5cm;width:auto;max-width:100%}
+}
+@media(max-width:640px){
+  body{padding:0 12px 60px;padding-top:calc(var(--top) + 18px)}
+  h1{font-size:20px}
+  .ch-title{font-size:12px;max-width:110px}
+  .mtab{padding:5px 10px;font-size:12.5px}
+  .grid{grid-template-columns:1fr}
+  .kcard{padding:22px 18px 20px;border-radius:14px;max-height:calc(100vh - 195px)}
+  .kc-title{font-size:18px;margin-bottom:14px}
+  .kc-list li{font-size:14.5px;margin-bottom:8px}
+  .kc-list li .hi{font-size:15px}
+  .kc-trap{font-size:13.5px;padding:11px 12px}
+  .stage-nav{gap:8px}
+  .navbtn{padding:11px 14px;font-size:13px}
+  .posnum{font-size:12px}
+  .kcard .figbox img{max-height:32vh}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="back" href="../index.html#fg">← 全部章节</a>
+  <div class="ch-title">第 4 章　建设工程发承包法律制度</div>
+  <div class="modes">
+    <button class="mtab on" data-mode="grid">索引</button>
+    <button class="mtab" data-mode="card">知识卡片</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 索引模式 ============ -->
+  <div id="gridView">
+    <header class="pg">
+      <div class="kicker">2027 二建 · 建设工程法规及相关知识</div>
+      <h1>第 4 章　建设工程发承包法律制度</h1>
+      <div class="sub">教材 P96–P120　·　<b id="total">0</b> 张考点卡　·　覆盖 4.1 发承包一般规定 至 4.3 非招标采购制度</div>
+      <div class="sub" style="margin-top:4px;font-size:13px;color:var(--tx3)">点击卡片展开细节；带 <span class="fmark">配图</span> 的卡片可直接看图，点图放大</div>
+    </header>
+
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索考点关键词，如：时限、比例、网络计划……">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="list"></div>
+    <div class="empty" id="empty" style="display:none">没有匹配的考点，换个关键词试试</div>
+  </div>
+
+  <!-- ============ 知识卡片模式 ============ -->
+  <div id="cardView">
+    <div class="stage">
+      <div class="stage-filter" id="chips2"></div>
+      <div class="stage-body">
+        <div class="kcard" id="kcard"></div>
+      </div>
+      <div class="stage-nav">
+        <button class="navbtn" id="prev">← 上一张</button>
+        <div class="posbox">
+          <div class="posnum"><b id="pos">1</b> / <span id="posAll">1</span></div>
+          <div class="posbar"><i id="posfill" style="width:0%"></i></div>
+        </div>
+        <button class="navbtn" id="next">下一张 →</button>
+      </div>
+      <div class="kc-hint">键盘 <kbd>←</kbd> <kbd>→</kbd> 翻页　·　<kbd>空格</kbd> 切回索引　·　点图放大</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="lb" id="lb">
+  <button class="lbclose" id="lbclose">×</button>
+  <img id="lbimg" alt="">
+  <div class="lbtx" id="lbtx"></div>
+</div>
+
+<script>
+const BANK = {"chapter": 4, "name": "建设工程发承包法律制度", "pages": "P96–P120", "summary": "覆盖 4.1 发承包一般规定 至 4.3 非招标采购制度", "cards": [{"t": "主体", "s": "4.1.1", "p": "P96–P97", "n": "工程总承包单位的禁入主体范围", "k": ["工程总承包单位不得是工程总承包项目的<b>代建单位、项目管理单位、监理单位、造价咨询单位、招标代理单位<\/b>", "政府投资项目的项目建议书、可行性研究报告、初步设计文件编制单位及其评估单位，<b>一般不得<\/b>成为该项目的工程总承包单位", "政府投资项目招标人<b>公开<\/b>已经完成的项目建议书、可行性研究报告、初步设计文件的，上述单位可以参与投标"], "x": "「一般不得」并非绝对禁止：文件公开后信息优势丧失，编制单位可同等参与竞争。"}, {"t": "主体", "s": "4.1.1", "p": "P97–P98", "n": "工程总承包中由建设单位承担的风险", "k": ["主要工程材料、设备、人工价格与招标时基期价相比，<b>波动幅度超过合同约定幅度的部分<\/b>", "因国家法律法规政策变化引起的合同价格的变化", "不可预见的地质条件造成的工程费用和工期的变化", "因建设单位原因产生的工程费用和工期的变化，以及不可抗力造成的工程费用和工期的变化"], "x": "这五类风险一律归建设单位，不得通过合同条款转嫁给总承包单位。"}, {"t": "主体", "s": "4.1.1", "p": "P98", "n": "分包不免除总承包单位的质量与安全责任", "k": ["工程总承包单位应当对其承包的<b>全部建设工程质量<\/b>负责，分包单位对其分包工程的质量负责", "分包<b>不免除<\/b>工程总承包单位对其承包的全部建设工程所负的质量责任", "工程总承包单位对承包范围内工程的安全生产<b>负总责<\/b>，分包单位应当服从其安全生产管理", "分包单位不服从管理导致生产安全事故的，由<b>分包单位承担主要责任<\/b>，但不免除总承包单位的安全责任"], "x": "质量责任不因分包而转移；安全事故主要责任可归不服从管理的分包单位，但总包责任仍在。"}, {"t": "主体", "s": "4.1.1", "p": "P98", "n": "工程总承包项目经理的任职条件", "k": ["取得相应工程建设类<b>注册执业资格<\/b>，包括注册建筑师、勘察设计注册工程师、注册建造师或者注册监理工程师等", "未实施注册执业资格的，取得<b>高级专业技术职称<\/b>", "担任过与拟建项目相类似的工程总承包项目经理、设计项目负责人、施工项目负责人或者项目总监理工程师", "工程总承包项目经理<b>不得同时在两个或者两个以上<\/b>工程项目担任工程总承包项目经理、施工项目负责人"], "x": "「担任过类似项目负责人」是并列的经历条件，不能只记注册资格一项。"}, {"t": "程序", "s": "4.1.3", "p": "P99", "n": "合法分包应当同时满足的条件", "k": ["承包人不得将其承包的<b>全部建设工程转包<\/b>给第三人，或者支解后以分包名义分别转包", "禁止将工程分包给<b>不具备相应资质条件<\/b>的单位", "建设工程<b>主体结构<\/b>的施工必须由承包人自行完成", "禁止分包单位将其承包的工程<b>再分包<\/b>", "除总承包合同中已有约定的分包外，必须经<b>建设单位认可<\/b>"], "x": "主体结构自行完成、禁止再分包是分包与转包、违法分包的分界线。"}, {"t": "概念", "s": "4.1.3", "p": "P99", "n": "违法分包的六种法定情形", "k": ["承包单位将其承包的工程分包给<b>个人<\/b>的", "施工总承包单位或专业承包单位将工程分包给<b>不具备相应资质<\/b>单位的", "施工总承包单位将总承包合同范围内<b>工程主体结构<\/b>的施工分包给其他单位的，<b>钢结构工程除外<\/b>", "专业分包单位将其承包的专业工程中<b>非劳务作业部分再分包<\/b>，以及专业作业承包人将其承包的劳务再分包", "专业作业承包人除计取劳务作业费用外，还计取<b>主要建筑材料款和大中型施工机械设备、主要周转材料费用<\/b>"], "x": "主体结构分包一律违法，唯一例外是钢结构工程；分包给个人无论有无资质均违法。"}, {"t": "概念", "s": "4.1.3", "p": "P100", "n": "转包行为的认定情形", "k": ["承包单位将其承包的<b>全部工程<\/b>转给其他单位或个人施工的", "包括<b>母公司<\/b>承接建筑工程后将所承接工程交由具有独立法人资格的<b>子公司<\/b>施工的情形", "将其承包的全部工程<b>肢解以后，以分包的名义<\/b>分别转给其他单位或个人施工的", "未派驻项目负责人、技术负责人、质量管理负责人、安全管理负责人等主要管理人员，或派驻人员与施工单位没有订立劳动合同", "合同约定由承包单位采购的主要材料、构配件及设备，实际由其他单位或个人采购、租赁，又不能合理解释并提供证明"], "x": "母公司中标交子公司施工按转包认定，不属于企业内部的施工组织安排。"}, {"t": "概念", "s": "4.1.3", "p": "P100", "n": "挂靠与转包的认定界限", "k": ["没有资质的单位或个人<b>借用<\/b>其他施工单位的资质承揽工程的", "有资质的施工单位<b>相互借用<\/b>资质，包括低借高、高借低、相同等级相互借用", "第8条第（3）至（9）项规定的情形，有证据证明属于挂靠的，以<b>挂靠<\/b>论处", "不足以认定为挂靠的，则以<b>转包<\/b>认定"], "x": "同一组事实，有借用资质证据定挂靠，无证据则定转包，二者不可并存。"}, {"t": "数字", "s": "4.2.1", "p": "P101", "n": "必须招标项目的三项规模标准", "k": ["施工单项合同估算价在<span class='hi'>400 万元<\/span>人民币以上", "重要设备、材料等货物的采购，单项合同估算价在<span class='hi'>200 万元<\/span>人民币以上", "勘察、设计、监理等服务的采购，单项合同估算价在<span class='hi'>100 万元<\/span>人民币以上", "达到上述标准<b>之一<\/b>的，其勘察、设计、施工、监理以及与工程建设有关的重要设备、材料等的采购必须招标"], "x": "三档对应施工 400 万、货物 200 万、服务 100 万，切勿相互错位。"}, {"t": "数字", "s": "4.2.1", "p": "P101", "n": "使用国有资金项目的招标口径", "k": ["使用<b>预算资金 200 万元<\/b>人民币以上，<b>并且<\/b>该资金占投资额 <b>10% 以上<\/b>的项目", "预算资金包括一般公共预算资金、政府性基金预算资金、国有资本经营预算资金、社会保险基金预算资金", "使用国有企业事业单位资金，并且该资金占<b>控股或者主导地位<\/b>的项目"], "x": "200 万元与 10% 是「并且」关系，必须同时满足，缺一不属于法定招标范围。"}, {"t": "概念", "s": "4.2.1", "p": "P101–P102", "n": "依法可以不进行招标的情形", "k": ["涉及国家安全、国家秘密、抢险救灾，或者属于利用扶贫资金实行以工代赈、需要使用农民工等特殊情况，不适宜招标的", "需要采用<b>不可替代的专利或者专有技术<\/b>的", "采购人依法能够<b>自行建设、生产或者提供<\/b>；已通过招标方式选定的特许经营项目投资人依法能够自行建设、生产或者提供", "需要向<b>原中标人<\/b>采购工程、货物或者服务，否则将影响施工或者功能配套要求的", "承包商、供应商或者服务提供者<b>少于三家<\/b>，不能形成有效竞争的"], "x": "「少于三家」才可不招标，与邀请招标须向「三个以上」发出邀请正好衔接。"}, {"t": "主体", "s": "4.2.1", "p": "P102", "n": "邀请招标的适用情形与批准主体", "k": ["国家重点项目和地方重点项目不适宜公开招标的，经<b>国务院发展计划部门或者省级人民政府批准<\/b>可以邀请招标", "国有资金占控股或者主导地位的依法必须招标项目，<b>应当公开招标<\/b>", "技术复杂、有特殊要求或者受自然环境限制，<b>只有少量<\/b>潜在投标人可供选择的，可以邀请招标", "采用公开招标方式的<b>费用占项目合同金额的比例过大<\/b>的，可以邀请招标", "邀请招标必须向<span class='hi'>三个以上<\/span>的潜在投标人发出邀请，被邀请人须具备承担项目能力且资信良好"], "x": "批准路径只留给国家重点项目和地方重点项目；国有资金控股项目原则上一律公开招标。"}, {"t": "时间", "s": "4.2.2", "p": "P103", "n": "资格预审文件的发售与申请期限", "k": ["资格预审文件或者招标文件的<b>发售期不得少于 <span class='hi'>5 日<\/span><\/b>", "依法必须招标的项目，提交资格预审申请文件的时间，自资格预审文件<b>停止发售之日起不得少于 <span class='hi'>5 日<\/span><\/b>", "通过资格预审的申请人<span class='hi'>少于 3 个<\/span>的，应当<b>重新招标<\/b>", "未通过资格预审的申请人不具有投标资格"], "x": "两个 5 日起算点不同：前者是发售期长度，后者自停止发售之日起算。"}, {"t": "时间", "s": "4.2.2", "p": "P104", "n": "投标文件编制的最短时间", "k": ["自<b>招标文件开始发出之日<\/b>起至<b>投标人提交投标文件截止之日<\/b>止，最短不得少于<span class='hi'>20 日<\/span>", "该 20 日要求仅适用于<b>依法必须进行招标<\/b>的项目", "招标人应当确定投标人编制投标文件所需要的合理时间"], "x": "起算点是招标文件开始发出之日，不是发售结束日，也不是开标日。"}, {"t": "数字", "s": "4.2.2", "p": "P104", "n": "投标保证金的比例与封顶数额", "k": ["投标保证金不得超过招标项目估算价的 <span class='hi'>2%<\/span>", "施工、货物招标的，投标保证金最高不得超过<span class='hi'>80 万元<\/span>人民币", "勘察、设计等服务招标的投标保证金最高不得超过<span class='hi'>10 万元<\/span>人民币", "投标保证金有效期应当与<b>投标有效期一致<\/b>", "境内投标单位以现金或者支票形式提交的投标保证金应当从其<b>基本账户<\/b>转出"], "x": "80 万对应施工与货物，10 万对应勘察设计等服务；比例与封顶额双重约束，取低者。"}, {"t": "时间", "s": "4.2.2", "p": "P104", "n": "投标有效期的起算点", "k": ["招标人应当在招标文件中<b>载明<\/b>投标有效期", "投标有效期<b>从提交投标文件的截止之日起算<\/b>", "投标保证金有效期应当与投标有效期一致"], "x": "起算点是投标截止之日，既不是开标日，也不是中标通知书发出日。"}, {"t": "时间", "s": "4.2.2", "p": "P104", "n": "招标文件澄清修改的通知期限", "k": ["澄清或者修改的内容可能影响文件编制的，应当在提交资格预审申请文件截止时间至少<span class='hi'>3 日<\/span>前通知", "或者投标截止时间至少<span class='hi'>15 日<\/span>前，以<b>书面形式<\/b>通知所有获取文件的潜在投标人", "不足 3 日或者 15 日的，招标人应当<b>顺延<\/b>提交截止时间"], "x": "3 日针对资格预审、15 日针对投标；不足即顺延，不能以缩短期限了事。"}, {"t": "时间", "s": "4.2.2", "p": "P105", "n": "投标文件撤回与撤销的后果", "k": ["投标人在投标截止时间<b>前<\/b>可以补充、修改或者撤回已提交的投标文件，并<b>书面通知<\/b>招标人", "招标人已收取投标保证金的，应当自收到书面撤回通知之日起<span class='hi'>5 日<\/span>内退还", "投标截止<b>后<\/b>投标人撤销投标文件的，招标人<b>可以不退还<\/b>投标保证金"], "x": "截止前叫「撤回」，5 日内退保证金；截止后叫「撤销」，可不退。"}, {"t": "程序", "s": "4.2.2", "p": "P106", "n": "联合体投标的组成与效力规则", "k": ["招标人接受联合体投标并进行资格预审的，联合体应当在<b>提交资格预审申请文件前<\/b>组成", "资格预审后联合体<b>增减、更换成员<\/b>的，其投标<b>无效<\/b>", "由同一专业的单位组成的联合体，按照<b>资质等级较低<\/b>的单位确定资质等级", "联合体各方应当共同与招标人签订合同，就中标项目向招标人承担<b>连带责任<\/b>", "联合体各方在同一招标项目中以自己名义单独投标或者参加其他联合体投标的，<b>相关投标均无效<\/b>"], "x": "牵头方签约不例外，必须各方共同签约；成员变动发生在资格预审之后即致投标无效。"}, {"t": "数字", "s": "4.2.3", "p": "P109", "n": "评标委员会的人数与专家构成", "k": ["评标委员会由招标人的代表和有关技术、经济等方面的专家组成", "依法必须进行招标的项目，评标委员会成员人数为<span class='hi'>5 人以上单数<\/span>", "技术、经济等方面的专家不得少于成员总数的<span class='hi'>三分之二<\/span>", "专家应当从事相关领域工作满<span class='hi'>8 年<\/span>并具有高级职称或者具有同等专业水平", "评标委员会成员的名单在<b>中标结果确定前<\/b>应当保密"], "x": "5 人以上且单数、专家≥2/3、专家须满 8 年并具高级职称，三个条件同时成立。"}, {"t": "程序", "s": "4.2.3", "p": "P109", "n": "评标中三个「以谁为准」的规则", "k": ["投标文件中的大写金额和小写金额不一致的，以<b>大写金额<\/b>为准", "总价金额与单价金额不一致的，以<b>单价金额<\/b>为准，但单价金额小数点有明显错误的除外", "对不同文字文本投标文件的解释发生异议的，以<b>中文文本<\/b>为准", "澄清或者说明不得超出投标文件的范围或者改变投标文件的<b>实质性内容<\/b>"], "x": "总价与单价不一致以单价为准，只有单价小数点明显错误时才倒过来以总价为准。"}, {"t": "程序", "s": "4.2.3", "p": "P111", "n": "中标候选人的推荐与定标规则", "k": ["评标委员会推荐的中标候选人应当限定在<span class='hi'>1～3 人<\/span>，并标明<b>排列顺序<\/b>", "国有资金占控股或者主导地位的项目，招标人应当确定<b>排名第一<\/b>的中标候选人为中标人", "排名第一的候选人放弃中标、因不可抗力不能履行合同、未按期提交履约保证金或被查实有违法行为，可依序确定其他候选人", "依次确定的其他候选人与预期差距较大或者对招标人明显不利的，招标人<b>可以重新招标<\/b>"], "x": "只有国有资金控股或主导的项目强制选第一名，其他项目可在候选人范围内自主定标。"}, {"t": "时间", "s": "4.2.3", "p": "P112", "n": "中标后签约与退还保证金期限", "k": ["招标人应当与中标人在<b>投标有效期内<\/b>以及<b>中标通知书发出之日起<span class='hi'>30 日<\/span>之内<\/b>订立书面合同", "签订合同后<span class='hi'>5 日<\/span>内应当向中标人和未中标的投标人退还投标保证金及<b>银行同期存款利息<\/b>", "中标通知书发出后，招标人改变中标结果或者中标人放弃中标的，应当承担<b>法律责任<\/b>"], "x": "30 日自中标通知书发出之日起算；退保证金是签约后 5 日，且须一并退还利息。"}, {"t": "数字", "s": "4.2.3", "p": "P112", "n": "履约保证金的上限比例", "k": ["履约保证金不得超过中标合同金额的 <span class='hi'>10%<\/span>", "招标文件要求中标人提交履约保证金的，中标人应当按照招标文件的要求提交", "中标人要求变更合同金额超过中标合同金额 <span class='hi'>10%<\/span>，或者拟分包金额超过招标文件约定分包金额 <span class='hi'>10%<\/span> 的，招标人要组织全面审核"], "x": "10% 既是履约保证金上限，也是合同变更与分包金额的审核触发线，两处数值相同但用途不同。"}, {"t": "时间", "s": "4.2.4", "p": "P112", "n": "招标投标异议的提出与答复期限", "k": ["对资格预审文件有异议的，应当在提交资格预审申请文件截止时间<span class='hi'>2 日<\/span>前提出", "对招标文件有异议的，应当在投标截止时间<span class='hi'>10 日<\/span>前提出", "招标人应当自收到异议之日起<span class='hi'>3 日<\/span>内作出答复，作出答复前应当<b>暂停<\/b>招标投标活动", "对开标有异议的，应当在<b>开标现场<\/b>提出，招标人当场答复并制作记录", "对评标结果有异议的，应当在<b>中标候选人公示期间<\/b>提出"], "x": "2 日对资格预审文件、10 日对招标文件、开标须现场提出，三个节点各不相同。"}, {"t": "时间", "s": "4.2.4", "p": "P112–P113", "n": "投诉的期限与行政处理时限", "k": ["可以自<b>知道或者应当知道之日起<\/b><span class='hi'>10 日<\/span>内向有关行政监督部门投诉", "对资格预审文件、招标文件、开标和评标结果的投诉，应当<b>先向招标人提出异议<\/b>", "行政监督部门应当自收到投诉之日起<span class='hi'>3 个工作日<\/span>内决定是否受理", "自受理投诉之日起<span class='hi'>30 个工作日<\/span>内作出书面处理决定，检验检测鉴定、专家评审时间不计算在内", "向两个以上有权受理部门投诉的，由<b>最先收到<\/b>投诉的行政监督部门负责处理"], "x": "10 日是自然日，3 个工作日与 30 个工作日是工作日；异议是这四类投诉的法定前置。"}, {"t": "主体", "s": "4.3", "p": "P113", "n": "非招标采购方式的审批主体", "k": ["适用于达到公开招标数额标准的货物、服务采购项目拟采用非招标采购方式的情形", "采购人应当在<b>采购活动开始前<\/b>，报经<b>主管预算单位同意<\/b>", "再向<b>设区的市、自治州以上人民政府财政部门<\/b>申请批准"], "x": "两级前置缺一不可：先经主管预算单位同意，再报市级以上财政部门批准。"}, {"t": "数字", "s": "4.3.1", "p": "P114", "n": "谈判小组的组成与供应商家数", "k": ["谈判小组由采购人的代表和有关专家共<span class='hi'>3 人以上<\/span>的<b>单数<\/b>组成", "其中专家的人数不得少于成员总数的<span class='hi'>三分之二<\/span>", "谈判小组从符合资格条件的供应商名单中确定<b>不少于 3 家<\/b>的供应商参加谈判", "公开招标的货物、服务项目，实质性响应的供应商<b>只有两家<\/b>时，经<b>本级财政部门批准<\/b>可以与该两家进行竞争性谈判"], "x": "两家供应商谈判须经财政部门批准，不是达到两家即可自动转为竞争性谈判。"}, {"t": "数字", "s": "4.3.3", "p": "P116", "n": "单一来源采购的适用与添购比例", "k": ["符合法定情形的货物或者服务，可以采用单一来源方式采购：只能从<b>唯一供应商<\/b>处采购的", "发生了<b>不可预见的紧急情况<\/b>不能从其他供应商处采购的", "必须保证原有采购项目一致性或者服务配套要求，需要继续从原供应商处添购，且添购资金总额<b>不超过原合同采购金额 <span class='hi'>10%<\/span><\/b>"], "x": "10% 只约束「添购」这一种情形，前两种情形没有金额或比例限制。"}, {"t": "时间", "s": "4.3.4", "p": "P117–P118", "n": "框架协议的有效期与签订备案时限", "k": ["货物项目框架协议有效期一般不超过<span class='hi'>1 年<\/span>，服务项目一般不超过<span class='hi'>2 年<\/span>", "应当在入围通知书发出之日起<span class='hi'>30 日<\/span>内和入围供应商签订框架协议", "框架协议签订后<span class='hi'>7 个工作日<\/span>内，将框架协议副本报<b>本级财政部门备案<\/b>", "除剩余入围供应商不足入围供应商总数 <span class='hi'>70%<\/span> 且影响框架协议执行的情形外，有效期内征集人不得补充征集供应商"], "x": "1 年对货物、2 年对服务；补充征集的门槛是剩余入围供应商不足 70%，两个条件须同时具备。"}]};
+const DATA = BANK.cards;
+const FIGS = BANK.figs || {};
+const CH = BANK.chapter;
+const TYPES = ["时间","数字","计算","程序","主体","概念"];
+
+let activeType = "全部", keyword = "";
+let cur = 0;
+let mode = "grid";
+
+const $ = id => document.getElementById(id);
+
+function figHTML(d, compact){
+  if(!d.fig || !FIGS[d.fig]) return "";
+  const F = FIGS[d.fig];
+  return `<figure class="figbox">
+    <img src="${F.src}" alt="${F.cap||''}" data-fig="${d.fig}" loading="lazy">
+    <figcaption class="figcap">
+      <span class="fl">配图</span>
+      <span>${F.cap||''}</span>
+      <span class="zoom">教材 ${F.p}　点击放大</span>
+    </figcaption>
+  </figure>`;
+}
+
+function filtered(){
+  const kw = keyword.trim().toLowerCase();
+  return DATA.filter(d=>{
+    if(activeType !== "全部" && d.t !== activeType) return false;
+    if(!kw) return true;
+    const hay = (d.n + " " + d.s + " " + d.p + " " + d.k.join(" ") + " " + (d.x||"")).replace(/<[^>]+>/g,"").toLowerCase();
+    return hay.includes(kw);
+  });
+}
+
+function chipHTML(){
+  const counts = {};
+  TYPES.forEach(t=>counts[t] = DATA.filter(d=>d.t===t).length);
+  const items = [["全部", DATA.length], ...TYPES.filter(t=>counts[t]).map(t=>[t,counts[t]])];
+  return items.map(([t,n])=>
+    `<button class="chip${t===activeType?" on":""}" data-t="${t}">${t}<span class="n">${n}</span></button>`
+  ).join("");
+}
+function bindChips(box){
+  box.querySelectorAll(".chip").forEach(b=>{
+    b.onclick = ()=>{ activeType = b.dataset.t; cur = 0; renderChips(); renderGrid(); renderCard(); };
+  });
+}
+function renderChips(){
+  const a = $("chips"), b = $("chips2");
+  if(a){ a.innerHTML = chipHTML(); bindChips(a); }
+  if(b){ b.innerHTML = chipHTML(); bindChips(b); }
+}
+
+/* ---------------- 索引模式 ---------------- */
+function renderGrid(){
+  const rows = filtered();
+  const kw = keyword.trim();
+  $("total").textContent = DATA.length;
+  $("stats").innerHTML = (kw || activeType!=="全部")
+    ? `筛选出 <b>${rows.length}</b> 张考点卡` + (kw?`，关键词「${kw.replace(/</g,"&lt;")}」`:"") + `　·　共 ${DATA.length} 张`
+    : `共 <b>${DATA.length}</b> 张考点卡　·　${BANK.summary}`;
+
+  $("empty").style.display = rows.length ? "none" : "block";
+  $("list").innerHTML = rows.map(d=>`
+    <div class="card t-${d.t}">
+      <div class="card-top">
+        <span class="tag">${d.t}</span>
+        <span class="sec">${d.s||""}</span>
+        ${d.fig && FIGS[d.fig] ? '<span class="fmark">配图</span>' : ''}
+        <span class="pg">${d.p||""}</span>
+      </div>
+      <h3>${d.n}</h3>
+      <div class="body">
+        <ul>${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+        ${figHTML(d)}
+        ${d.x?`<div class="trap">${d.x}</div>`:""}
+      </div>
+      <div class="more">点击展开 ▾</div>
+    </div>`).join("");
+
+  $("list").querySelectorAll(".card").forEach(c=>{
+    c.onclick = (e)=>{ if(e.target.closest(".figbox")) return; c.classList.toggle("open"); };
+  });
+  bindZoom($("list"));
+}
+
+/* ---------------- 知识卡片模式 ---------------- */
+function renderCard(){
+  const rows = filtered();
+  const box = $("kcard");
+  $("posAll").textContent = rows.length || 0;
+
+  if(!rows.length){
+    box.className = "kcard";
+    box.innerHTML = `<div class="kc-empty">当前筛选下没有卡片</div>`;
+    $("pos").textContent = "0";
+    $("posfill").style.width = "0%";
+    $("prev").disabled = $("next").disabled = true;
+    return;
+  }
+  if(cur >= rows.length) cur = rows.length - 1;
+  if(cur < 0) cur = 0;
+
+  const d = rows[cur];
+  box.className = "kcard t-" + d.t;
+  box.innerHTML = `
+    <div class="kc-top">
+      <span class="tag">${d.t}</span>
+      <span class="sec">${d.s||""}</span>
+      <span class="pg">${d.p||""}</span>
+    </div>
+    <h2 class="kc-title">${d.n}</h2>
+    <ul class="kc-list">${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+    ${figHTML(d, true)}
+    ${d.x?`<div class="kc-trap">${d.x}</div>`:""}
+  `;
+  box.scrollTop = 0;
+  box.classList.remove("anim"); void box.offsetWidth; box.classList.add("anim");
+
+  $("pos").textContent = cur + 1;
+  $("posfill").style.width = ((cur+1)/rows.length*100).toFixed(1) + "%";
+  $("prev").disabled = cur === 0;
+  $("next").disabled = cur === rows.length - 1;
+  bindZoom(box);
+  try{ localStorage.setItem("kb_pos_ch"+CH, cur); }catch(e){}
+}
+
+function go(n){
+  const rows = filtered();
+  if(!rows.length) return;
+  const t = cur + n;
+  if(t < 0 || t >= rows.length) return;
+  cur = t; renderCard();
+}
+
+/* ---------------- 灯箱 ---------------- */
+function bindZoom(scope){
+  scope.querySelectorAll(".figbox img").forEach(img=>{
+    img.onclick = (e)=>{
+      e.stopPropagation();
+      const F = FIGS[img.dataset.fig] || {};
+      $("lbimg").src = F.src || img.src;
+      $("lbtx").textContent = F.cap || "";
+      $("lb").classList.add("on");
+    };
+  });
+}
+function closeLB(){ $("lb").classList.remove("on"); }
+$("lb").onclick = closeLB;
+$("lbclose").onclick = (e)=>{ e.stopPropagation(); closeLB(); };
+
+/* ---------------- 模式切换 ---------------- */
+function setMode(m){
+  mode = m;
+  document.querySelectorAll(".mtab").forEach(b=>b.classList.toggle("on", b.dataset.mode===m));
+  $("gridView").style.display = m==="grid" ? "block" : "none";
+  $("cardView").style.display = m==="card" ? "block" : "none";
+  if(m==="card"){
+    if(!window.__restored){
+      const saved = (window.__posParam != null)
+        ? window.__posParam
+        : parseInt(localStorage.getItem("kb_pos_ch"+CH)||"0", 10);
+      const rows = filtered();
+      cur = Math.min(Math.max(saved||0,0), Math.max(rows.length-1,0));
+      window.__restored = true;
+    }
+    renderCard();
+    window.scrollTo({top:0, behavior:"auto"});
+  }else{
+    renderGrid();
+  }
+  try{ localStorage.setItem("kb_mode", m); }catch(e){}
+}
+document.querySelectorAll(".mtab").forEach(b=>{
+  b.onclick = ()=> setMode(b.dataset.mode);
+});
+
+/* ---------------- 事件 ---------------- */
+$("q").addEventListener("input", e=>{
+  keyword = e.target.value; cur = 0; renderGrid();
+  if(mode==="card") renderCard();
+});
+$("prev").onclick = ()=> go(-1);
+$("next").onclick = ()=> go(1);
+
+document.addEventListener("keydown", e=>{
+  if($("lb").classList.contains("on")){
+    if(e.key === "Escape") closeLB();
+    return;
+  }
+  const inInput = document.activeElement && document.activeElement.tagName === "INPUT";
+  if(e.key === "/" && !inInput && mode==="grid"){
+    e.preventDefault(); $("q").focus(); return;
+  }
+  if(mode === "card" && !inInput){
+    if(e.key === "ArrowLeft"){ e.preventDefault(); go(-1); }
+    else if(e.key === "ArrowRight"){ e.preventDefault(); go(1); }
+    else if(e.key === " "){ e.preventDefault(); setMode("grid"); }
+    else if(e.key === "Escape"){ setMode("grid"); }
+  }
+});
+
+/* 触摸滑动（图片上不触发，避免与放大冲突） */
+let tx = 0, ty = 0;
+const stage = document.querySelector(".stage-body");
+stage.addEventListener("touchstart", e=>{
+  if(e.target.closest(".figbox")) return;
+  tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+}, {passive:true});
+stage.addEventListener("touchend", e=>{
+  if(e.target.closest(".figbox")) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)*1.6) go(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* ---------------- 初始化 ---------------- */
+renderChips();
+renderGrid();
+let initMode = "grid";
+try{ initMode = localStorage.getItem("kb_mode") || "grid"; }catch(e){}
+const sp = new URLSearchParams(location.search);
+if(sp.get("mode")) initMode = sp.get("mode");
+if(sp.get("i") != null) window.__posParam = Math.max(parseInt(sp.get("i"), 10) || 0, 0);
+setMode(initMode);
+</script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2章 施工招标投标与合同管理 · 考点卡</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --line:#e2e0d8; --line2:#cfccc2;
+  --tx:#2c2c2a; --tx2:#5f5e5a; --tx3:#8c8a82;
+  --blue:#185fa5; --blue-bg:#e6f1fb;
+  --teal:#0f6e56; --teal-bg:#e1f5ee;
+  --amber:#854f0b; --amber-bg:#faeeda;
+  --red:#a32d2d; --red-bg:#fcebeb;
+  --purple:#534ab7; --purple-bg:#eeedfe;
+  --gray:#6b6b66; --gray-bg:#efeee9;
+  --top:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:15px; line-height:1.7;
+  padding:0 20px 80px; padding-top:calc(var(--top) + 26px);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--top);z-index:60;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:rgba(246,245,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.back{
+  font-size:13px;color:var(--tx2);text-decoration:none;white-space:nowrap;
+  padding:5px 10px;border-radius:7px;transition:background .15s;
+}
+.back:hover{background:#eceae4;color:var(--tx)}
+.ch-title{font-size:13.5px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modes{margin-left:auto;display:flex;background:#eceae4;border-radius:9px;padding:3px;gap:2px;flex-shrink:0}
+.mtab{
+  border:0;background:transparent;font-family:inherit;font-size:13px;color:var(--tx2);
+  padding:5px 14px;border-radius:6px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.mtab:hover{color:var(--tx)}
+.mtab.on{background:var(--card);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.wrap{max-width:1120px;margin:0 auto}
+header.pg{margin-bottom:22px}
+.kicker{font-size:12px;letter-spacing:.12em;color:var(--tx3);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:25px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--tx2);font-size:14px}
+.sub b{color:var(--blue);font-weight:600}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:20px 0 16px;position:sticky;top:calc(var(--top) + 8px);z-index:20;
+}
+#q{
+  flex:1;min-width:180px;border:1px solid var(--line2);border-radius:8px;
+  padding:8px 12px;font-size:14px;font-family:inherit;color:var(--tx);
+  outline:none;background:#fbfaf7;transition:border-color .15s;
+}
+#q:focus{border-color:var(--blue);background:#fff}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line2);background:#fff;border-radius:99px;
+  padding:5px 13px;font-size:13px;color:var(--tx2);cursor:pointer;
+  font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--tx3)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip .n{opacity:.55;font-size:11px;margin-left:4px}
+
+.stats{font-size:13px;color:var(--tx3);margin-bottom:14px}
+.stats b{color:var(--tx);font-weight:600}
+
+/* ---------- 索引模式 ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;border-left:3px solid var(--line2);
+  cursor:pointer;transition:border-color .15s,box-shadow .15s;
+}
+.card:hover{border-color:var(--line2);box-shadow:0 1px 6px rgba(0,0,0,.045)}
+.card.t-时间{border-left-color:var(--blue)}
+.card.t-数字{border-left-color:var(--purple)}
+.card.t-计算{border-left-color:var(--teal)}
+.card.t-程序{border-left-color:var(--amber)}
+.card.t-主体{border-left-color:var(--red)}
+.card.t-概念{border-left-color:var(--gray)}
+
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.tag{font-size:11px;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.t-时间 .tag{background:var(--blue-bg);color:var(--blue)}
+.t-数字 .tag{background:var(--purple-bg);color:var(--purple)}
+.t-计算 .tag{background:var(--teal-bg);color:var(--teal)}
+.t-程序 .tag{background:var(--amber-bg);color:var(--amber)}
+.t-主体 .tag{background:var(--red-bg);color:var(--red)}
+.t-概念 .tag{background:var(--gray-bg);color:var(--gray)}
+.sec{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.pg{margin-left:auto;font-size:11px;color:var(--tx3);background:#f2f0eb;padding:2px 7px;border-radius:4px}
+.fmark{font-size:11px;color:var(--teal);background:var(--teal-bg);padding:2px 6px;border-radius:4px}
+
+.card h3{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px}
+ul{list-style:none}
+li{position:relative;padding-left:15px;margin-bottom:6px;font-size:14px;color:var(--tx2)}
+li::before{content:"";position:absolute;left:2px;top:.65em;width:4px;height:4px;border-radius:50%;background:var(--tx3)}
+li b{color:var(--tx);font-weight:600}
+li .hi{background:#fff3cd;color:#633806;font-weight:600;padding:0 3px;border-radius:3px}
+
+.trap{
+  margin-top:11px;padding:9px 12px;border-radius:7px;
+  background:var(--red-bg);border-left:2px solid var(--red);
+  font-size:13px;color:#791f1f;
+}
+.trap::before{content:"易错 ";font-weight:700;font-size:11px;letter-spacing:.05em}
+
+.card .body{display:none}
+.card.open .body{display:block}
+.more{font-size:12px;color:var(--tx3);margin-top:8px}
+.card.open .more{display:none}
+.card.open{border-color:var(--line2)}
+.empty{text-align:center;color:var(--tx3);padding:60px 0;font-size:14px}
+
+/* ---------- 配图 ---------- */
+.figbox{margin:14px 0 4px}
+.figbox img{
+  display:block;width:100%;height:auto;border:1px solid var(--line);
+  border-radius:8px;background:#fff;cursor:zoom-in;transition:border-color .15s;
+}
+.figbox img:hover{border-color:var(--teal)}
+.figcap{
+  display:flex;gap:8px;align-items:baseline;margin-top:6px;
+  font-size:11.5px;color:var(--tx3);line-height:1.55;
+}
+.figcap .fl{color:var(--teal);font-weight:600;flex-shrink:0}
+.figcap .zoom{margin-left:auto;flex-shrink:0;color:var(--tx3)}
+
+/* 灯箱 */
+.lb{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(28,27,25,.9);padding:28px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+.lb.on{display:flex}
+.lb img{
+  max-width:100%;max-height:calc(100vh - 110px);object-fit:contain;
+  background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.lb .lbtx{color:#ddd;font-size:13px;text-align:center;max-width:760px;line-height:1.6}
+.lb .lbclose{
+  position:absolute;top:14px;right:20px;color:#fff;font-size:28px;line-height:1;
+  background:none;border:0;cursor:pointer;opacity:.7;
+}
+.lb .lbclose:hover{opacity:1}
+
+/* ---------- 知识卡片模式 ---------- */
+#cardView{display:none}
+.stage{
+  min-height:calc(100vh - var(--top) - 70px);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:6px;padding-bottom:8px;
+}
+.stage-filter{
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:14px;flex-shrink:0;
+}
+.stage-filter .chip{padding:4px 12px;font-size:12.5px}
+
+.stage-body{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;padding:4px 0;
+}
+.kcard{
+  width:100%;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;
+  border-top:4px solid var(--line2);
+  padding:32px 38px 28px;
+  box-shadow:0 4px 24px rgba(60,55,45,.06);
+  max-height:calc(100vh - 210px);overflow-y:auto;
+}
+.kcard.t-时间{border-top-color:var(--blue)}
+.kcard.t-数字{border-top-color:var(--purple)}
+.kcard.t-计算{border-top-color:var(--teal)}
+.kcard.t-程序{border-top-color:var(--amber)}
+.kcard.t-主体{border-top-color:var(--red)}
+.kcard.t-概念{border-top-color:var(--gray)}
+.kcard.anim{animation:pop .28s cubic-bezier(.2,.7,.3,1)}
+@keyframes pop{
+  from{opacity:0;transform:translateY(10px) scale(.99)}
+  to{opacity:1;transform:none}
+}
+.kc-top{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.kc-top .tag{font-size:12px;padding:3px 10px;border-radius:6px}
+.kc-top .sec{font-size:12px}
+.kc-top .pg{margin-left:auto;font-size:12px;padding:3px 9px}
+.kc-title{font-size:21px;font-weight:600;line-height:1.45;letter-spacing:-.01em;margin-bottom:18px}
+.kc-list li{font-size:15.5px;line-height:1.85;margin-bottom:10px;padding-left:18px;color:var(--tx2)}
+.kc-list li::before{top:.85em;width:5px;height:5px;left:3px}
+.kc-list li b{color:var(--tx)}
+.kc-list li .hi{font-size:16px;padding:1px 5px}
+.kc-trap{
+  margin-top:18px;padding:13px 15px;border-radius:9px;
+  background:var(--red-bg);border-left:3px solid var(--red);
+  font-size:14px;line-height:1.75;color:#791f1f;
+}
+.kc-trap::before{
+  content:"易错";display:inline-block;font-weight:700;font-size:11px;
+  letter-spacing:.06em;background:var(--red);color:#fff;
+  padding:1px 7px;border-radius:4px;margin-right:8px;vertical-align:1px;
+}
+.kc-empty{text-align:center;color:var(--tx3);padding:70px 0}
+.kcard .figbox img{max-height:40vh;width:auto;max-width:100%;margin:0 auto}
+
+/* 翻页导航 */
+.stage-nav{
+  display:flex;align-items:center;gap:16px;justify-content:center;
+  margin-top:18px;width:100%;max-width:680px;flex-shrink:0;
+}
+.navbtn{
+  flex:0 0 auto;border:1px solid var(--line2);background:var(--card);
+  border-radius:10px;padding:11px 22px;font-size:14px;font-family:inherit;
+  color:var(--tx2);cursor:pointer;transition:all .15s;
+}
+.navbtn:hover:not(:disabled){border-color:var(--tx3);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.navbtn:active:not(:disabled){transform:translateY(1px)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.posbox{flex:1;min-width:0;text-align:center}
+.posnum{font-size:13px;color:var(--tx2);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.posnum b{color:var(--tx);font-weight:600;font-size:15px}
+.posbar{height:3px;background:#e6e3db;border-radius:2px;margin-top:7px;overflow:hidden}
+.posbar i{display:block;height:100%;background:var(--tx2);border-radius:2px;transition:width .25s ease}
+.kc-hint{text-align:center;font-size:12px;color:var(--tx3);margin-top:12px}
+.kc-hint kbd{
+  font-family:inherit;font-size:11px;background:#eceae4;border:1px solid var(--line2);
+  border-radius:4px;padding:1px 5px;margin:0 2px;color:var(--tx2);
+}
+
+/* 打印 */
+@media print{
+  body{background:#fff;padding:0;font-size:12px}
+  .topbar,.toolbar,.stats,.more,.stage-filter,.stage-nav,.kc-hint,.lb{display:none!important}
+  .card .body{display:block!important}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .card{break-inside:avoid;box-shadow:none;padding:10px 12px}
+  h1{font-size:18px}
+  #cardView{display:none!important}
+  #gridView{display:block!important}
+  .figbox img{max-height:6.5cm;width:auto;max-width:100%}
+}
+@media(max-width:640px){
+  body{padding:0 12px 60px;padding-top:calc(var(--top) + 18px)}
+  h1{font-size:20px}
+  .ch-title{font-size:12px;max-width:110px}
+  .mtab{padding:5px 10px;font-size:12.5px}
+  .grid{grid-template-columns:1fr}
+  .kcard{padding:22px 18px 20px;border-radius:14px;max-height:calc(100vh - 195px)}
+  .kc-title{font-size:18px;margin-bottom:14px}
+  .kc-list li{font-size:14.5px;margin-bottom:8px}
+  .kc-list li .hi{font-size:15px}
+  .kc-trap{font-size:13.5px;padding:11px 12px}
+  .stage-nav{gap:8px}
+  .navbtn{padding:11px 14px;font-size:13px}
+  .posnum{font-size:12px}
+  .kcard .figbox img{max-height:32vh}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="back" href="../index.html#gl">← 全部章节</a>
+  <div class="ch-title">第 2 章　施工招标投标与合同管理</div>
+  <div class="modes">
+    <button class="mtab on" data-mode="grid">索引</button>
+    <button class="mtab" data-mode="card">知识卡片</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 索引模式 ============ -->
+  <div id="gridView">
+    <header class="pg">
+      <div class="kicker">2027 二建 · 建设工程施工管理</div>
+      <h1>第 2 章　施工招标投标与合同管理</h1>
+      <div class="sub">教材 P50–P116　·　<b id="total">0</b> 张考点卡　·　覆盖 2.1 施工招标投标 至 2.3 施工承包风险管理及担保保险</div>
+      <div class="sub" style="margin-top:4px;font-size:13px;color:var(--tx3)">点击卡片展开细节；带 <span class="fmark">配图</span> 的卡片可直接看图，点图放大</div>
+    </header>
+
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索考点关键词，如：时限、比例、网络计划……">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="list"></div>
+    <div class="empty" id="empty" style="display:none">没有匹配的考点，换个关键词试试</div>
+  </div>
+
+  <!-- ============ 知识卡片模式 ============ -->
+  <div id="cardView">
+    <div class="stage">
+      <div class="stage-filter" id="chips2"></div>
+      <div class="stage-body">
+        <div class="kcard" id="kcard"></div>
+      </div>
+      <div class="stage-nav">
+        <button class="navbtn" id="prev">← 上一张</button>
+        <div class="posbox">
+          <div class="posnum"><b id="pos">1</b> / <span id="posAll">1</span></div>
+          <div class="posbar"><i id="posfill" style="width:0%"></i></div>
+        </div>
+        <button class="navbtn" id="next">下一张 →</button>
+      </div>
+      <div class="kc-hint">键盘 <kbd>←</kbd> <kbd>→</kbd> 翻页　·　<kbd>空格</kbd> 切回索引　·　点图放大</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="lb" id="lb">
+  <button class="lbclose" id="lbclose">×</button>
+  <img id="lbimg" alt="">
+  <div class="lbtx" id="lbtx"></div>
+</div>
+
+<script>
+const BANK = {"chapter": 2, "name": "施工招标投标与合同管理", "pages": "P50–P116", "summary": "覆盖 2.1 施工招标投标 至 2.3 施工承包风险管理及担保保险", "cards": [{"t": "概念", "s": "2.1", "p": "P50", "n": "招标投标中的要约邀请、要约与承诺", "k": ["建设单位发布的<b>招标公告属于要约邀请<\/b>，建筑企业的投标文件属于要约，建设单位发出中标通知书属于承诺", "依据《中华人民共和国民法典》，订立施工合同通常需经过要约和承诺两个环节"], "x": "三者不可颠倒：公告→要约邀请、投标文件→要约、中标通知书→承诺。"}, {"t": "数字", "s": "2.1.1", "p": "P50", "n": "邀请招标的邀请对象数量", "k": ["邀请招标也称有限竞争性招标，邀请对象以<span class='hi'>5～10 家<\/span>为宜，但不应少于<span class='hi'>3 家<\/span>，否则便失去竞争意义", "与公开招标相比，不发布招标公告、不设资格预审程序，可节约招标费用、缩短招标时间", "虽不进行资格预审，仍要求投标人在投标文件中提供资质和能力证明材料，作为资格后审内容之一"], "x": "「不少于3家」是竞争底线，「5～10家」是适宜区间，两者不是同一要求。"}, {"t": "时间", "s": "2.1.1", "p": "P53", "n": "资格预审文件发售期与异议答复时限", "k": ["资格预审文件的发售期不得少于<span class='hi'>5 日<\/span>", "潜在投标人或其他利害关系人对资格预审文件有异议的，应在提交资格预审申请文件截止时间<span class='hi'>2 日前<\/span>提出", "招标人应自收到异议之日起<span class='hi'>3 日内<\/span>作出答复，作出答复前应暂停招标投标活动"], "x": "异议是「截止时间2日前提出」，答复是「收到之日起3日内」，起算点不同。"}, {"t": "时间", "s": "2.1.1", "p": "P53", "n": "资格预审文件澄清修改的3日时限", "k": ["澄清或修改可能影响资格预审申请文件编制的，招标人应在提交资格预审申请文件截止时间至少<span class='hi'>3 日前<\/span>书面通知所有获取文件的潜在投标人", "不足3日的，招标人应顺延提交资格预审申请文件的截止时间"], "x": "资格预审文件是3日、招标文件是15日，两个时限极易张冠李戴。"}, {"t": "主体", "s": "2.1.1", "p": "P53", "n": "资格审查委员会的组成要求", "k": ["国有资金占控股或者主导地位的依法必须进行招标的项目，招标人应组建资格审查委员会审查资格预审申请文件", "资格审查委员会由招标人代表和有关技术、经济等方面的专家组成，成员人数为<span class='hi'>5 人以上单数<\/span>", "其中技术、经济等方面的专家不得少于成员总数的<span class='hi'>2/3<\/span>；其他项目由招标人自行组织资格审查"], "x": "「5人以上单数」与「专家不少于2/3」须同时满足，缺一即错。"}, {"t": "主体", "s": "2.1.1", "p": "P55", "n": "评标委员会的组建与名单保密", "k": ["评标委员会由招标人负责组建，成员为<span class='hi'>5 人以上单数<\/span>，其中技术、经济等方面的专家不得少于成员总数的<span class='hi'>2/3<\/span>", "评标委员会成员名单一般应在开标前确定，在<b>中标结果确定前<\/b>应当保密", "专家成员从依法组建的专家库中随机抽取或直接确定；技术复杂、专业性强或国家有特殊要求的项目，可由招标人直接确定"], "x": "保密截止点是「中标结果确定前」，不是开标后即可公开。"}, {"t": "时间", "s": "2.1.1", "p": "P55", "n": "招标文件澄清与修改的15日时限", "k": ["澄清或者修改的内容可能影响投标文件编制的，招标人应在投标截止时间至少<span class='hi'>15 日前<\/span>以书面形式通知所有获取招标文件的潜在投标人", "不足15日的，招标人应顺延提交投标文件的截止时间", "投标预备会后对投标人所提问题的澄清，以书面方式通知所有购买招标文件的投标人，该澄清内容为招标文件的组成部分"], "x": "是「投标截止时间前15日」，不是发出招标文件后15日。"}, {"t": "程序", "s": "2.1.1", "p": "P56", "n": "开标主持程序的关键顺序", "k": ["宣布开标纪律→公布并点名确认投标人→宣布开标人、唱标人、记录人、监标人→检查投标文件密封情况→确定并宣布开标顺序", "设有标底的公布标底，再按宣布的顺序当众开标，公布投标人名称、投标保证金递交情况、投标报价、质量目标、工期等", "投标人代表、招标人代表、监标人、记录人在开标记录上签字确认后开标结束"], "x": "密封情况检查在当众开标之前；标底公布也在当众开标之前。"}, {"t": "概念", "s": "2.1.1", "p": "P56", "n": "投标报价算术错误的修正规则", "k": ["总价金额与依据单价计算出的结果不一致时，<b>以单价金额为准<\/b>修正总价，单价金额小数点有明显错误的除外", "书写有错误、大写金额与小写金额不一致时，<b>以大写金额为准<\/b>", "修正后需请投标人书面确认，投标人不接受修正价格的，其投标作废标处理"], "x": "单价优先于总价、大写优先于小写；单价小数点明显错误是唯一例外。"}, {"t": "概念", "s": "2.1.1", "p": "P57", "n": "两种评标方法及推荐中标候选人顺序", "k": ["经评审的最低投标价法：按经评审的投标价由低到高推荐中标候选人，经评审的投标价相等时投标报价低的优先", "综合评估法：按得分由高到低推荐中标候选人，综合评分相等时以投标报价低的优先", "两者投标报价也相等的，均由招标人自行确定"], "x": "最低投标价法比的是「经评审的投标价」，不是原始投标报价。"}, {"t": "时间", "s": "2.1.1", "p": "P59", "n": "中标后订立书面合同的30日时限", "k": ["招标人和中标人应在<b>中标通知书发出之日起<\/b><span class='hi'>30 日内<\/span>，根据招标文件和中标人的投标文件订立书面合同", "合同的标的、价款、质量、履行期限等主要条款应与招标文件和中标人投标文件的内容一致", "招标人和中标人不得再行订立背离合同实质性内容的其他协议"], "x": "起算点是「中标通知书发出之日」，不是收到之日或签订之日。"}, {"t": "数字", "s": "2.1.1", "p": "P59", "n": "履约保证金不得超过中标合同金额10%", "k": ["招标文件要求中标人提交履约保证金的，中标人应按照招标文件的要求提交", "履约保证金不得超过中标合同金额的<span class='hi'>10%<\/span>", "中标人无正当理由拒签合同、提出附加条件或不按要求提交履约保证金的，取消中标资格且投标保证金不予退还"], "x": "履约保证金10%（基数为中标合同金额）、投标保证金2%（基数为估算价），比例与基数都不同。"}, {"t": "概念", "s": "2.1.2", "p": "P59", "n": "固定总价合同的适用情形", "k": ["施工单位按投标时建设单位接受的投标报价一笔包死，不论实际成本如何，均按签约合同价获得工程款支付", "适用于招标时已有施工图设计文件、施工任务和发包范围明确、合同履行中不会出现较大设计变更的工程", "适用于规模较小、技术不太复杂的中小型工程；工程量小、工期较短（<span class='hi'>一般为1年之内<\/span>）的工程"], "x": "固定总价合同下施工单位承担主要风险，故投标报价通常较高。"}, {"t": "概念", "s": "2.1.2", "p": "P60", "n": "单价合同的工程量性质与风险分担", "k": ["以实际完成工程量乘以所报单价计算工程价款，投标单价为计及各种摊销费用的综合单价，而非直接费单价", "工程量清单所列工程量为<b>估算工程量<\/b>，而非实际工程量；无特殊情况一般不得变更单价", "多用于工期长、技术复杂、不可预见因素较多的大型工程，以及初步设计完成后即进行招标的工程"], "x": "单价合同「量可变、价不变」：工程量风险归建设单位，单价风险归施工单位。"}, {"t": "概念", "s": "2.1.2", "p": "P61", "n": "成本加酬金合同的四种形式", "k": ["成本加固定百分比酬金：酬金随直接成本增加而增加，不能激励施工单位缩短工期和降低成本", "成本加固定酬金：不能鼓励降低直接成本，但为尽快获得全部酬金，施工单位会关心缩短工期", "成本加浮动酬金、目标成本加奖罚：能促使降低成本并缩短工期，双方风险都不大，但预期成本难以准确估算"], "x": "多用于边设计边施工的紧急工程或灾后修复工程，签约时只能约定酬金计取方式。"}, {"t": "概念", "s": "2.1.3", "p": "P64", "n": "工程量清单的三种计价方式", "k": ["单价计价：以工程数量乘以相应综合单价计算，分部分项工程项目清单宜采用", "总价计价：以项为单位采用总价计算，措施项目清单宜采用，其他项目清单中的专业工程暂估价也可采用", "费率计价：以计费基础乘以相应费率计算，暂列金额、总承包服务费可采用，增值税采用费率（税率）计价"], "x": "计日工采用单价计价，不要与措施项目清单的总价计价混淆。"}, {"t": "概念", "s": "2.1.4", "p": "P67", "n": "不平衡报价法的适用情形", "k": ["在不影响工程总报价的前提下调整内部各项目报价，既不提高总报价、不影响中标，又能在结算时得到更理想收益", "能早日结算的项目（前期措施费、基础工程、土石方工程）可适当提高报价，后期项目（设备安装、装饰工程）可适当降低", "预计今后工程量会增加的项目适当提高单价，工程量可能减少的项目适当降低单价"], "x": "分标后可能由其他单位施工的暂定项目不宜报高价，以免抬高总报价。"}, {"t": "概念", "s": "2.1.5", "p": "P69", "n": "施工投标文件的组成", "k": ["通常包括技术标书、商务标书、投标函及其他有关文件三部分内容", "技术标书主要是指施工组织设计，评标委员会以此评价投标人的技术实力和工程经验", "商务标书主要包括工程报价、优惠条件、对合同条款的确认等，工程报价以工程量清单为主"], "x": "投标文件应对招标文件的实质性要求作出响应，一般不带附加条件，否则会导致废标。"}, {"t": "程序", "s": "2.2.1", "p": "P71", "n": "施工合同文件的优先解释顺序", "k": ["①合同协议书→②中标通知书→③投标函及投标函附录→④专用合同条款→⑤通用合同条款", "⑥技术标准和要求→⑦图纸→⑧已标价工程量清单→⑨其他合同文件", "组成合同的各项文件应互相解释、互为说明；除专用合同条款另有约定外，按上述顺序解释"], "x": "协议书永远第一，中标通知书在投标函之前；专用条款在通用条款之前。"}, {"t": "时间", "s": "2.2.1", "p": "P71", "n": "监理人发出开工通知的7天时限", "k": ["发包人应委托监理人发出开工通知，监理人应在<b>开工日期<\/b><span class='hi'>7 天前<\/span>向承包人发出开工通知", "监理人在发出开工通知前应获得发包人同意", "工期自监理人发出的开工通知中载明的开工日期起计算，承包人应在开工日期后尽快施工"], "x": "是「开工日期前7天」，不是合同签订后7天，也不是提交开工申请后7天。"}, {"t": "时间", "s": "2.2.1", "p": "P74", "n": "基准日期的确定", "k": ["为区分政策法规变化或市场物价变化对合同价格影响的责任，通用合同条款将<b>投标截止日前第<\/b><span class='hi'>28 天<\/span>规定为基准日期", "基准日期后因法律法规、规范标准等变化导致工程成本发生约定以外的增减时，相应调整合同价款", "工期12个月以内的简明施工合同通用条款没有调价条款，承包人应在投标报价中合理考虑市场价格变化"], "x": "基准日期是「投标截止日前第28天」，不是开工日或签约日。"}, {"t": "时间", "s": "2.2.1", "p": "P76", "n": "暂停施工的答复与复工时限", "k": ["发包人原因暂停施工且监理人未及时下达指示的，承包人可先暂停施工并书面请求，监理人应在接到请求后<span class='hi'>24h 内<\/span>答复，逾期视为同意", "监理人发出暂停施工指示后<span class='hi'>56 天<\/span>内未发出复工通知，承包人可书面要求其在收到通知后<span class='hi'>28 天<\/span>内准许继续施工", "监理人逾期不予批准，可将受影响部分视为可取消的工作；暂停施工影响整个工程的，可视为发包人违约"], "x": "24h答复暂停请求、56天发复工通知、28天准许复工，三个时限分工不同。"}, {"t": "时间", "s": "2.2.1", "p": "P79", "n": "工程进度付款的核查与支付时限", "k": ["监理人在收到进度付款申请单及支持性证明文件后<span class='hi'>14 天<\/span>内完成核查，出具经发包人签认的进度付款证书", "发包人应在监理人收到进度付款申请单后<span class='hi'>28 天<\/span>内，将进度应付款支付给承包人", "监理人出具进度付款证书，不应视为其已同意、批准或接受了承包人完成的该部分工作"], "x": "14天是监理核查、28天是发包人付款，起算点都是「监理人收到申请单」。"}, {"t": "数字", "s": "2.2.1", "p": "P79", "n": "进度款支付比例80%与质保金3%", "k": ["自2022年8月1日起签订的工程合同，政府机关、事业单位、国有企业建设工程进度款支付应不低于已完成工程价款的<span class='hi'>80%<\/span>", "除按合同约定保留不超过工程价款总额<span class='hi'>3%<\/span>的质量保证金外，进度款支付比例可由发承包双方自行确定", "进度款支付超出实际已完成工程价款的，承包单位应在结算后30日内向发包单位返还多收部分"], "x": "80%的基数是「已完成工程价款」，3%的基数是「工程价款总额」，不可混用。"}, {"t": "时间", "s": "2.2.1", "p": "P80", "n": "竣工结算的三个14天链条", "k": ["监理人收到竣工付款申请单后<span class='hi'>14 天<\/span>内完成核查，提出到期应支付价款送发包人审核并抄送承包人", "发包人应在收到后<span class='hi'>14 天<\/span>内审核完毕，由监理人出具经发包人签认的竣工付款证书", "发包人应在监理人出具竣工付款证书后<span class='hi'>14 天<\/span>内支付；逾期未核查、未审核又未提意见的视为同意"], "x": "三个14天依次为监理核查、发包人审核、发包人付款，顺序不能颠倒。"}, {"t": "时间", "s": "2.2.1", "p": "P84", "n": "竣工验收的28天与56天", "k": ["监理人收到竣工验收申请报告后，认为尚不具备条件的应在<span class='hi'>28 天<\/span>内通知承包人需进行的工作；认为具备条件的应在28天内提请发包人验收", "发包人同意接收的，应在监理人收到申请报告后<span class='hi'>56 天<\/span>内，由监理人出具经发包人签认的工程接收证书", "发包人在收到竣工验收申请报告56天后未进行验收的，视为验收合格，但不可抗力原因除外"], "x": "28天是监理审查，56天是出接收证书；「视为验收合格」的期限也是56天。"}, {"t": "时间", "s": "2.2.1", "p": "P85", "n": "承包人索赔的28天三步程序", "k": ["承包人应在知道或应当知道索赔事件发生后<span class='hi'>28 天<\/span>内向监理人递交索赔意向通知书，逾期则丧失追加付款和（或）延长工期的权利", "发出索赔意向通知书后<span class='hi'>28 天<\/span>内正式递交索赔通知书，说明索赔理由及要求的金额和工期", "索赔事件影响结束后的<span class='hi'>28 天<\/span>内，递交最终索赔通知书"], "x": "第一个28天是失权期限，最易考；三个28天的起算点各不相同。"}, {"t": "时间", "s": "2.2.1", "p": "P86", "n": "索赔处理的42天答复与28天赔付", "k": ["监理人应在收到索赔通知书或有关索赔的进一步证明材料后<span class='hi'>42 天<\/span>内，将索赔处理结果答复承包人", "承包人接受索赔处理结果的，发包人应在作出索赔处理结果答复后<span class='hi'>28 天<\/span>内完成赔付", "承包人不接受处理结果的，按合同约定的争议解决办法办理"], "x": "42天是监理答复、28天是发包人赔付，别与索赔意向的28天混淆。"}, {"t": "时间", "s": "2.2.2", "p": "P92", "n": "分包人延期开工的5天与48h", "k": ["分包人不能按时开工，应在不迟于合同协议书约定的开工日期前<span class='hi'>5 天<\/span>，以书面形式向承包人提出延期开工的理由", "承包人应在接到延期开工申请后<span class='hi'>48h 内<\/span>书面答复，逾期不答复视为同意分包人要求，工期相应顺延", "承包人不同意延期或分包人未在规定时间内提出的，工期不予顺延"], "x": "5天由分包人提出、48h由承包人答复；因承包人原因推迟开工的，承包人赔偿损失并顺延工期。"}, {"t": "数字", "s": "2.2.2", "p": "P94", "n": "分包工程量的计量确认规则", "k": ["承包人接到分包人已完工程量报告后<span class='hi'>7 天<\/span>内自行计量或报经监理人计量，计量前<span class='hi'>24h<\/span>通知分包人", "承包人收到报告后7天内未进行计量，从<span class='hi'>第8天<\/span>起分包人报告开列的工程量即视为被确认，作为支付依据", "分包人收到通知不参加计量，计量结果有效；承包人未按时通知致分包人未能参加，计量结果无效"], "x": "「7天内计量」与「第8天起视为确认」是同一规则的两面，勿答成第7天。"}, {"t": "时间", "s": "2.2.3", "p": "P99", "n": "劳务报酬最终支付的14天", "k": ["全部工作完成并经工程承包人认可后<span class='hi'>14 天<\/span>内，劳务分包人向工程承包人递交完整的结算资料", "工程承包人收到结算资料后<span class='hi'>14 天<\/span>内进行核实，给予确认或者提出修改意见", "工程承包人确认结算资料后<span class='hi'>14 天<\/span>内向劳务分包人支付劳务报酬尾款"], "x": "三个14天依次为递交、核实、付款，起算点分别是认可、收到、确认。"}, {"t": "数字", "s": "2.2.4", "p": "P101", "n": "材料采购合同的三段付款比例", "k": ["合同生效后，收到卖方财务收据并审核无误后<span class='hi'>28 日<\/span>内，支付签约合同价的<span class='hi'>10%<\/span>作为预付款", "卖方按约交付材料并提供服务后，进度款支付至该批次合同材料合同价格的<span class='hi'>95%<\/span>", "全部合同材料质量保证期届满后，支付合同价格<span class='hi'>5%<\/span>的结清款"], "x": "设备采购是10%、60%、25%、5%四段，材料采购是三段10%、95%、5%，勿混。"}, {"t": "计算", "s": "2.2.4", "p": "P102", "n": "迟延交付违约金的计算方法", "k": ["迟延交付违约金＝迟延交付材料金额×<span class='hi'>0.08%<\/span>×迟延交付天数", "迟延交付违约金的最高限额为合同价格的<span class='hi'>10%<\/span>", "迟延付款违约金同样按迟延付款金额×0.08%×迟延天数计算，总额不得超过合同价格的10%"], "x": "0.08%是每日费率；上限10%的基数是合同价格，不是迟延部分的金额。"}, {"t": "计算", "s": "2.3.1", "p": "P109", "n": "风险等级矩阵与五级划分", "k": ["将风险因素发生的概率 p 和风险损失量 O 分别划分为大（H）、中（M）、小（L）三个区间，形成<span class='hi'>9 个<\/span>不同区域", "按风险量大小将风险分为<span class='hi'>5 个等级<\/span>：很小（VL）、小（L）、中等（M）、大（H）、很大（VH）", "大、很大属不可接受风险需重点关注；中等为不希望有的风险；小为可接受风险；很小为可忽略风险"], "x": "9个区域对应5个等级，多个区域风险量大致相等，并非一一对应。", "fig": "ch02f11"}, {"t": "概念", "s": "2.3.1", "p": "P110", "n": "风险应对的四种策略", "k": ["风险规避：断绝风险来源，否决或放弃某一施工方案，仅在风险概率较高且损失相当大、或其他策略代价昂贵时采用", "风险减轻：把发生可能性和（或）影响降到可接受范围，是绝大部分情形下采用的策略，典型如联合体承包", "风险转移分保险转移与非保险转移（工程分包、明确计价方式、第三方担保）；风险自留分主动自留与被动自留"], "x": "风险转移要求接收方有更强承受能力；自留的典型措施是建立预算储备和时间储备。"}, {"t": "数字", "s": "2.3.2", "p": "P111", "n": "投标保证金2%上限与退还规则", "k": ["投标保证金不得超过招标项目估算价的<span class='hi'>2%<\/span>，投标保证金有效期应与投标有效期一致", "依法必须招标项目的境内投标单位，以现金或支票形式提交的投标保证金应从其基本账户转出", "撤回已提交投标文件的应书面通知，招标人应自收到撤回通知之日起<span class='hi'>5 日<\/span>内退还；投标截止后撤销的可以不退还"], "x": "2%的基数是「招标项目估算价」，既不是投标报价，也不是中标合同金额。"}, {"t": "数字", "s": "2.3.2", "p": "P112", "n": "工程质量保证金3%上限", "k": ["工程质量保证金总预留比例不得高于工程价款结算总额的<span class='hi'>3%<\/span>", "合同约定以银行保函替代工程质量保证金的，保函金额不得高于工程价款结算总额的3%", "竣工前承包人已缴纳履约保证金的，发包人不得同时预留质量保证金；采用质量保证担保、质量保险的不得再预留"], "x": "3%的基数是「工程价款结算总额」，与履约保证金10%的基数不同，两者不得并收。"}, {"t": "概念", "s": "2.3.3", "p": "P114", "n": "安装工程一切险的责任范围", "k": ["以各种大型机器、设备安装工程为标的，承保机械和设备在安装过程中因自然灾害或意外事故造成的物质损失和费用损失", "责任范围与建筑工程一切险基本一致，但增加了超负荷、超电压、碰线、电弧、走电、短路、大气放电等电气事故的赔偿责任", "承保风险主要是人为风险并具技术色彩；免赔电气原因造成的电气设备或电气用具本身的损失"], "x": "「加保电气事故」与「免赔电气设备本身损失」并存，注意区分损失对象。"}], "figs": {"ch02f11": {"src": "data:image/png;base64,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", "cap": "风险等级矩阵图：按发生概率 P 与损失程度 O 划分 VL/L/M/H/VH 等级", "p": "P109"}}};
+const DATA = BANK.cards;
+const FIGS = BANK.figs || {};
+const CH = BANK.chapter;
+const TYPES = ["时间","数字","计算","程序","主体","概念"];
+
+let activeType = "全部", keyword = "";
+let cur = 0;
+let mode = "grid";
+
+const $ = id => document.getElementById(id);
+
+function figHTML(d, compact){
+  if(!d.fig || !FIGS[d.fig]) return "";
+  const F = FIGS[d.fig];
+  return `<figure class="figbox">
+    <img src="${F.src}" alt="${F.cap||''}" data-fig="${d.fig}" loading="lazy">
+    <figcaption class="figcap">
+      <span class="fl">配图</span>
+      <span>${F.cap||''}</span>
+      <span class="zoom">教材 ${F.p}　点击放大</span>
+    </figcaption>
+  </figure>`;
+}
+
+function filtered(){
+  const kw = keyword.trim().toLowerCase();
+  return DATA.filter(d=>{
+    if(activeType !== "全部" && d.t !== activeType) return false;
+    if(!kw) return true;
+    const hay = (d.n + " " + d.s + " " + d.p + " " + d.k.join(" ") + " " + (d.x||"")).replace(/<[^>]+>/g,"").toLowerCase();
+    return hay.includes(kw);
+  });
+}
+
+function chipHTML(){
+  const counts = {};
+  TYPES.forEach(t=>counts[t] = DATA.filter(d=>d.t===t).length);
+  const items = [["全部", DATA.length], ...TYPES.filter(t=>counts[t]).map(t=>[t,counts[t]])];
+  return items.map(([t,n])=>
+    `<button class="chip${t===activeType?" on":""}" data-t="${t}">${t}<span class="n">${n}</span></button>`
+  ).join("");
+}
+function bindChips(box){
+  box.querySelectorAll(".chip").forEach(b=>{
+    b.onclick = ()=>{ activeType = b.dataset.t; cur = 0; renderChips(); renderGrid(); renderCard(); };
+  });
+}
+function renderChips(){
+  const a = $("chips"), b = $("chips2");
+  if(a){ a.innerHTML = chipHTML(); bindChips(a); }
+  if(b){ b.innerHTML = chipHTML(); bindChips(b); }
+}
+
+/* ---------------- 索引模式 ---------------- */
+function renderGrid(){
+  const rows = filtered();
+  const kw = keyword.trim();
+  $("total").textContent = DATA.length;
+  $("stats").innerHTML = (kw || activeType!=="全部")
+    ? `筛选出 <b>${rows.length}</b> 张考点卡` + (kw?`，关键词「${kw.replace(/</g,"&lt;")}」`:"") + `　·　共 ${DATA.length} 张`
+    : `共 <b>${DATA.length}</b> 张考点卡　·　${BANK.summary}`;
+
+  $("empty").style.display = rows.length ? "none" : "block";
+  $("list").innerHTML = rows.map(d=>`
+    <div class="card t-${d.t}">
+      <div class="card-top">
+        <span class="tag">${d.t}</span>
+        <span class="sec">${d.s||""}</span>
+        ${d.fig && FIGS[d.fig] ? '<span class="fmark">配图</span>' : ''}
+        <span class="pg">${d.p||""}</span>
+      </div>
+      <h3>${d.n}</h3>
+      <div class="body">
+        <ul>${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+        ${figHTML(d)}
+        ${d.x?`<div class="trap">${d.x}</div>`:""}
+      </div>
+      <div class="more">点击展开 ▾</div>
+    </div>`).join("");
+
+  $("list").querySelectorAll(".card").forEach(c=>{
+    c.onclick = (e)=>{ if(e.target.closest(".figbox")) return; c.classList.toggle("open"); };
+  });
+  bindZoom($("list"));
+}
+
+/* ---------------- 知识卡片模式 ---------------- */
+function renderCard(){
+  const rows = filtered();
+  const box = $("kcard");
+  $("posAll").textContent = rows.length || 0;
+
+  if(!rows.length){
+    box.className = "kcard";
+    box.innerHTML = `<div class="kc-empty">当前筛选下没有卡片</div>`;
+    $("pos").textContent = "0";
+    $("posfill").style.width = "0%";
+    $("prev").disabled = $("next").disabled = true;
+    return;
+  }
+  if(cur >= rows.length) cur = rows.length - 1;
+  if(cur < 0) cur = 0;
+
+  const d = rows[cur];
+  box.className = "kcard t-" + d.t;
+  box.innerHTML = `
+    <div class="kc-top">
+      <span class="tag">${d.t}</span>
+      <span class="sec">${d.s||""}</span>
+      <span class="pg">${d.p||""}</span>
+    </div>
+    <h2 class="kc-title">${d.n}</h2>
+    <ul class="kc-list">${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+    ${figHTML(d, true)}
+    ${d.x?`<div class="kc-trap">${d.x}</div>`:""}
+  `;
+  box.scrollTop = 0;
+  box.classList.remove("anim"); void box.offsetWidth; box.classList.add("anim");
+
+  $("pos").textContent = cur + 1;
+  $("posfill").style.width = ((cur+1)/rows.length*100).toFixed(1) + "%";
+  $("prev").disabled = cur === 0;
+  $("next").disabled = cur === rows.length - 1;
+  bindZoom(box);
+  try{ localStorage.setItem("kb_pos_ch"+CH, cur); }catch(e){}
+}
+
+function go(n){
+  const rows = filtered();
+  if(!rows.length) return;
+  const t = cur + n;
+  if(t < 0 || t >= rows.length) return;
+  cur = t; renderCard();
+}
+
+/* ---------------- 灯箱 ---------------- */
+function bindZoom(scope){
+  scope.querySelectorAll(".figbox img").forEach(img=>{
+    img.onclick = (e)=>{
+      e.stopPropagation();
+      const F = FIGS[img.dataset.fig] || {};
+      $("lbimg").src = F.src || img.src;
+      $("lbtx").textContent = F.cap || "";
+      $("lb").classList.add("on");
+    };
+  });
+}
+function closeLB(){ $("lb").classList.remove("on"); }
+$("lb").onclick = closeLB;
+$("lbclose").onclick = (e)=>{ e.stopPropagation(); closeLB(); };
+
+/* ---------------- 模式切换 ---------------- */
+function setMode(m){
+  mode = m;
+  document.querySelectorAll(".mtab").forEach(b=>b.classList.toggle("on", b.dataset.mode===m));
+  $("gridView").style.display = m==="grid" ? "block" : "none";
+  $("cardView").style.display = m==="card" ? "block" : "none";
+  if(m==="card"){
+    if(!window.__restored){
+      const saved = (window.__posParam != null)
+        ? window.__posParam
+        : parseInt(localStorage.getItem("kb_pos_ch"+CH)||"0", 10);
+      const rows = filtered();
+      cur = Math.min(Math.max(saved||0,0), Math.max(rows.length-1,0));
+      window.__restored = true;
+    }
+    renderCard();
+    window.scrollTo({top:0, behavior:"auto"});
+  }else{
+    renderGrid();
+  }
+  try{ localStorage.setItem("kb_mode", m); }catch(e){}
+}
+document.querySelectorAll(".mtab").forEach(b=>{
+  b.onclick = ()=> setMode(b.dataset.mode);
+});
+
+/* ---------------- 事件 ---------------- */
+$("q").addEventListener("input", e=>{
+  keyword = e.target.value; cur = 0; renderGrid();
+  if(mode==="card") renderCard();
+});
+$("prev").onclick = ()=> go(-1);
+$("next").onclick = ()=> go(1);
+
+document.addEventListener("keydown", e=>{
+  if($("lb").classList.contains("on")){
+    if(e.key === "Escape") closeLB();
+    return;
+  }
+  const inInput = document.activeElement && document.activeElement.tagName === "INPUT";
+  if(e.key === "/" && !inInput && mode==="grid"){
+    e.preventDefault(); $("q").focus(); return;
+  }
+  if(mode === "card" && !inInput){
+    if(e.key === "ArrowLeft"){ e.preventDefault(); go(-1); }
+    else if(e.key === "ArrowRight"){ e.preventDefault(); go(1); }
+    else if(e.key === " "){ e.preventDefault(); setMode("grid"); }
+    else if(e.key === "Escape"){ setMode("grid"); }
+  }
+});
+
+/* 触摸滑动（图片上不触发，避免与放大冲突） */
+let tx = 0, ty = 0;
+const stage = document.querySelector(".stage-body");
+stage.addEventListener("touchstart", e=>{
+  if(e.target.closest(".figbox")) return;
+  tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+}, {passive:true});
+stage.addEventListener("touchend", e=>{
+  if(e.target.closest(".figbox")) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)*1.6) go(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* ---------------- 初始化 ---------------- */
+renderChips();
+renderGrid();
+let initMode = "grid";
+try{ initMode = localStorage.getItem("kb_mode") || "grid"; }catch(e){}
+const sp = new URLSearchParams(location.search);
+if(sp.get("mode")) initMode = sp.get("mode");
+if(sp.get("i") != null) window.__posParam = Math.max(parseInt(sp.get("i"), 10) || 0, 0);
+setMode(initMode);
+</script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7章 施工招标投标与合同管理 · 考点卡</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --line:#e2e0d8; --line2:#cfccc2;
+  --tx:#2c2c2a; --tx2:#5f5e5a; --tx3:#8c8a82;
+  --blue:#185fa5; --blue-bg:#e6f1fb;
+  --teal:#0f6e56; --teal-bg:#e1f5ee;
+  --amber:#854f0b; --amber-bg:#faeeda;
+  --red:#a32d2d; --red-bg:#fcebeb;
+  --purple:#534ab7; --purple-bg:#eeedfe;
+  --gray:#6b6b66; --gray-bg:#efeee9;
+  --top:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:15px; line-height:1.7;
+  padding:0 20px 80px; padding-top:calc(var(--top) + 26px);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--top);z-index:60;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:rgba(246,245,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.back{
+  font-size:13px;color:var(--tx2);text-decoration:none;white-space:nowrap;
+  padding:5px 10px;border-radius:7px;transition:background .15s;
+}
+.back:hover{background:#eceae4;color:var(--tx)}
+.ch-title{font-size:13.5px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modes{margin-left:auto;display:flex;background:#eceae4;border-radius:9px;padding:3px;gap:2px;flex-shrink:0}
+.mtab{
+  border:0;background:transparent;font-family:inherit;font-size:13px;color:var(--tx2);
+  padding:5px 14px;border-radius:6px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.mtab:hover{color:var(--tx)}
+.mtab.on{background:var(--card);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.wrap{max-width:1120px;margin:0 auto}
+header.pg{margin-bottom:22px}
+.kicker{font-size:12px;letter-spacing:.12em;color:var(--tx3);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:25px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--tx2);font-size:14px}
+.sub b{color:var(--blue);font-weight:600}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:20px 0 16px;position:sticky;top:calc(var(--top) + 8px);z-index:20;
+}
+#q{
+  flex:1;min-width:180px;border:1px solid var(--line2);border-radius:8px;
+  padding:8px 12px;font-size:14px;font-family:inherit;color:var(--tx);
+  outline:none;background:#fbfaf7;transition:border-color .15s;
+}
+#q:focus{border-color:var(--blue);background:#fff}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line2);background:#fff;border-radius:99px;
+  padding:5px 13px;font-size:13px;color:var(--tx2);cursor:pointer;
+  font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--tx3)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip .n{opacity:.55;font-size:11px;margin-left:4px}
+
+.stats{font-size:13px;color:var(--tx3);margin-bottom:14px}
+.stats b{color:var(--tx);font-weight:600}
+
+/* ---------- 索引模式 ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;border-left:3px solid var(--line2);
+  cursor:pointer;transition:border-color .15s,box-shadow .15s;
+}
+.card:hover{border-color:var(--line2);box-shadow:0 1px 6px rgba(0,0,0,.045)}
+.card.t-时间{border-left-color:var(--blue)}
+.card.t-数字{border-left-color:var(--purple)}
+.card.t-计算{border-left-color:var(--teal)}
+.card.t-程序{border-left-color:var(--amber)}
+.card.t-主体{border-left-color:var(--red)}
+.card.t-概念{border-left-color:var(--gray)}
+
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.tag{font-size:11px;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.t-时间 .tag{background:var(--blue-bg);color:var(--blue)}
+.t-数字 .tag{background:var(--purple-bg);color:var(--purple)}
+.t-计算 .tag{background:var(--teal-bg);color:var(--teal)}
+.t-程序 .tag{background:var(--amber-bg);color:var(--amber)}
+.t-主体 .tag{background:var(--red-bg);color:var(--red)}
+.t-概念 .tag{background:var(--gray-bg);color:var(--gray)}
+.sec{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.pg{margin-left:auto;font-size:11px;color:var(--tx3);background:#f2f0eb;padding:2px 7px;border-radius:4px}
+.fmark{font-size:11px;color:var(--teal);background:var(--teal-bg);padding:2px 6px;border-radius:4px}
+
+.card h3{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px}
+ul{list-style:none}
+li{position:relative;padding-left:15px;margin-bottom:6px;font-size:14px;color:var(--tx2)}
+li::before{content:"";position:absolute;left:2px;top:.65em;width:4px;height:4px;border-radius:50%;background:var(--tx3)}
+li b{color:var(--tx);font-weight:600}
+li .hi{background:#fff3cd;color:#633806;font-weight:600;padding:0 3px;border-radius:3px}
+
+.trap{
+  margin-top:11px;padding:9px 12px;border-radius:7px;
+  background:var(--red-bg);border-left:2px solid var(--red);
+  font-size:13px;color:#791f1f;
+}
+.trap::before{content:"易错 ";font-weight:700;font-size:11px;letter-spacing:.05em}
+
+.card .body{display:none}
+.card.open .body{display:block}
+.more{font-size:12px;color:var(--tx3);margin-top:8px}
+.card.open .more{display:none}
+.card.open{border-color:var(--line2)}
+.empty{text-align:center;color:var(--tx3);padding:60px 0;font-size:14px}
+
+/* ---------- 配图 ---------- */
+.figbox{margin:14px 0 4px}
+.figbox img{
+  display:block;width:100%;height:auto;border:1px solid var(--line);
+  border-radius:8px;background:#fff;cursor:zoom-in;transition:border-color .15s;
+}
+.figbox img:hover{border-color:var(--teal)}
+.figcap{
+  display:flex;gap:8px;align-items:baseline;margin-top:6px;
+  font-size:11.5px;color:var(--tx3);line-height:1.55;
+}
+.figcap .fl{color:var(--teal);font-weight:600;flex-shrink:0}
+.figcap .zoom{margin-left:auto;flex-shrink:0;color:var(--tx3)}
+
+/* 灯箱 */
+.lb{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(28,27,25,.9);padding:28px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+.lb.on{display:flex}
+.lb img{
+  max-width:100%;max-height:calc(100vh - 110px);object-fit:contain;
+  background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.lb .lbtx{color:#ddd;font-size:13px;text-align:center;max-width:760px;line-height:1.6}
+.lb .lbclose{
+  position:absolute;top:14px;right:20px;color:#fff;font-size:28px;line-height:1;
+  background:none;border:0;cursor:pointer;opacity:.7;
+}
+.lb .lbclose:hover{opacity:1}
+
+/* ---------- 知识卡片模式 ---------- */
+#cardView{display:none}
+.stage{
+  min-height:calc(100vh - var(--top) - 70px);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:6px;padding-bottom:8px;
+}
+.stage-filter{
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:14px;flex-shrink:0;
+}
+.stage-filter .chip{padding:4px 12px;font-size:12.5px}
+
+.stage-body{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;padding:4px 0;
+}
+.kcard{
+  width:100%;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;
+  border-top:4px solid var(--line2);
+  padding:32px 38px 28px;
+  box-shadow:0 4px 24px rgba(60,55,45,.06);
+  max-height:calc(100vh - 210px);overflow-y:auto;
+}
+.kcard.t-时间{border-top-color:var(--blue)}
+.kcard.t-数字{border-top-color:var(--purple)}
+.kcard.t-计算{border-top-color:var(--teal)}
+.kcard.t-程序{border-top-color:var(--amber)}
+.kcard.t-主体{border-top-color:var(--red)}
+.kcard.t-概念{border-top-color:var(--gray)}
+.kcard.anim{animation:pop .28s cubic-bezier(.2,.7,.3,1)}
+@keyframes pop{
+  from{opacity:0;transform:translateY(10px) scale(.99)}
+  to{opacity:1;transform:none}
+}
+.kc-top{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.kc-top .tag{font-size:12px;padding:3px 10px;border-radius:6px}
+.kc-top .sec{font-size:12px}
+.kc-top .pg{margin-left:auto;font-size:12px;padding:3px 9px}
+.kc-title{font-size:21px;font-weight:600;line-height:1.45;letter-spacing:-.01em;margin-bottom:18px}
+.kc-list li{font-size:15.5px;line-height:1.85;margin-bottom:10px;padding-left:18px;color:var(--tx2)}
+.kc-list li::before{top:.85em;width:5px;height:5px;left:3px}
+.kc-list li b{color:var(--tx)}
+.kc-list li .hi{font-size:16px;padding:1px 5px}
+.kc-trap{
+  margin-top:18px;padding:13px 15px;border-radius:9px;
+  background:var(--red-bg);border-left:3px solid var(--red);
+  font-size:14px;line-height:1.75;color:#791f1f;
+}
+.kc-trap::before{
+  content:"易错";display:inline-block;font-weight:700;font-size:11px;
+  letter-spacing:.06em;background:var(--red);color:#fff;
+  padding:1px 7px;border-radius:4px;margin-right:8px;vertical-align:1px;
+}
+.kc-empty{text-align:center;color:var(--tx3);padding:70px 0}
+.kcard .figbox img{max-height:40vh;width:auto;max-width:100%;margin:0 auto}
+
+/* 翻页导航 */
+.stage-nav{
+  display:flex;align-items:center;gap:16px;justify-content:center;
+  margin-top:18px;width:100%;max-width:680px;flex-shrink:0;
+}
+.navbtn{
+  flex:0 0 auto;border:1px solid var(--line2);background:var(--card);
+  border-radius:10px;padding:11px 22px;font-size:14px;font-family:inherit;
+  color:var(--tx2);cursor:pointer;transition:all .15s;
+}
+.navbtn:hover:not(:disabled){border-color:var(--tx3);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.navbtn:active:not(:disabled){transform:translateY(1px)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.posbox{flex:1;min-width:0;text-align:center}
+.posnum{font-size:13px;color:var(--tx2);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.posnum b{color:var(--tx);font-weight:600;font-size:15px}
+.posbar{height:3px;background:#e6e3db;border-radius:2px;margin-top:7px;overflow:hidden}
+.posbar i{display:block;height:100%;background:var(--tx2);border-radius:2px;transition:width .25s ease}
+.kc-hint{text-align:center;font-size:12px;color:var(--tx3);margin-top:12px}
+.kc-hint kbd{
+  font-family:inherit;font-size:11px;background:#eceae4;border:1px solid var(--line2);
+  border-radius:4px;padding:1px 5px;margin:0 2px;color:var(--tx2);
+}
+
+/* 打印 */
+@media print{
+  body{background:#fff;padding:0;font-size:12px}
+  .topbar,.toolbar,.stats,.more,.stage-filter,.stage-nav,.kc-hint,.lb{display:none!important}
+  .card .body{display:block!important}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .card{break-inside:avoid;box-shadow:none;padding:10px 12px}
+  h1{font-size:18px}
+  #cardView{display:none!important}
+  #gridView{display:block!important}
+  .figbox img{max-height:6.5cm;width:auto;max-width:100%}
+}
+@media(max-width:640px){
+  body{padding:0 12px 60px;padding-top:calc(var(--top) + 18px)}
+  h1{font-size:20px}
+  .ch-title{font-size:12px;max-width:110px}
+  .mtab{padding:5px 10px;font-size:12.5px}
+  .grid{grid-template-columns:1fr}
+  .kcard{padding:22px 18px 20px;border-radius:14px;max-height:calc(100vh - 195px)}
+  .kc-title{font-size:18px;margin-bottom:14px}
+  .kc-list li{font-size:14.5px;margin-bottom:8px}
+  .kc-list li .hi{font-size:15px}
+  .kc-trap{font-size:13.5px;padding:11px 12px}
+  .stage-nav{gap:8px}
+  .navbtn{padding:11px 14px;font-size:13px}
+  .posnum{font-size:12px}
+  .kcard .figbox img{max-height:32vh}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="back" href="../index.html#sl">← 全部章节</a>
+  <div class="ch-title">第 7 章　施工招标投标与合同管理</div>
+  <div class="modes">
+    <button class="mtab on" data-mode="grid">索引</button>
+    <button class="mtab" data-mode="card">知识卡片</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 索引模式 ============ -->
+  <div id="gridView">
+    <header class="pg">
+      <div class="kicker">2027 二建 · 水利水电工程管理与实务</div>
+      <h1>第 7 章　施工招标投标与合同管理</h1>
+      <div class="sub">教材 P293–P327　·　<b id="total">0</b> 张考点卡　·　覆盖 7.1 施工招标投标 与 7.2 施工合同管理</div>
+      <div class="sub" style="margin-top:4px;font-size:13px;color:var(--tx3)">点击卡片展开细节；带 <span class="fmark">配图</span> 的卡片可直接看图，点图放大</div>
+    </header>
+
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索考点关键词，如：时限、比例、网络计划……">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="list"></div>
+    <div class="empty" id="empty" style="display:none">没有匹配的考点，换个关键词试试</div>
+  </div>
+
+  <!-- ============ 知识卡片模式 ============ -->
+  <div id="cardView">
+    <div class="stage">
+      <div class="stage-filter" id="chips2"></div>
+      <div class="stage-body">
+        <div class="kcard" id="kcard"></div>
+      </div>
+      <div class="stage-nav">
+        <button class="navbtn" id="prev">← 上一张</button>
+        <div class="posbox">
+          <div class="posnum"><b id="pos">1</b> / <span id="posAll">1</span></div>
+          <div class="posbar"><i id="posfill" style="width:0%"></i></div>
+        </div>
+        <button class="navbtn" id="next">下一张 →</button>
+      </div>
+      <div class="kc-hint">键盘 <kbd>←</kbd> <kbd>→</kbd> 翻页　·　<kbd>空格</kbd> 切回索引　·　点图放大</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="lb" id="lb">
+  <button class="lbclose" id="lbclose">×</button>
+  <img id="lbimg" alt="">
+  <div class="lbtx" id="lbtx"></div>
+</div>
+
+<script>
+const BANK = {"chapter": 7, "name": "施工招标投标与合同管理", "pages": "P293–P327", "summary": "覆盖 7.1 施工招标投标 与 7.2 施工合同管理", "cards": [{"t": "数字", "s": "7.1.1", "p": "P293", "n": "必须招标的规模标准", "k": ["施工单项合同估算价在 <span class='hi'>400 万元<\/span> 人民币以上的水利基础设施项目必须招标", "使用预算资金 <span class='hi'>200 万元<\/span> 人民币以上，并且该资金占投资额 <span class='hi'>10%<\/span> 以上的项目", "使用国有企业事业单位资金，并且该资金占控股或者主导地位的项目", "同一项目中可合并的勘察、设计、施工、监理及重要设备材料采购，合计达标的必须招标"], "x": "400 万元是施工单项合同估算价，不是项目总投资；合并采购条款是为防止化整为零规避招标。"}, {"t": "主体", "s": "7.1.1", "p": "P296", "n": "投标回避与禁止准入情形", "k": ["为招标人不具独立法人资格的附属机构，或为招标项目的监理人、代建人、招标代理机构的", "为招标项目前期准备提供设计或咨询服务的，但设计施工总承包的除外", "被责令停业、被暂停或取消投标资格、财产被接管或冻结的", "最近 <span class='hi'>三年内<\/span> 有骗取中标、严重违约或重大工程质量问题的"], "x": "设计施工总承包是唯一例外；单位负责人为同一人或存在控股、管理关系的不同单位，也不得投同一标段。"}, {"t": "时间", "s": "7.1.1", "p": "P296", "n": "招标文件异议的提出与答复", "k": ["对招标文件有异议，应在投标截止时间 <span class='hi'>10 日前<\/span> 向招标人或其委托的招标代理机构提出", "招标人或其委托的招标代理机构应自收到异议之日起 <span class='hi'>3 日内<\/span> 作出答复", "作出答复前，应当暂停招标投标活动", "未在规定时间提出异议的，不得再对招标文件相关内容提出异议或投诉"], "x": "10 日是提出期限、3 日是答复期限，两者起点不同；异议属修改范畴的还须同时走修改澄清程序。"}, {"t": "时间", "s": "7.1.1", "p": "P297", "n": "中标候选人公示与评标异议", "k": ["招标人应当自收到评标报告之日起 <span class='hi'>3 日内<\/span> 公示中标候选人", "中标候选人公示期不得少于 <span class='hi'>3 日<\/span>", "对评标结果的异议应在公示期间提出，招标人自收到异议之日起 3 日内答复，答复前暂停", "公示应载明候选人排序、名称、投标报价、质量、工期及项目负责人姓名和证书编号"], "x": "公示 3 日、答复 3 日极易混淆；异议须在公示期内提出，逾期不得再针对评标投诉。"}, {"t": "程序", "s": "7.1.2", "p": "P297", "n": "水利工程施工招标应具备条件", "k": ["初步设计已经批准；建设资金来源已落实，年度投资计划已经安排", "具有能满足招标要求的设计文件，已与设计单位签订图纸交付合同或协议", "监理单位已确定；永久征地、临时征地和移民搬迁安置已落实或已有明确安排"], "x": "是初步设计批准而非可行性研究批准；“监理单位已确定”是水利工程招标条件的特点。"}, {"t": "概念", "s": "7.1.2", "p": "P298", "n": "招标文件编制的禁止性规定", "k": ["不得提出注册地址、所有制性质、市场占有率、特定区域或行业业绩等不合理条件", "不得套用特定生产供应者的条件设定投标人资格、技术、商务条件", "不得将装订、纸张、明显的文字错误列为否决投标情形", "设有最高投标限价的应在招标文件中明确，<b>不得规定最低投标限价<\/b>"], "x": "只有最高投标限价、没有最低投标限价；必须引用某生产供应者标准时，应加“或相当于”。"}, {"t": "时间", "s": "7.1.2", "p": "P299", "n": "招标文件发售期与邀请招标", "k": ["招标文件的发售期不得少于 <span class='hi'>5 日<\/span>", "采用邀请招标的，应向 <span class='hi'>3 个以上<\/span> 有投标资格的法人或其他组织发出投标邀请书", "投标人少于 3 个的，招标人应当重新招标", "依法必须招标项目的招标公告应在“中国招标投标公共服务平台”或省级平台发布"], "x": "发售期 5 日与投标准备期 20 日不同：前者是卖文件的时间，后者是编投标文件的时间。"}, {"t": "时间", "s": "7.1.2", "p": "P299", "n": "招标文件澄清与修改的期限", "k": ["投标人如有疑问，应在投标截止时间 <span class='hi'>17 天前<\/span> 以书面形式要求招标人澄清", "澄清和修改通知应在投标截止时间 <span class='hi'>15 天前<\/span> 以书面形式发给所有购买招标文件的投标人", "通知发出时间距投标截止不足 15 天且影响投标文件编制的，应相应延长投标截止时间", "投标人收到澄清和修改通知后，应在 <span class='hi'>1 天内<\/span> 书面通知招标人确认已收到"], "x": "17 天是投标人提问、15 天是招标人发通知、1 天是投标人回执，三个期限不要互串。"}, {"t": "时间", "s": "7.1.2", "p": "P299", "n": "开标的时间与人数要求", "k": ["自招标文件开始发出之日起至投标人提交投标文件截止日止，最短不得少于 <span class='hi'>20 日<\/span>", "投标截止时间与开标时间应当为同一时间", "投标人少于 3 个的，不得开标", "开标应当有开标记录，开标记录应当提交评标委员会"], "x": "20 日是编制投标文件的最短期限；开标与投标截止同一时间，不是开标之后再截止。"}, {"t": "程序", "s": "7.1.2", "p": "P300", "n": "招标人不得接收投标文件的情形", "k": ["未通过资格预审的申请人递交的投标文件", "逾期送达的投标文件，即投标截止时间之后送达的投标文件", "未按招标文件要求密封的投标文件", "未提交保证金或保证金不合格、未备案、原件不合格、身份不合格等<b>不得<\/b>作为不接收理由"], "x": "只有三种情形可拒收；保证金不合格、身份不合格应记入开标记录交评标委员会，属无效标而非拒收。"}, {"t": "数字", "s": "7.1.2", "p": "P300", "n": "评标委员会与两种评标办法", "k": ["评标委员会由招标人代表和依法抽取的专家组成，为 <span class='hi'>七人以上单数<\/span>", "评标办法包括经评审的最低投标价法和综合评估法，一般采取综合评估法", "综合评估法按得分由高到低推荐中标候选人，但投标报价低于其成本的除外", "综合评分相等时以投标报价低的优先，报价也相等的由招标人自行确定"], "x": "评标委员会是七人以上单数而非五人；报价低于成本的，得分再高也不能推荐。"}, {"t": "概念", "s": "7.1.2", "p": "P300", "n": "初步评审的三类标准", "k": ["形式评审：名称与营业执照、资质证书、安全生产许可证一致，签字盖章符合规定", "形式评审还包括只能有一个报价，正副本数量、印刷装订、密封和标识符合规定", "响应性评审包括投标范围、计划工期、工程质量、投标有效期、投标保证金、已标价工程量清单等", "详细评审因素为施工组织设计、项目管理机构、投标报价和投标人综合实力"], "x": "初步评审＝形式＋资格＋响应性三项，只有详细评审才打分；两者不可混为一谈。"}, {"t": "计算", "s": "7.1.2", "p": "P301", "n": "评标基准价与报价偏差率", "k": ["偏差率＝（投标人报价－评标基准价）÷ 评标基准价 × <span class='hi'>100%<\/span>", "评标基准价 S＝T×A＋（Σa<sub>n<\/sub>÷n）×（1－A）", "T 为最高投标限价，A 为最高投标限价在评标基准价中的权重，n 为有效报价投标人个数", "招标文件应明确最优偏差率得分值、偏离后扣分规则及有效报价是否含暂列金额和暂估价"], "x": "偏差率分母是评标基准价而非投标人报价；A 是最高投标限价的权重，不是平均报价的权重。"}, {"t": "程序", "s": "7.1.2", "p": "P302", "n": "确定中标人的规则", "k": ["评标委员会推荐的中标候选人限定在 <span class='hi'>1～3 人<\/span>，并标明排列顺序", "国有资金占控股或主导地位的依法必须招标项目，应确定排名第一的中标候选人为中标人", "排名第一的放弃中标、因不可抗力不能履约、不提交履约保证金等，可依次确定或重新招标", "确定中标人之前，招标人不得与投标人就投标价格、投标方案等实质性内容谈判"], "x": "确定的中标人与推荐顺序不一致须有充足理由并按管理权限报水利行政主管部门备案。"}, {"t": "程序", "s": "7.1.2", "p": "P302", "n": "重新招标的五种情形", "k": ["投标截止时间止，投标人少于 3 个的", "经评标委员会评审后否决所有投标的", "否决不合格投标或界定为废标后有效投标不足 3 个、明显缺乏竞争而否决全部投标的", "同意延长投标有效期的投标人少于 3 个，或中标候选人均未与招标人签订合同的"], "x": "重新招标后仍出现这些情形，属必须审批的水利项目，经行政监督部门批准可不再招标。"}, {"t": "数字", "s": "7.1.3", "p": "P304", "n": "投标保证金的额度与退还", "k": ["投标保证金一般不超过合同估算价的 <span class='hi'>2%<\/span>，但最高不得超过 <span class='hi'>80 万元<\/span>", "以现金或者支票形式提交的投标保证金应当从其基本账户转出", "投标人不按要求提交投标保证金的，其投标文件作无效标处理", "招标人与中标人签订合同后 <span class='hi'>5 个工作日内<\/span>，向未中标人和中标人退还保证金及利息"], "x": "2% 的基数是合同估算价不是签约合同价；退还是“签订合同后 5 个工作日”，注意是工作日。"}, {"t": "时间", "s": "7.1.3", "p": "P304", "n": "投标文件的撤回与撤销", "k": ["投标截止时间前投标人可以撤回已提交的投标文件，应书面通知招标人", "招标人已收取投标保证金的，应自收到书面撤回通知之日起 <span class='hi'>5 日内<\/span> 退还", "投标截止时间后，投标人不得撤销投标文件", "投标截止时间后投标人撤销投标文件的，招标人可以不退还投标保证金"], "x": "截止前叫撤回、退保证金；截止后叫撤销、可不退。分界点就是投标截止时间。"}, {"t": "时间", "s": "7.1.3", "p": "P305", "n": "投标有效期与延长", "k": ["水利工程施工招标投标有效期一般为 <span class='hi'>56 天<\/span>", "有效期内投标人不得要求撤销或修改投标文件，定标应当在投标有效期内完成", "不能在有效期内定标的，招标人应通知所有投标人延长投标有效期", "拒绝延长的有权收回投标保证金；同意延长的应相应延长投标担保有效期，但不得修改实质性内容"], "x": "投标有效期≠投标保证金有效期：保证金有效期与投标有效期一致，延长时担保须同步延长。"}, {"t": "程序", "s": "7.1.3", "p": "P305", "n": "算术性错误的修正原则", "k": ["投标文件大写金额与小写金额不一致的，以<b>大写金额<\/b>为准", "总价金额与单价金额不一致的，以<b>单价金额<\/b>为准，但单价金额小数点有明显错误的除外", "澄清、说明和补正不得改变投标文件的实质性内容（算术性错误修正的除外）", "投标人拒不按评标委员会要求书面澄清或说明的，其投标文件按无效标处理"], "x": "大小写看大写、总价单价看单价，两个方向相反；小数点明显错误的单价不能作为修正依据。"}, {"t": "程序", "s": "7.2.1", "p": "P307", "n": "合同文件的组成与解释顺序", "k": ["协议书→中标通知书→投标函及投标函附录→专用合同条款→通用合同条款", "其后依次为技术标准和要求（合同技术条款）→图纸→已标价工程量清单", "最后是经合同双方确认进入合同的其他文件", "上述次序同时也是解释合同的优先顺序"], "x": "协议书第一、中标通知书第二；专用条款排在通用条款之前，图纸排在技术条款之后。"}, {"t": "概念", "s": "7.2.1", "p": "P307", "n": "专用合同条款优先原则", "k": ["专用合同条款是补充和修改通用合同条款中条款号相同的条款或需要时增加的条款", "通用与专用条款应对照阅读，出现矛盾或不一致时<b>以专用合同条款为准<\/b>", "通用合同条款中未补充和修改的部分仍然有效", "专用与通用条款主要是划清发包人和承包人双方各自的责任、权利和义务"], "x": "“以专用为准”不等于通用条款作废，未修改部分继续有效，这是常设的判断陷阱。"}, {"t": "时间", "s": "7.2.2", "p": "P309", "n": "开工通知与进场延误责任", "k": ["监理人应在开工日期 <span class='hi'>7 天前<\/span> 向承包人发出开工通知，发出前应获得发包人同意", "工期自监理人发出的开工通知中载明的开工日期起计算", "承包人接到开工通知后 <span class='hi'>14 天内<\/span> 未按进度计划进场，监理人可通知其在 7 天内提交书面报告", "书面报告应说明原因和补救措施，由此增加的费用和工期延误责任由承包人承担"], "x": "三个期限主体不同：7 天是监理人提前通知，14 天是承包人进场，7 天是提交延误报告。"}, {"t": "数字", "s": "7.2.2", "p": "P312", "n": "履约担保的额度与退还", "k": ["承包人应按招标文件要求提交履约担保，一般在中标并签订合同前提交", "履约担保金额不超过签约合同价的 <span class='hi'>10%<\/span>", "履约担保在发包人颁发合同工程完工证书前一直有效", "发包人应在合同工程完工证书颁发后 <span class='hi'>28 天内<\/span> 将履约担保退还给承包人"], "x": "10% 的基数是签约合同价（不是合同估算价）；有效期至完工证书颁发，不是至保修期满。"}, {"t": "概念", "s": "7.2.2", "p": "P313", "n": "不利物质条件的界定与处理", "k": ["指施工中遭遇发包人地质勘探未能查明的地下溶洞、溶蚀裂隙、坝基深层淤泥层或软弱带等使施工受阻", "承包人应采取适应不利物质条件的合理措施继续施工，并及时通知监理人", "承包人有权要求延长工期及增加费用", "监理人应分析该障碍或条件是否不可预见及不可预见程度，按照变更的约定办理"], "x": "不利物质条件只给工期和费用、<b>不给利润<\/b>；与发包人基准资料错误需付合理利润不同。"}, {"t": "时间", "s": "7.2.3", "p": "P315", "n": "缺陷责任期的起算与保修", "k": ["缺陷责任期（工程质量保修期）从工程通过<b>合同工程完工验收<\/b>后开始计算", "完工验收前提前验收的单位工程或部分工程，未投入使用的仍从合同工程完工验收后起算", "已投入使用的，从通过单位工程或部分工程投入使用验收后开始计算", "保修期满后 <span class='hi'>30 个工作日内<\/span> 颁发质量保修责任终止证书并退还剩余质量保证金"], "x": "是否“已投入使用”是起算点的分界；水利工程质量保修期通常为一年，河湖疏浚工程无保修期。"}, {"t": "概念", "s": "7.2.5", "p": "P319", "n": "工程变更的范围与内容", "k": ["取消合同中任何一项工作，但被取消的工作不能转由发包人或其他人实施", "改变合同中任何一项工作的质量或其他特性；改变工程的基线、标高、位置或尺寸", "改变施工时间或已批准的施工工艺、顺序；为完成工程需要追加的额外工作", "增加或减少专用合同条款约定的关键项目工程量超过工程总量的一定百分比"], "x": "取消的工作若转由发包人或他人实施，就不构成变更；变更须引起施工组织实质变动才调单价。"}, {"t": "程序", "s": "7.2.5", "p": "P320", "n": "变更估价的三项原则", "k": ["已标价工程量清单中有<b>适用于<\/b>变更工作的子目，采用该子目的单价", "无适用但有<b>类似<\/b>子目的，可在合理范围内参照类似子目单价，由监理人商定或确定", "无适用或类似子目的，按<b>成本加利润<\/b>原则，由监理人商定或确定变更工作的单价", "顺序为：适用子目→类似子目→成本加利润，不得跳档适用"], "x": "三原则有严格先后顺序，不能直接套用成本加利润；商定或确定的主体是监理人。"}, {"t": "时间", "s": "7.2.5", "p": "P320", "n": "变更程序的三个 14 天", "k": ["承包人应在收到变更指示或变更意向书后 <span class='hi'>14 天内<\/span> 向监理人提交变更报价书", "监理人应在收到变更报价书后 <span class='hi'>14 天内<\/span> 商定或确定变更价格", "承包人提出书面变更建议的，监理人应在收到建议后 <span class='hi'>14 天内<\/span> 作出变更指示", "变更指示只能由监理人发出，没有监理人的变更指示承包人不得擅自变更"], "x": "三个 14 天起算点不同；变更权在监理人（经发包人同意），承包人只有建议权。"}, {"t": "程序", "s": "7.2.5", "p": "P322", "n": "承包人索赔的程序与时限", "k": ["知道或应当知道索赔事件发生后 <span class='hi'>28 天内<\/span> 向监理人递交<b>索赔意向通知书<\/b>", "发出索赔意向通知书后 <span class='hi'>28 天内<\/span> 正式递交<b>索赔通知书<\/b>，说明理由、金额和工期", "监理人应在收到索赔通知书或进一步证明材料后 <span class='hi'>42 天内<\/span> 将处理结果答复承包人", "承包人接受处理结果的，发包人应在答复后 <span class='hi'>28 天内<\/span> 完成赔付"], "x": "逾期不发明索赔意向通知书即丧失追加付款和延长工期的权利；答复期是 42 天，别再记成 28 天。"}, {"t": "时间", "s": "7.2.5", "p": "P322", "n": "索赔权利的期限终止", "k": ["承包人接受完工付款证书后，应被认为无权再提出合同工程完工证书颁发前发生的任何索赔", "最终结清申请单中，只限于提出合同工程完工证书颁发后发生的索赔", "提出索赔的期限自接受最终结清证书时终止", "发包人索赔期限与承包人相同，延长工程质量保修期的通知应在保修期届满前发出"], "x": "两个关门节点：接受完工付款证书关掉此前的索赔，接受最终结清证书则终止全部索赔期限。"}, {"t": "概念", "s": "7.2.2", "p": "P311", "n": "争议的解决方式与执行", "k": ["监理人的商定或确定不是强制的，也不是最终的决定", "对总监理工程师的确定有异议的构成争议，争议解决前双方应暂按该确定执行", "合同争议的处理方法有友好协商、提请争议评审组评审、仲裁、诉讼四种", "按争议约定对总监理工程师的确定作出修改的，按修改后的结果执行"], "x": "争议期间不停止执行监理人的确定，属“先执行、后修正”，常作为案例判断点。"}, {"t": "概念", "s": "7.2.6", "p": "P324", "n": "分包限制与主体结构禁止分包", "k": ["水利建设工程主要建筑物的主体结构不得进行工程分包", "主要建筑物指失事后将造成下游灾害或严重影响工程功能效益的建筑物，如堤坝、泄洪建筑物、输水建筑物、电站厂房和泵站", "分包单位进场需经监理单位批准；开工后新增分包须报监理审核、项目法人审批", "承包人和分包人应依法签订分包合同，并在签订后 <span class='hi'>7 个工作日内<\/span> 送发包人备案"], "x": "“主体结构不得分包”不等于不得分包，非主体结构工程可以分包；分包后承包人对分包人行为负全部责任。"}]};
+const DATA = BANK.cards;
+const FIGS = BANK.figs || {};
+const CH = BANK.chapter;
+const TYPES = ["时间","数字","计算","程序","主体","概念"];
+
+let activeType = "全部", keyword = "";
+let cur = 0;
+let mode = "grid";
+
+const $ = id => document.getElementById(id);
+
+function figHTML(d, compact){
+  if(!d.fig || !FIGS[d.fig]) return "";
+  const F = FIGS[d.fig];
+  return `<figure class="figbox">
+    <img src="${F.src}" alt="${F.cap||''}" data-fig="${d.fig}" loading="lazy">
+    <figcaption class="figcap">
+      <span class="fl">配图</span>
+      <span>${F.cap||''}</span>
+      <span class="zoom">教材 ${F.p}　点击放大</span>
+    </figcaption>
+  </figure>`;
+}
+
+function filtered(){
+  const kw = keyword.trim().toLowerCase();
+  return DATA.filter(d=>{
+    if(activeType !== "全部" && d.t !== activeType) return false;
+    if(!kw) return true;
+    const hay = (d.n + " " + d.s + " " + d.p + " " + d.k.join(" ") + " " + (d.x||"")).replace(/<[^>]+>/g,"").toLowerCase();
+    return hay.includes(kw);
+  });
+}
+
+function chipHTML(){
+  const counts = {};
+  TYPES.forEach(t=>counts[t] = DATA.filter(d=>d.t===t).length);
+  const items = [["全部", DATA.length], ...TYPES.filter(t=>counts[t]).map(t=>[t,counts[t]])];
+  return items.map(([t,n])=>
+    `<button class="chip${t===activeType?" on":""}" data-t="${t}">${t}<span class="n">${n}</span></button>`
+  ).join("");
+}
+function bindChips(box){
+  box.querySelectorAll(".chip").forEach(b=>{
+    b.onclick = ()=>{ activeType = b.dataset.t; cur = 0; renderChips(); renderGrid(); renderCard(); };
+  });
+}
+function renderChips(){
+  const a = $("chips"), b = $("chips2");
+  if(a){ a.innerHTML = chipHTML(); bindChips(a); }
+  if(b){ b.innerHTML = chipHTML(); bindChips(b); }
+}
+
+/* ---------------- 索引模式 ---------------- */
+function renderGrid(){
+  const rows = filtered();
+  const kw = keyword.trim();
+  $("total").textContent = DATA.length;
+  $("stats").innerHTML = (kw || activeType!=="全部")
+    ? `筛选出 <b>${rows.length}</b> 张考点卡` + (kw?`，关键词「${kw.replace(/</g,"&lt;")}」`:"") + `　·　共 ${DATA.length} 张`
+    : `共 <b>${DATA.length}</b> 张考点卡　·　${BANK.summary}`;
+
+  $("empty").style.display = rows.length ? "none" : "block";
+  $("list").innerHTML = rows.map(d=>`
+    <div class="card t-${d.t}">
+      <div class="card-top">
+        <span class="tag">${d.t}</span>
+        <span class="sec">${d.s||""}</span>
+        ${d.fig && FIGS[d.fig] ? '<span class="fmark">配图</span>' : ''}
+        <span class="pg">${d.p||""}</span>
+      </div>
+      <h3>${d.n}</h3>
+      <div class="body">
+        <ul>${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+        ${figHTML(d)}
+        ${d.x?`<div class="trap">${d.x}</div>`:""}
+      </div>
+      <div class="more">点击展开 ▾</div>
+    </div>`).join("");
+
+  $("list").querySelectorAll(".card").forEach(c=>{
+    c.onclick = (e)=>{ if(e.target.closest(".figbox")) return; c.classList.toggle("open"); };
+  });
+  bindZoom($("list"));
+}
+
+/* ---------------- 知识卡片模式 ---------------- */
+function renderCard(){
+  const rows = filtered();
+  const box = $("kcard");
+  $("posAll").textContent = rows.length || 0;
+
+  if(!rows.length){
+    box.className = "kcard";
+    box.innerHTML = `<div class="kc-empty">当前筛选下没有卡片</div>`;
+    $("pos").textContent = "0";
+    $("posfill").style.width = "0%";
+    $("prev").disabled = $("next").disabled = true;
+    return;
+  }
+  if(cur >= rows.length) cur = rows.length - 1;
+  if(cur < 0) cur = 0;
+
+  const d = rows[cur];
+  box.className = "kcard t-" + d.t;
+  box.innerHTML = `
+    <div class="kc-top">
+      <span class="tag">${d.t}</span>
+      <span class="sec">${d.s||""}</span>
+      <span class="pg">${d.p||""}</span>
+    </div>
+    <h2 class="kc-title">${d.n}</h2>
+    <ul class="kc-list">${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+    ${figHTML(d, true)}
+    ${d.x?`<div class="kc-trap">${d.x}</div>`:""}
+  `;
+  box.scrollTop = 0;
+  box.classList.remove("anim"); void box.offsetWidth; box.classList.add("anim");
+
+  $("pos").textContent = cur + 1;
+  $("posfill").style.width = ((cur+1)/rows.length*100).toFixed(1) + "%";
+  $("prev").disabled = cur === 0;
+  $("next").disabled = cur === rows.length - 1;
+  bindZoom(box);
+  try{ localStorage.setItem("kb_pos_ch"+CH, cur); }catch(e){}
+}
+
+function go(n){
+  const rows = filtered();
+  if(!rows.length) return;
+  const t = cur + n;
+  if(t < 0 || t >= rows.length) return;
+  cur = t; renderCard();
+}
+
+/* ---------------- 灯箱 ---------------- */
+function bindZoom(scope){
+  scope.querySelectorAll(".figbox img").forEach(img=>{
+    img.onclick = (e)=>{
+      e.stopPropagation();
+      const F = FIGS[img.dataset.fig] || {};
+      $("lbimg").src = F.src || img.src;
+      $("lbtx").textContent = F.cap || "";
+      $("lb").classList.add("on");
+    };
+  });
+}
+function closeLB(){ $("lb").classList.remove("on"); }
+$("lb").onclick = closeLB;
+$("lbclose").onclick = (e)=>{ e.stopPropagation(); closeLB(); };
+
+/* ---------------- 模式切换 ---------------- */
+function setMode(m){
+  mode = m;
+  document.querySelectorAll(".mtab").forEach(b=>b.classList.toggle("on", b.dataset.mode===m));
+  $("gridView").style.display = m==="grid" ? "block" : "none";
+  $("cardView").style.display = m==="card" ? "block" : "none";
+  if(m==="card"){
+    if(!window.__restored){
+      const saved = (window.__posParam != null)
+        ? window.__posParam
+        : parseInt(localStorage.getItem("kb_pos_ch"+CH)||"0", 10);
+      const rows = filtered();
+      cur = Math.min(Math.max(saved||0,0), Math.max(rows.length-1,0));
+      window.__restored = true;
+    }
+    renderCard();
+    window.scrollTo({top:0, behavior:"auto"});
+  }else{
+    renderGrid();
+  }
+  try{ localStorage.setItem("kb_mode", m); }catch(e){}
+}
+document.querySelectorAll(".mtab").forEach(b=>{
+  b.onclick = ()=> setMode(b.dataset.mode);
+});
+
+/* ---------------- 事件 ---------------- */
+$("q").addEventListener("input", e=>{
+  keyword = e.target.value; cur = 0; renderGrid();
+  if(mode==="card") renderCard();
+});
+$("prev").onclick = ()=> go(-1);
+$("next").onclick = ()=> go(1);
+
+document.addEventListener("keydown", e=>{
+  if($("lb").classList.contains("on")){
+    if(e.key === "Escape") closeLB();
+    return;
+  }
+  const inInput = document.activeElement && document.activeElement.tagName === "INPUT";
+  if(e.key === "/" && !inInput && mode==="grid"){
+    e.preventDefault(); $("q").focus(); return;
+  }
+  if(mode === "card" && !inInput){
+    if(e.key === "ArrowLeft"){ e.preventDefault(); go(-1); }
+    else if(e.key === "ArrowRight"){ e.preventDefault(); go(1); }
+    else if(e.key === " "){ e.preventDefault(); setMode("grid"); }
+    else if(e.key === "Escape"){ setMode("grid"); }
+  }
+});
+
+/* 触摸滑动（图片上不触发，避免与放大冲突） */
+let tx = 0, ty = 0;
+const stage = document.querySelector(".stage-body");
+stage.addEventListener("touchstart", e=>{
+  if(e.target.closest(".figbox")) return;
+  tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+}, {passive:true});
+stage.addEventListener("touchend", e=>{
+  if(e.target.closest(".figbox")) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)*1.6) go(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* ---------------- 初始化 ---------------- */
+renderChips();
+renderGrid();
+let initMode = "grid";
+try{ initMode = localStorage.getItem("kb_mode") || "grid"; }catch(e){}
+const sp = new URLSearchParams(location.search);
+if(sp.get("mode")) initMode = sp.get("mode");
+if(sp.get("i") != null) window.__posParam = Math.max(parseInt(sp.get("i"), 10) || 0, 0);
+setMode(initMode);
+</script>
+</body>
+</html>

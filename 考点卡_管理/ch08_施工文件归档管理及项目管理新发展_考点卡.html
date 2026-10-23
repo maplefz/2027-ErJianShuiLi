@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8章 施工文件归档管理及项目管理新发展 · 考点卡</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --line:#e2e0d8; --line2:#cfccc2;
+  --tx:#2c2c2a; --tx2:#5f5e5a; --tx3:#8c8a82;
+  --blue:#185fa5; --blue-bg:#e6f1fb;
+  --teal:#0f6e56; --teal-bg:#e1f5ee;
+  --amber:#854f0b; --amber-bg:#faeeda;
+  --red:#a32d2d; --red-bg:#fcebeb;
+  --purple:#534ab7; --purple-bg:#eeedfe;
+  --gray:#6b6b66; --gray-bg:#efeee9;
+  --top:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:15px; line-height:1.7;
+  padding:0 20px 80px; padding-top:calc(var(--top) + 26px);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--top);z-index:60;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:rgba(246,245,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.back{
+  font-size:13px;color:var(--tx2);text-decoration:none;white-space:nowrap;
+  padding:5px 10px;border-radius:7px;transition:background .15s;
+}
+.back:hover{background:#eceae4;color:var(--tx)}
+.ch-title{font-size:13.5px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modes{margin-left:auto;display:flex;background:#eceae4;border-radius:9px;padding:3px;gap:2px;flex-shrink:0}
+.mtab{
+  border:0;background:transparent;font-family:inherit;font-size:13px;color:var(--tx2);
+  padding:5px 14px;border-radius:6px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.mtab:hover{color:var(--tx)}
+.mtab.on{background:var(--card);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.wrap{max-width:1120px;margin:0 auto}
+header.pg{margin-bottom:22px}
+.kicker{font-size:12px;letter-spacing:.12em;color:var(--tx3);text-transform:uppercase;margin-bottom:8px}
+h1{font-size:25px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:var(--tx2);font-size:14px}
+.sub b{color:var(--blue);font-weight:600}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:20px 0 16px;position:sticky;top:calc(var(--top) + 8px);z-index:20;
+}
+#q{
+  flex:1;min-width:180px;border:1px solid var(--line2);border-radius:8px;
+  padding:8px 12px;font-size:14px;font-family:inherit;color:var(--tx);
+  outline:none;background:#fbfaf7;transition:border-color .15s;
+}
+#q:focus{border-color:var(--blue);background:#fff}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line2);background:#fff;border-radius:99px;
+  padding:5px 13px;font-size:13px;color:var(--tx2);cursor:pointer;
+  font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--tx3)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip .n{opacity:.55;font-size:11px;margin-left:4px}
+
+.stats{font-size:13px;color:var(--tx3);margin-bottom:14px}
+.stats b{color:var(--tx);font-weight:600}
+
+/* ---------- 索引模式 ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;border-left:3px solid var(--line2);
+  cursor:pointer;transition:border-color .15s,box-shadow .15s;
+}
+.card:hover{border-color:var(--line2);box-shadow:0 1px 6px rgba(0,0,0,.045)}
+.card.t-时间{border-left-color:var(--blue)}
+.card.t-数字{border-left-color:var(--purple)}
+.card.t-计算{border-left-color:var(--teal)}
+.card.t-程序{border-left-color:var(--amber)}
+.card.t-主体{border-left-color:var(--red)}
+.card.t-概念{border-left-color:var(--gray)}
+
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.tag{font-size:11px;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.t-时间 .tag{background:var(--blue-bg);color:var(--blue)}
+.t-数字 .tag{background:var(--purple-bg);color:var(--purple)}
+.t-计算 .tag{background:var(--teal-bg);color:var(--teal)}
+.t-程序 .tag{background:var(--amber-bg);color:var(--amber)}
+.t-主体 .tag{background:var(--red-bg);color:var(--red)}
+.t-概念 .tag{background:var(--gray-bg);color:var(--gray)}
+.sec{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.pg{margin-left:auto;font-size:11px;color:var(--tx3);background:#f2f0eb;padding:2px 7px;border-radius:4px}
+.fmark{font-size:11px;color:var(--teal);background:var(--teal-bg);padding:2px 6px;border-radius:4px}
+
+.card h3{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px}
+ul{list-style:none}
+li{position:relative;padding-left:15px;margin-bottom:6px;font-size:14px;color:var(--tx2)}
+li::before{content:"";position:absolute;left:2px;top:.65em;width:4px;height:4px;border-radius:50%;background:var(--tx3)}
+li b{color:var(--tx);font-weight:600}
+li .hi{background:#fff3cd;color:#633806;font-weight:600;padding:0 3px;border-radius:3px}
+
+.trap{
+  margin-top:11px;padding:9px 12px;border-radius:7px;
+  background:var(--red-bg);border-left:2px solid var(--red);
+  font-size:13px;color:#791f1f;
+}
+.trap::before{content:"易错 ";font-weight:700;font-size:11px;letter-spacing:.05em}
+
+.card .body{display:none}
+.card.open .body{display:block}
+.more{font-size:12px;color:var(--tx3);margin-top:8px}
+.card.open .more{display:none}
+.card.open{border-color:var(--line2)}
+.empty{text-align:center;color:var(--tx3);padding:60px 0;font-size:14px}
+
+/* ---------- 配图 ---------- */
+.figbox{margin:14px 0 4px}
+.figbox img{
+  display:block;width:100%;height:auto;border:1px solid var(--line);
+  border-radius:8px;background:#fff;cursor:zoom-in;transition:border-color .15s;
+}
+.figbox img:hover{border-color:var(--teal)}
+.figcap{
+  display:flex;gap:8px;align-items:baseline;margin-top:6px;
+  font-size:11.5px;color:var(--tx3);line-height:1.55;
+}
+.figcap .fl{color:var(--teal);font-weight:600;flex-shrink:0}
+.figcap .zoom{margin-left:auto;flex-shrink:0;color:var(--tx3)}
+
+/* 灯箱 */
+.lb{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(28,27,25,.9);padding:28px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+.lb.on{display:flex}
+.lb img{
+  max-width:100%;max-height:calc(100vh - 110px);object-fit:contain;
+  background:#fff;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.lb .lbtx{color:#ddd;font-size:13px;text-align:center;max-width:760px;line-height:1.6}
+.lb .lbclose{
+  position:absolute;top:14px;right:20px;color:#fff;font-size:28px;line-height:1;
+  background:none;border:0;cursor:pointer;opacity:.7;
+}
+.lb .lbclose:hover{opacity:1}
+
+/* ---------- 知识卡片模式 ---------- */
+#cardView{display:none}
+.stage{
+  min-height:calc(100vh - var(--top) - 70px);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:6px;padding-bottom:8px;
+}
+.stage-filter{
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:14px;flex-shrink:0;
+}
+.stage-filter .chip{padding:4px 12px;font-size:12.5px}
+
+.stage-body{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;padding:4px 0;
+}
+.kcard{
+  width:100%;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;
+  border-top:4px solid var(--line2);
+  padding:32px 38px 28px;
+  box-shadow:0 4px 24px rgba(60,55,45,.06);
+  max-height:calc(100vh - 210px);overflow-y:auto;
+}
+.kcard.t-时间{border-top-color:var(--blue)}
+.kcard.t-数字{border-top-color:var(--purple)}
+.kcard.t-计算{border-top-color:var(--teal)}
+.kcard.t-程序{border-top-color:var(--amber)}
+.kcard.t-主体{border-top-color:var(--red)}
+.kcard.t-概念{border-top-color:var(--gray)}
+.kcard.anim{animation:pop .28s cubic-bezier(.2,.7,.3,1)}
+@keyframes pop{
+  from{opacity:0;transform:translateY(10px) scale(.99)}
+  to{opacity:1;transform:none}
+}
+.kc-top{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.kc-top .tag{font-size:12px;padding:3px 10px;border-radius:6px}
+.kc-top .sec{font-size:12px}
+.kc-top .pg{margin-left:auto;font-size:12px;padding:3px 9px}
+.kc-title{font-size:21px;font-weight:600;line-height:1.45;letter-spacing:-.01em;margin-bottom:18px}
+.kc-list li{font-size:15.5px;line-height:1.85;margin-bottom:10px;padding-left:18px;color:var(--tx2)}
+.kc-list li::before{top:.85em;width:5px;height:5px;left:3px}
+.kc-list li b{color:var(--tx)}
+.kc-list li .hi{font-size:16px;padding:1px 5px}
+.kc-trap{
+  margin-top:18px;padding:13px 15px;border-radius:9px;
+  background:var(--red-bg);border-left:3px solid var(--red);
+  font-size:14px;line-height:1.75;color:#791f1f;
+}
+.kc-trap::before{
+  content:"易错";display:inline-block;font-weight:700;font-size:11px;
+  letter-spacing:.06em;background:var(--red);color:#fff;
+  padding:1px 7px;border-radius:4px;margin-right:8px;vertical-align:1px;
+}
+.kc-empty{text-align:center;color:var(--tx3);padding:70px 0}
+.kcard .figbox img{max-height:40vh;width:auto;max-width:100%;margin:0 auto}
+
+/* 翻页导航 */
+.stage-nav{
+  display:flex;align-items:center;gap:16px;justify-content:center;
+  margin-top:18px;width:100%;max-width:680px;flex-shrink:0;
+}
+.navbtn{
+  flex:0 0 auto;border:1px solid var(--line2);background:var(--card);
+  border-radius:10px;padding:11px 22px;font-size:14px;font-family:inherit;
+  color:var(--tx2);cursor:pointer;transition:all .15s;
+}
+.navbtn:hover:not(:disabled){border-color:var(--tx3);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.navbtn:active:not(:disabled){transform:translateY(1px)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.posbox{flex:1;min-width:0;text-align:center}
+.posnum{font-size:13px;color:var(--tx2);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.posnum b{color:var(--tx);font-weight:600;font-size:15px}
+.posbar{height:3px;background:#e6e3db;border-radius:2px;margin-top:7px;overflow:hidden}
+.posbar i{display:block;height:100%;background:var(--tx2);border-radius:2px;transition:width .25s ease}
+.kc-hint{text-align:center;font-size:12px;color:var(--tx3);margin-top:12px}
+.kc-hint kbd{
+  font-family:inherit;font-size:11px;background:#eceae4;border:1px solid var(--line2);
+  border-radius:4px;padding:1px 5px;margin:0 2px;color:var(--tx2);
+}
+
+/* 打印 */
+@media print{
+  body{background:#fff;padding:0;font-size:12px}
+  .topbar,.toolbar,.stats,.more,.stage-filter,.stage-nav,.kc-hint,.lb{display:none!important}
+  .card .body{display:block!important}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .card{break-inside:avoid;box-shadow:none;padding:10px 12px}
+  h1{font-size:18px}
+  #cardView{display:none!important}
+  #gridView{display:block!important}
+  .figbox img{max-height:6.5cm;width:auto;max-width:100%}
+}
+@media(max-width:640px){
+  body{padding:0 12px 60px;padding-top:calc(var(--top) + 18px)}
+  h1{font-size:20px}
+  .ch-title{font-size:12px;max-width:110px}
+  .mtab{padding:5px 10px;font-size:12.5px}
+  .grid{grid-template-columns:1fr}
+  .kcard{padding:22px 18px 20px;border-radius:14px;max-height:calc(100vh - 195px)}
+  .kc-title{font-size:18px;margin-bottom:14px}
+  .kc-list li{font-size:14.5px;margin-bottom:8px}
+  .kc-list li .hi{font-size:15px}
+  .kc-trap{font-size:13.5px;padding:11px 12px}
+  .stage-nav{gap:8px}
+  .navbtn{padding:11px 14px;font-size:13px}
+  .posnum{font-size:12px}
+  .kcard .figbox img{max-height:32vh}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="back" href="../index.html#gl">← 全部章节</a>
+  <div class="ch-title">第 8 章　施工文件归档管理及项目管理新发展</div>
+  <div class="modes">
+    <button class="mtab on" data-mode="grid">索引</button>
+    <button class="mtab" data-mode="card">知识卡片</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 索引模式 ============ -->
+  <div id="gridView">
+    <header class="pg">
+      <div class="kicker">2027 二建 · 建设工程施工管理</div>
+      <h1>第 8 章　施工文件归档管理及项目管理新发展</h1>
+      <div class="sub">教材 P318–P334　·　<b id="total">0</b> 张考点卡　·　覆盖 8.1 施工文件归档管理 与 8.2 项目管理新发展</div>
+      <div class="sub" style="margin-top:4px;font-size:13px;color:var(--tx3)">点击卡片展开细节；带 <span class="fmark">配图</span> 的卡片可直接看图，点图放大</div>
+    </header>
+
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索考点关键词，如：时限、比例、网络计划……">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="list"></div>
+    <div class="empty" id="empty" style="display:none">没有匹配的考点，换个关键词试试</div>
+  </div>
+
+  <!-- ============ 知识卡片模式 ============ -->
+  <div id="cardView">
+    <div class="stage">
+      <div class="stage-filter" id="chips2"></div>
+      <div class="stage-body">
+        <div class="kcard" id="kcard"></div>
+      </div>
+      <div class="stage-nav">
+        <button class="navbtn" id="prev">← 上一张</button>
+        <div class="posbox">
+          <div class="posnum"><b id="pos">1</b> / <span id="posAll">1</span></div>
+          <div class="posbar"><i id="posfill" style="width:0%"></i></div>
+        </div>
+        <button class="navbtn" id="next">下一张 →</button>
+      </div>
+      <div class="kc-hint">键盘 <kbd>←</kbd> <kbd>→</kbd> 翻页　·　<kbd>空格</kbd> 切回索引　·　点图放大</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="lb" id="lb">
+  <button class="lbclose" id="lbclose">×</button>
+  <img id="lbimg" alt="">
+  <div class="lbtx" id="lbtx"></div>
+</div>
+
+<script>
+const BANK = {"chapter": 8, "name": "施工文件归档管理及项目管理新发展", "pages": "P318–P334", "summary": "覆盖 8.1 施工文件归档管理 与 8.2 项目管理新发展", "cards": [{"t": "概念", "s": "8.1.1", "p": "P318", "n": "施工文件归档范围的规范依据", "k": ["依据《建设工程文件归档规范》GB/T 50328-2014（2019年版）", "规范明确了建筑工程和市政工程中<b>与施工单位有关<\/b>的工程文件归档范围", "其他类别工程的归档范围可参照该规范执行"], "x": "GB/T 为推荐性国标，建筑工程与市政工程均适用，不要与质量验收系列规范混淆。"}, {"t": "概念", "s": "8.1.1", "p": "P318", "n": "施工单位必须归档的建筑工程文件类别", "k": ["招标投标文件、开工审批文件、合同价格文件、工程造价文件", "工程建设基本信息、监理管理文件、进度控制文件、质量控制文件", "施工管理文件、施工技术文件、施工记录文件", "出厂质量证明及检测报告、竣工图、竣工验收与备案文件", "监理管理文件含<b>工程复工报审表<\/b>，监理验收文件含<b>竣工移交证书<\/b>"], "x": "施工单位归档不等于只归自己编制的文件，监理形成的复工报审表同样要归档。"}, {"t": "程序", "s": "8.1.2", "p": "P321", "n": "工程文件同步形成与合同约定", "k": ["建设工程文件应<b>随工程建设进度同步形成<\/b>，不得事后补编", "建设单位在招标及与勘察、设计、施工、监理签约时应明确相关要求", "合同应明确竣工图编制单位、档案编制套数、编制费用及承担单位", "合同还应明确工程档案的质量要求和移交时间"], "x": "这些事项由<b>建设单位<\/b>在合同中约定，不是施工单位自行确定。"}, {"t": "时间", "s": "8.1.2", "p": "P321", "n": "工程档案预验收与移交时限", "k": ["建设单位组织竣工验收前，应提请当地城建档案管理机构对工程档案<b>预验收<\/b>", "未取得工程档案验收认可文件，<b>不得组织工程竣工验收<\/b>", "列入接收范围的工程，竣工验收后<span class='hi'>3 个月<\/span>内向城建档案管理机构移交一套档案"], "x": "预验收在竣工验收<b>之前<\/b>，向城建档案机构移交在竣工验收<b>之后<\/b>，顺序不能颠倒。"}, {"t": "主体", "s": "8.1.2", "p": "P321", "n": "工程文件立卷移交的责任主体", "k": ["勘察、设计、施工、监理单位将本单位形成的文件立卷后向<b>建设单位<\/b>移交", "总承包模式下，总包单位负责收集、汇总各分包单位形成的工程档案", "分包单位整理、立卷后及时移交<b>总承包单位<\/b>", "由几个单位承包的，各承包单位分别整理立卷并向建设单位移交"], "x": "分包单位的移交对象是总包，不是建设单位；总包才是向建设单位移交的主体。"}, {"t": "程序", "s": "8.1.2", "p": "P321", "n": "施工文件立卷流程", "k": ["对属于归档范围的施工文件进行分类，确定归入案卷的文件材料", "对卷内文件材料进行排列、编目、装订（或装盒）", "排列所有案卷，形成<b>案卷目录<\/b>，至此立卷工作完成"], "x": "顺序是分类→卷内排列编目装订→案卷排列成目录，先卷内后案卷。"}, {"t": "数字", "s": "8.1.2", "p": "P322", "n": "案卷厚度与图纸折叠要求", "k": ["不同幅面图纸统一折叠成<b>A4幅面<\/b>（297mm×210mm）", "图面朝内，先沿标题栏短边方向W形折叠，再沿长边方向W形折叠", "折叠后应使<b>标题栏露在外面<\/b>，便于查找利用", "文字材料卷厚度不宜超过<span class='hi'>20mm<\/span>，图纸卷不宜超过<span class='hi'>50mm<\/span>"], "x": "两个厚度不要记反；案卷内不应有重份文件，印刷成册的文件宜保持原状。"}, {"t": "概念", "s": "8.1.2", "p": "P322", "n": "归档纸质文件的质量要求", "k": ["归档的纸质施工文件应为<b>原件<\/b>，不得以复印件替代", "采用碳素墨水、蓝黑墨水等耐久性强的书写材料", "不得使用红色墨水、纯蓝墨水、圆珠笔、复写纸、铅笔等易褪色材料", "计算机输出文字和图件应使用<b>激光打印机<\/b>"], "x": "是原件不是复印件；色带式、水性墨、热敏打印机输出的文件不得归档。"}, {"t": "数字", "s": "8.1.2", "p": "P323", "n": "竣工图章的内容与尺寸", "k": ["内容含「竣工图」字样、施工单位、编制人、审核人、技术负责人、编制日期", "还包括监理单位、现场监理、总监", "竣工图章尺寸应为<span class='hi'>50mm×80mm<\/span>", "使用不易褪色的印泥，盖在<b>图标栏上方空白处<\/b>"], "x": "所有竣工图均应加盖竣工图章，位置在图标栏上方，不是压在图标栏上。"}, {"t": "概念", "s": "8.1.2", "p": "P323", "n": "归档电子文件的格式与签名", "k": ["采用<b>开放式文件格式或通用格式<\/b>进行存储", "专用软件产生的非通用格式电子文件应转换成通用格式", "应采用<b>电子签名<\/b>等手段，所载内容真实可靠", "电子文件所载内容必须与其纸质档案<b>一致<\/b>，不得相互矛盾"], "x": "电子文件不能替代纸质原件，两者内容须一致并建立标识关系。"}, {"t": "时间", "s": "8.1.2", "p": "P323", "n": "施工单位归档时间与编制套数", "k": ["施工单位应在<b>工程竣工验收前<\/b>，将形成的工程档案向建设单位归档", "工程档案的编制不得少于<span class='hi'>两套<\/span>，少于两套不合规", "一套由建设单位保管，一套（<b>原件<\/b>）移交当地城建档案管理机构", "移交时应编制<b>移交清单<\/b>，双方签字、盖章后方可交接"], "x": "向建设单位归档在竣工前，向城建档案机构移交在竣工后，两件事别混。"}, {"t": "概念", "s": "8.2.1", "p": "P323", "n": "国际有影响力的项目管理标准", "k": ["美国项目管理协会（PMI）的项目管理知识体系（<b>PMBOK<\/b>）", "国际项目管理协会（IPMA）的个人能力基准ICB和组织能力基准OCB", "国际标准化组织（ISO）的项目管理系列标准"], "x": "PMBOK对应PMP认证，IPMA的ICB对应IPMP认证，两套认证体系不要混淆。"}, {"t": "数字", "s": "8.2.1", "p": "P323", "n": "PMBOK传统架构：5过程组10领域", "k": ["5个基本过程组：启动、计划、执行、监控、收尾", "10个知识领域用来支撑基本过程组的执行", "领域含集成、范围、进度、费用、质量、资源、沟通、风险、采购、利益相关者管理"], "x": "第7版起不再沿用5过程组和10知识领域架构，答题要看清版本。"}, {"t": "数字", "s": "8.2.1", "p": "P324", "n": "PMBOK第7版与第8版的架构变化", "k": ["2021年第7版：提出基于<b>价值交付<\/b>的<span class='hi'>12项原则<\/span>和<span class='hi'>8个绩效域<\/span>", "2025年第8版：原则精简为<span class='hi'>6项<\/span>，绩效域整合为<span class='hi'>7个<\/span>", "第8版重新引入「过程」，增加人工智能（AI）应用和可持续项目管理内容"], "x": "第8版是6原则7绩效域，不要与第7版的12原则8绩效域记反。"}, {"t": "概念", "s": "8.2.1", "p": "P324", "n": "项目群管理与项目组合管理的区别", "k": ["项目群管理：以综合协调方式对<b>一组相关项目<\/b>进行管理，实现战略目标、获得收益", "项目组合管理：将若干项目或项目群<b>与其他工作组合<\/b>在一起进行有效管理", "项目组合中的项目或项目群之间<b>没必要相互关联或直接相关<\/b>"], "x": "项目群内项目必须相关（如通信卫星系统）；项目组合内项目可以互不相关。"}, {"t": "数字", "s": "8.2.1", "p": "P324", "n": "IPMA个人能力基准的三个维度", "k": ["<b>环境能力<\/b>：含战略、治理架构与过程、要求标准与规则等<span class='hi'>5<\/span>个要素", "<b>行为能力<\/b>：含自我反思、诚信可靠、人际沟通、领导力、团队工作等<span class='hi'>10<\/span>个要素", "<b>技术能力<\/b>：含项目策划、需求与目标、范围、时间、质量、财务、风险等<span class='hi'>13<\/span>个要素"], "x": "环境5、行为10、技术13，三个数字的对应关系是常见设错点。"}, {"t": "概念", "s": "8.2.1", "p": "P326", "n": "我国工程项目管理主要标准", "k": ["国家标准《建设工程项目管理规范》<b>GB/T 50326-2017<\/b>", "国家标准《建设项目工程总承包管理规范》<b>GB/T 50352-2018<\/b>", "团体标准《建设工程施工项目经理岗位职业标准》<b>T/CCIAT 0010-2019<\/b>"], "x": "T/CCIAT 是团体标准而非国家标准，但对建造师执业有重要参考价值。"}, {"t": "概念", "s": "8.2.1", "p": "P326", "n": "项目管理责任制度的核心", "k": ["项目管理责任制度应作为项目管理的<b>基本制度<\/b>", "<b>项目经理责任制<\/b>是项目管理责任制度的核心内容", "施工单位法定代表人应<b>书面授权委托<\/b>项目经理，并实行项目经理责任制", "项目经理应取得相应资格，并取得<b>安全生产考核合格证书<\/b>"], "x": "授权必须是书面形式，且有范围、期限和内容限定，不是口头任命。"}, {"t": "概念", "s": "8.2.1", "p": "P331", "n": "项目成功评价标准的转变", "k": ["传统：在范围、进度、成本<b>三重要素<\/b>约束下满足质量要求、交付可交付成果", "现在：转变为<b>实现收益并获取价值<\/b>", "成功与否在于相关方对可交付成果的<b>价值感知与价值认同<\/b>", "还在于投入运营后为组织和社会创造的价值"], "x": "「按时按预算交付」不等于成功，这是价值交付对目标管理理念的颠覆。"}, {"t": "概念", "s": "8.2.1", "p": "P331", "n": "价值交付系统的组成与内容", "k": ["组件包括<b>项目组合、项目群、项目、产品和运营<\/b>", "可单独或共同使用多种组件创造价值，共同组成符合组织战略的价值交付系统", "需考虑创造价值、组织治理体系、与项目有关的职能、项目环境、产品管理考虑因素"], "x": "「运营」也是价值交付系统的组件之一，答题时最容易被漏掉。"}, {"t": "概念", "s": "8.2.1", "p": "P332", "n": "价值驱动型项目管理的基本理念", "k": ["如果做的是错误的项目，执行得再完美也无关紧要", "在预算范围内按时完成的项目<b>并不一定<\/b>是成功的项目", "满足进度、成本、范围和质量「铁三角」的项目不一定产生商业价值", "<b>价格<\/b>是实施项目所付出的，<b>价值<\/b>是实施项目得到的"], "x": "商业价值是客户认为值得付出的东西，商业价值实现时项目才算成功。"}, {"t": "概念", "s": "8.2.2", "p": "P332", "n": "BIM的定义与施工阶段应用", "k": ["BIM 是在建设工程<b>全生命期<\/b>内对其物理和功能特性进行数字化表达", "并依此进行设计、施工、运营的过程和结果的总称", "施工阶段应用依据《建筑信息模型施工应用标准》<b>GB/T 51235-2017<\/b>", "宜覆盖深化设计、施工实施、竣工验收等全过程"], "x": "BIM 不是三维模型本身，而是数字化表达的过程与结果的总称。"}, {"t": "数字", "s": "8.2.2", "p": "P333", "n": "BIM的4D与5D施工管理方式", "k": ["<span class='hi'>4D<\/span>＝3D设计＋进度管理，可自动将施工模型与施工进度关联", "<span class='hi'>5D<\/span>＝4D＋成本管理，可准确获取工程量并结合工期和成本分析工序合理性", "5D 在预算过程中创建的成本信息可直接用于生成采购计划", "实现成本与时间的同步管理，为财务分析提供数据支持"], "x": "4D 加的是进度，5D 加的是成本，不要记成5D加质量或安全。"}, {"t": "程序", "s": "8.2.2", "p": "P333", "n": "BIM技术应用策划的程序", "k": ["确定BIM技术应用的范围和内容", "以BIM技术应用流程图等形式明确BIM技术应用过程", "规定BIM技术应用过程中的信息交换要求", "确定基础条件，包括沟通途径及技术和质量保障措施"], "x": "策划程序与策划内容不同：程序是4步，内容含目标、组织架构、模型要求等9项。"}]};
+const DATA = BANK.cards;
+const FIGS = BANK.figs || {};
+const CH = BANK.chapter;
+const TYPES = ["时间","数字","计算","程序","主体","概念"];
+
+let activeType = "全部", keyword = "";
+let cur = 0;
+let mode = "grid";
+
+const $ = id => document.getElementById(id);
+
+function figHTML(d, compact){
+  if(!d.fig || !FIGS[d.fig]) return "";
+  const F = FIGS[d.fig];
+  return `<figure class="figbox">
+    <img src="${F.src}" alt="${F.cap||''}" data-fig="${d.fig}" loading="lazy">
+    <figcaption class="figcap">
+      <span class="fl">配图</span>
+      <span>${F.cap||''}</span>
+      <span class="zoom">教材 ${F.p}　点击放大</span>
+    </figcaption>
+  </figure>`;
+}
+
+function filtered(){
+  const kw = keyword.trim().toLowerCase();
+  return DATA.filter(d=>{
+    if(activeType !== "全部" && d.t !== activeType) return false;
+    if(!kw) return true;
+    const hay = (d.n + " " + d.s + " " + d.p + " " + d.k.join(" ") + " " + (d.x||"")).replace(/<[^>]+>/g,"").toLowerCase();
+    return hay.includes(kw);
+  });
+}
+
+function chipHTML(){
+  const counts = {};
+  TYPES.forEach(t=>counts[t] = DATA.filter(d=>d.t===t).length);
+  const items = [["全部", DATA.length], ...TYPES.filter(t=>counts[t]).map(t=>[t,counts[t]])];
+  return items.map(([t,n])=>
+    `<button class="chip${t===activeType?" on":""}" data-t="${t}">${t}<span class="n">${n}</span></button>`
+  ).join("");
+}
+function bindChips(box){
+  box.querySelectorAll(".chip").forEach(b=>{
+    b.onclick = ()=>{ activeType = b.dataset.t; cur = 0; renderChips(); renderGrid(); renderCard(); };
+  });
+}
+function renderChips(){
+  const a = $("chips"), b = $("chips2");
+  if(a){ a.innerHTML = chipHTML(); bindChips(a); }
+  if(b){ b.innerHTML = chipHTML(); bindChips(b); }
+}
+
+/* ---------------- 索引模式 ---------------- */
+function renderGrid(){
+  const rows = filtered();
+  const kw = keyword.trim();
+  $("total").textContent = DATA.length;
+  $("stats").innerHTML = (kw || activeType!=="全部")
+    ? `筛选出 <b>${rows.length}</b> 张考点卡` + (kw?`，关键词「${kw.replace(/</g,"&lt;")}」`:"") + `　·　共 ${DATA.length} 张`
+    : `共 <b>${DATA.length}</b> 张考点卡　·　${BANK.summary}`;
+
+  $("empty").style.display = rows.length ? "none" : "block";
+  $("list").innerHTML = rows.map(d=>`
+    <div class="card t-${d.t}">
+      <div class="card-top">
+        <span class="tag">${d.t}</span>
+        <span class="sec">${d.s||""}</span>
+        ${d.fig && FIGS[d.fig] ? '<span class="fmark">配图</span>' : ''}
+        <span class="pg">${d.p||""}</span>
+      </div>
+      <h3>${d.n}</h3>
+      <div class="body">
+        <ul>${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+        ${figHTML(d)}
+        ${d.x?`<div class="trap">${d.x}</div>`:""}
+      </div>
+      <div class="more">点击展开 ▾</div>
+    </div>`).join("");
+
+  $("list").querySelectorAll(".card").forEach(c=>{
+    c.onclick = (e)=>{ if(e.target.closest(".figbox")) return; c.classList.toggle("open"); };
+  });
+  bindZoom($("list"));
+}
+
+/* ---------------- 知识卡片模式 ---------------- */
+function renderCard(){
+  const rows = filtered();
+  const box = $("kcard");
+  $("posAll").textContent = rows.length || 0;
+
+  if(!rows.length){
+    box.className = "kcard";
+    box.innerHTML = `<div class="kc-empty">当前筛选下没有卡片</div>`;
+    $("pos").textContent = "0";
+    $("posfill").style.width = "0%";
+    $("prev").disabled = $("next").disabled = true;
+    return;
+  }
+  if(cur >= rows.length) cur = rows.length - 1;
+  if(cur < 0) cur = 0;
+
+  const d = rows[cur];
+  box.className = "kcard t-" + d.t;
+  box.innerHTML = `
+    <div class="kc-top">
+      <span class="tag">${d.t}</span>
+      <span class="sec">${d.s||""}</span>
+      <span class="pg">${d.p||""}</span>
+    </div>
+    <h2 class="kc-title">${d.n}</h2>
+    <ul class="kc-list">${d.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+    ${figHTML(d, true)}
+    ${d.x?`<div class="kc-trap">${d.x}</div>`:""}
+  `;
+  box.scrollTop = 0;
+  box.classList.remove("anim"); void box.offsetWidth; box.classList.add("anim");
+
+  $("pos").textContent = cur + 1;
+  $("posfill").style.width = ((cur+1)/rows.length*100).toFixed(1) + "%";
+  $("prev").disabled = cur === 0;
+  $("next").disabled = cur === rows.length - 1;
+  bindZoom(box);
+  try{ localStorage.setItem("kb_pos_ch"+CH, cur); }catch(e){}
+}
+
+function go(n){
+  const rows = filtered();
+  if(!rows.length) return;
+  const t = cur + n;
+  if(t < 0 || t >= rows.length) return;
+  cur = t; renderCard();
+}
+
+/* ---------------- 灯箱 ---------------- */
+function bindZoom(scope){
+  scope.querySelectorAll(".figbox img").forEach(img=>{
+    img.onclick = (e)=>{
+      e.stopPropagation();
+      const F = FIGS[img.dataset.fig] || {};
+      $("lbimg").src = F.src || img.src;
+      $("lbtx").textContent = F.cap || "";
+      $("lb").classList.add("on");
+    };
+  });
+}
+function closeLB(){ $("lb").classList.remove("on"); }
+$("lb").onclick = closeLB;
+$("lbclose").onclick = (e)=>{ e.stopPropagation(); closeLB(); };
+
+/* ---------------- 模式切换 ---------------- */
+function setMode(m){
+  mode = m;
+  document.querySelectorAll(".mtab").forEach(b=>b.classList.toggle("on", b.dataset.mode===m));
+  $("gridView").style.display = m==="grid" ? "block" : "none";
+  $("cardView").style.display = m==="card" ? "block" : "none";
+  if(m==="card"){
+    if(!window.__restored){
+      const saved = (window.__posParam != null)
+        ? window.__posParam
+        : parseInt(localStorage.getItem("kb_pos_ch"+CH)||"0", 10);
+      const rows = filtered();
+      cur = Math.min(Math.max(saved||0,0), Math.max(rows.length-1,0));
+      window.__restored = true;
+    }
+    renderCard();
+    window.scrollTo({top:0, behavior:"auto"});
+  }else{
+    renderGrid();
+  }
+  try{ localStorage.setItem("kb_mode", m); }catch(e){}
+}
+document.querySelectorAll(".mtab").forEach(b=>{
+  b.onclick = ()=> setMode(b.dataset.mode);
+});
+
+/* ---------------- 事件 ---------------- */
+$("q").addEventListener("input", e=>{
+  keyword = e.target.value; cur = 0; renderGrid();
+  if(mode==="card") renderCard();
+});
+$("prev").onclick = ()=> go(-1);
+$("next").onclick = ()=> go(1);
+
+document.addEventListener("keydown", e=>{
+  if($("lb").classList.contains("on")){
+    if(e.key === "Escape") closeLB();
+    return;
+  }
+  const inInput = document.activeElement && document.activeElement.tagName === "INPUT";
+  if(e.key === "/" && !inInput && mode==="grid"){
+    e.preventDefault(); $("q").focus(); return;
+  }
+  if(mode === "card" && !inInput){
+    if(e.key === "ArrowLeft"){ e.preventDefault(); go(-1); }
+    else if(e.key === "ArrowRight"){ e.preventDefault(); go(1); }
+    else if(e.key === " "){ e.preventDefault(); setMode("grid"); }
+    else if(e.key === "Escape"){ setMode("grid"); }
+  }
+});
+
+/* 触摸滑动（图片上不触发，避免与放大冲突） */
+let tx = 0, ty = 0;
+const stage = document.querySelector(".stage-body");
+stage.addEventListener("touchstart", e=>{
+  if(e.target.closest(".figbox")) return;
+  tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+}, {passive:true});
+stage.addEventListener("touchend", e=>{
+  if(e.target.closest(".figbox")) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)*1.6) go(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* ---------------- 初始化 ---------------- */
+renderChips();
+renderGrid();
+let initMode = "grid";
+try{ initMode = localStorage.getItem("kb_mode") || "grid"; }catch(e){}
+const sp = new URLSearchParams(location.search);
+if(sp.get("mode")) initMode = sp.get("mode");
+if(sp.get("i") != null) window.__posParam = Math.max(parseInt(sp.get("i"), 10) || 0, 0);
+setMode(initMode);
+</script>
+</body>
+</html>
